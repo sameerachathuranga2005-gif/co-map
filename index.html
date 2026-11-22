@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>චාරිකා සතියේ සේවා සැලසුම් | බටගම සභාව</title>
+  
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231B365D'/><text x='50%' y='65%' font-family='Arial, sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'>JW</text></svg>">
+  
+  <!-- Google Fonts: Noto Sans Sinhala & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            jw: {
+              blue: '#1e3d6b',
+              navy: '#0d2240',
+              accent: '#3b82f6',
+              light: '#f0f4f9',
+              gold: '#d97706',
+              emerald: '#059669',
+              teal: '#0d9488'
+            }
+          },
+          fontFamily: {
+            sinhala: ['"Noto Sans Sinhala"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans Sinhala"', 'sans-serif'],
+          },
+          boxShadow: {
+            'glass': '0 8px 32px 0 rgba(14, 30, 60, 0.12)',
+            'glass-hover': '0 12px 40px 0 rgba(14, 30, 60, 0.18)',
+            'glow': '0 0 25px rgba(59, 130, 246, 0.4)',
+            'glow-gold': '0 0 25px rgba(217, 119, 6, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Leaflet CSS & JS for Interactive Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Noto Sans Sinhala', 'Plus Jakarta Sans', sans-serif;
+      background-color: #f4f7fb;
+      color: #1e293b;
+      -webkit-tap-highlight-color: transparent;
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Glassmorphism */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+    
+    .glass-dark {
+      background: rgba(13, 34, 64, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Modern Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Pulse animation */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring {
+      animation: pulse-ring 2.5s infinite ease-in-out;
+    }
+
+    /* Hide map container when collapsed */
+    #mapView {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Loading Screen Particles */
+    .loader-bg {
+      background: radial-gradient(circle at 50% 40%, #1e3d6b 0%, #0d2240 70%, #081426 100%);
+    }
+
+    /* Card hover shine */
+    .card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 antialiased selection:bg-blue-200">
+
+  <!-- ========================================== -->
+  <!-- 1. PRO WELCOME / SPLASH SCREEN (1% - 100%) -->
+  <!-- ========================================== -->
+  <div id="welcomeSplash" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center loader-bg text-white px-6 transition-all duration-700">
+    
+    <!-- Decorative Glowing Aura -->
+    <div class="absolute w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none pulse-ring"></div>
+    <div class="absolute w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none"></div>
+
+    <!-- Splash Content -->
+    <div class="relative z-10 flex flex-col items-center max-w-md w-full text-center">
+      
+      <!-- JW Badge / Icon -->
+      <div class="relative mb-6">
+        <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-blue-700 to-indigo-500 flex items-center justify-center shadow-2xl shadow-blue-500/40 border border-white/20 transform transition-transform hover:scale-105">
+          <span class="text-3xl font-extrabold tracking-wider font-sans">JW</span>
+        </div>
+        <div class="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full bg-emerald-500 text-xs font-semibold uppercase tracking-wider text-white shadow-lg border border-emerald-400">
+          2026
+        </div>
+      </div>
+
+      <!-- Welcome Headings -->
+      <h2 class="text-xs uppercase tracking-widest text-blue-200 font-semibold mb-1">
+        සාදරයෙන් පිළිගනිමු • WELCOME
+      </h2>
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2 leading-tight">
+        චාරිකා සතියේ වැඩසටහන
+      </h1>
+      <p class="text-sm text-blue-200/90 mb-6 font-medium">
+        යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව
+      </p>
+
+      <!-- Overseer Tag -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-blue-100 mb-8 shadow-inner">
+        <i data-lucide="user-check" class="w-3.5 h-3.5 text-blue-300"></i>
+        <span>චාරිකා සේවක: <strong>සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා</strong></span>
+      </div>
+
+      <!-- 1% to 100% Loader Progress Bar -->
+      <div class="w-full bg-white/10 rounded-full h-3 p-0.5 mb-3 border border-white/20 backdrop-blur overflow-hidden shadow-inner">
+        <div id="splashProgressBar" class="h-full rounded-full bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-300 transition-all duration-75 shadow-glow" style="width: 1%;"></div>
+      </div>
+
+      <!-- Progress Percentage Counter & Status -->
+      <div class="flex items-center justify-between w-full text-xs px-1 text-blue-200">
+        <span id="splashStatusText" class="font-medium animate-pulse">සැලසුම් සූදානම් කරමින්...</span>
+        <span id="splashPercentText" class="font-bold text-white text-base tracking-wider font-mono">1%</span>
+      </div>
+
+      <!-- Quick skip button (shows after 2s if needed) -->
+      <button id="skipSplashBtn" onclick="finishSplash()" class="mt-8 text-xs text-blue-300/80 hover:text-white underline underline-offset-4 transition opacity-0 hover:opacity-100">
+        කෙලින්ම පිවිසෙන්න (Skip to App)
+      </button>
+
+    </div>
+
+    <!-- Bottom credit info -->
+    <div class="absolute bottom-6 text-center text-[11px] text-blue-300/60 font-sans">
+      Batagama Congregation • Circuit Overseer Visit Week 2026
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- 2. MAIN APPLICATION CONTAINER              -->
+  <!-- ========================================== -->
+  <div id="mainApp" class="opacity-0 transition-opacity duration-500">
+    
+    <!-- Top Sticky Header Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+        
+        <!-- Left: Logo & Title -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-jw-blue flex items-center justify-center text-white font-bold text-sm shadow-md">
+            JW
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-100 text-jw-blue">බටගම සභාව</span>
+              <span class="text-xs text-slate-500 hidden sm:inline">2026 නොවැ 24 - 29</span>
+            </div>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">සේවා සැලසුම් & ස්ථාන සිතියම</h2>
+          </div>
+        </div>
+
+        <!-- Right: Action Buttons -->
+        <div class="flex items-center gap-2">
+          <!-- Audio toggle -->
+          <button id="soundToggleBtn" onclick="toggleSound()" title="ශබ්ද සක්‍රීය/අක්‍රීය" class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:text-jw-blue hover:bg-slate-50 transition">
+            <i data-lucide="volume-2" id="soundIcon" class="w-4 h-4"></i>
+          </button>
+
+          <!-- Toggle Map View -->
+          <button onclick="toggleMapModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-50 text-jw-blue hover:bg-blue-100 font-medium text-xs sm:text-sm transition border border-blue-200">
+            <i data-lucide="map-pin" class="w-4 h-4 text-jw-blue"></i>
+            <span class="hidden sm:inline">සිතියම</span>
+            <span class="sm:hidden">Map</span>
+          </button>
+
+          <!-- Share / WhatsApp -->
+          <button onclick="openShareModal()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs sm:text-sm shadow-sm transition">
+            <i data-lucide="share-2" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">බෙදාගන්න</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+
+    <!-- Main Body Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-24">
+      
+      <!-- HERO BANNER SECTION (JW Circuit Header Card) -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-jw-navy via-jw-blue to-slate-900 text-white shadow-xl mb-8 border border-white/10">
+        
+        <!-- Header Image banner -->
+        <div class="relative w-full h-44 sm:h-64 overflow-hidden">
+          <img src="assets/header_banner.jpg" alt="චාරිකා සතියේ වැඩසටහන" class="w-full h-full object-cover object-center opacity-85 transform hover:scale-105 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-jw-navy via-jw-navy/40 to-transparent"></div>
+          
+          <!-- Floating original schedule image toggle button -->
+          <button onclick="openScheduleModal()" class="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur text-white text-xs font-medium flex items-center gap-1.5 border border-white/20 transition">
+            <i data-lucide="image" class="w-3.5 h-3.5"></i>
+            <span>මුල් පත්‍රිකාව බලන්න</span>
+          </button>
+        </div>
+
+        <!-- Banner Content -->
+        <div class="p-6 sm:p-8 -mt-12 relative z-10">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-semibold">
+                  චාරිකා සතියේ වැඩසටහන
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-200 text-xs font-medium flex items-center gap-1">
+                  <i data-lucide="calendar" class="w-3 h-3"></i>
+                  2026 නොවැම්බර් 24 සිට 29 දක්වා
+                </span>
+              </div>
+              
+              <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                ක්ෂේත්‍ර සේවා රැස්වීම් සහ කණ්ඩායම් ස්ථාන
+              </h1>
+              
+              <p class="text-sm sm:text-base text-blue-100/90 flex items-center gap-2 font-medium">
+                <i data-lucide="users" class="w-4 h-4 text-blue-300 shrink-0"></i>
+                <span>චාරිකා සේවක: <strong>සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා</strong></span>
+              </p>
+            </div>
+
+            <!-- Quick Next Meeting Countdown Card -->
+            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 sm:px-5 sm:py-4 text-center min-w-[200px] shadow-glass">
+              <div class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold mb-1 flex items-center justify-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>ඉදිරි සේවා රැස්වීම</span>
+              </div>
+              <div id="nextMeetingTitle" class="text-sm font-bold text-white mb-0.5">
+                නොවැ 25 බදාදා - උදේ 9:00
+              </div>
+              <div id="nextMeetingLocation" class="text-xs text-blue-200 font-medium">
+                සහෝ. බර්නාඩ්ගේ නිවස
+              </div>
+              <button onclick="navigateToNextMeeting()" class="mt-2.5 w-full py-1.5 px-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold flex items-center justify-center gap-1 transition shadow-sm">
+                <i data-lucide="navigation" class="w-3 h-3"></i>
+                <span>Google Map ස්ථානයට යන්න</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- 3. INTERACTIVE MAP SECTION (Expandable)    -->
+      <!-- ========================================== -->
+      <div id="interactiveMapContainer" class="mb-8 bg-white rounded-3xl p-4 sm:p-6 shadow-glass border border-slate-200/80 transition-all">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-blue-100 text-jw-blue flex items-center justify-center">
+              <i data-lucide="map" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-base sm:text-lg font-bold text-slate-800">සේවා ස්ථාන සිතියම (Batagama & Surroundings)</h3>
+              <p class="text-xs text-slate-500">සෑම ස්ථානයකටම ක්ලික් කර මාර්ගය (Directions) ලබාගන්න</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="resetMapView()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-600 flex items-center gap-1">
+              <i data-lucide="locate-fixed" class="w-3.5 h-3.5"></i>
+              <span>සිතියම මැදට ගන්න</span>
+            </button>
+            <button onclick="toggleMapHeight()" id="mapExpandBtn" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-medium text-slate-700 flex items-center gap-1">
+              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+              <span id="expandMapText">විශාල කරන්න</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- The Leaflet Map Canvas -->
+        <div id="mapView" class="w-full h-72 sm:h-96 rounded-2xl overflow-hidden border border-slate-200 shadow-inner relative z-0"></div>
+
+        <!-- Map Location Legend -->
+        <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-600">
+          <span class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-blue-600 inline-block shadow-sm"></span>
+            <span>උදෑසන සේවය (Morning)</span>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-full bg-amber-600 inline-block shadow-sm"></span>
+            <span>සවස් සේවය (Evening)</span>
+          </span>
+          <span class="text-slate-400">|</span>
+          <span class="text-slate-500 font-medium">ස්ථානය ක්ලික් කිරීමෙන් Google Maps මඟින් ධාවන මාර්ග විවෘත වේ</span>
+        </div>
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- 4. DAY FILTER TABS & SEARCH                -->
+      <!-- ========================================== -->
+      <div class="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        
+        <!-- Filter Tabs -->
+        <div class="flex items-center gap-1.5 p-1.5 bg-slate-200/80 rounded-2xl w-full sm:w-auto overflow-x-auto no-scrollbar shadow-inner">
+          <button onclick="filterSchedule('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-jw-blue shadow-sm whitespace-nowrap">
+            සියලු දින (All)
+          </button>
+          <button onclick="filterSchedule('wed')" id="tab-wed" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            බදාදා (25)
+          </button>
+          <button onclick="filterSchedule('thu')" id="tab-thu" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            බ්‍රහස් (26)
+          </button>
+          <button onclick="filterSchedule('fri')" id="tab-fri" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            සිකුරාදා (27)
+          </button>
+          <button onclick="filterSchedule('sat')" id="tab-sat" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            සෙනසුරාදා (28)
+          </button>
+          <button onclick="filterSchedule('sun')" id="tab-sun" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            ඉරිදා (29)
+          </button>
+        </div>
+
+        <!-- Quick Stats / Helper -->
+        <div class="flex items-center gap-2 text-xs text-slate-500 w-full sm:w-auto justify-end">
+          <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm font-medium">
+            <i data-lucide="calendar-days" class="w-3.5 h-3.5 text-blue-600"></i>
+            <span>දින 5 ක සේවා සැලසුම්</span>
+          </span>
+          <button onclick="openCustomizerModal()" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 shadow-sm font-medium transition">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span>ස්ථාන/දුරකථන සංස්කරණය</span>
+          </button>
+        </div>
+
+      </div>
+
+
+      <!-- ========================================== -->
+      <!-- 5. SCHEDULE CARDS GRID (DAY BY DAY)        -->
+      <!-- ========================================== -->
+      <div id="scheduleGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+    </main>
+
+    <!-- Floating Quick Actions Bar on Mobile -->
+    <div class="fixed bottom-4 left-4 right-4 sm:hidden z-30">
+      <div class="glass-dark text-white rounded-2xl p-2.5 flex items-center justify-around shadow-2xl border border-white/20">
+        <button onclick="filterSchedule('all'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white">
+          <i data-lucide="home" class="w-5 h-5 mb-0.5"></i>
+          <span>මුල් පිටුව</span>
+        </button>
+        <button onclick="toggleMapModal()" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white">
+          <i data-lucide="map" class="w-5 h-5 mb-0.5"></i>
+          <span>සිතියම</span>
+        </button>
+        <button onclick="openShareModal()" class="flex flex-col items-center text-[10px] text-emerald-300 hover:text-emerald-200 font-bold">
+          <i data-lucide="send" class="w-5 h-5 mb-0.5"></i>
+          <span>WhatsApp</span>
+        </button>
+        <button onclick="openScheduleModal()" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white">
+          <i data-lucide="file-text" class="w-5 h-5 mb-0.5"></i>
+          <span>පත්‍රිකාව</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- MODALS                                     -->
+  <!-- ========================================== -->
+
+  <!-- Modal 1: Original Schedule Image Viewer -->
+  <div id="scheduleModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20">
+      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="calendar" class="w-5 h-5 text-jw-blue"></i>
+          <h3 class="font-bold text-slate-800 text-base sm:text-lg">සේවය සඳහා සැලසුම් — මුල් ලේඛනය</h3>
+        </div>
+        <button onclick="closeScheduleModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="p-4 max-h-[75vh] overflow-auto flex items-center justify-center bg-slate-50">
+        <img src="assets/schedule_table.jpg" alt="Original Schedule" class="max-w-full rounded-xl shadow-md border border-slate-200">
+      </div>
+      <div class="p-4 bg-slate-100/70 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
+        <span>බටගම සභාව • නොවැම්බර් 24 සිට 29</span>
+        <button onclick="closeScheduleModal()" class="px-4 py-2 rounded-xl bg-jw-blue text-white font-medium hover:bg-blue-700 transition">
+          වසන්න (Close)
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal 2: WhatsApp Share Modal -->
+  <div id="shareModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-white/20">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-emerald-50">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
+            <i data-lucide="send" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">WhatsApp පණිවිඩයක් ලෙස යවන්න</h3>
+            <p class="text-xs text-emerald-800">සහෝදර සහෝදරියන්ට පහසුවෙන්ම බෙදාහරින්න</p>
+          </div>
+        </div>
+        <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 flex items-center justify-center text-slate-600 transition shadow-sm">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1.5">බෙදාහැරීමට අවශ්‍ය දිනය තෝරන්න:</label>
+          <select id="shareDaySelect" onchange="updateSharePreview()" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+            <option value="all">සම්පූර්ණ සතියේ වැඩසටහන (All Schedule)</option>
+            <option value="wed">නොවැම්බර් 25 බදාදා (Wednesday)</option>
+            <option value="thu">නොවැම්බර් 26 බ්‍රහස්පතින්දා (Thursday)</option>
+            <option value="fri">නොවැම්බර් 27 සිකුරාදා (Friday)</option>
+            <option value="sat">නොවැම්බර් 28 සෙනසුරාදා (Saturday)</option>
+            <option value="sun">නොවැම්බර් 29 ඉරිදා (Sunday)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1.5">පණිවිඩයේ පෙරදසුන (Message Preview):</label>
+          <textarea id="sharePreviewText" rows="6" readonly class="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-700 font-mono leading-relaxed resize-none focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <button onclick="copyShareText()" class="py-2.5 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            <span id="copyBtnText">Copy Text</span>
+          </button>
+          
+          <button onclick="sendToWhatsApp()" class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-md shadow-emerald-600/30">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>WhatsApp විවෘත කරන්න</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal 3: Location Customizer & GPS Editor -->
+  <div id="customizerModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-white/20">
+      
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+            <i data-lucide="edit-3" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">ස්ථාන & Google Maps සබැඳි සකසන්න</h3>
+            <p class="text-xs text-slate-500">නිශ්චිත Google Maps ලින්ක් හෝ දුරකථන අංක ඇතුළත් කරන්න</p>
+          </div>
+        </div>
+        <button onclick="closeCustomizerModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto space-y-4 flex-1 text-xs" id="customizerForm">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+        <button onclick="resetToDefaults()" class="text-xs text-rose-600 hover:underline font-medium">
+          මුල් තත්වයට පත්කරන්න (Reset)
+        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="closeCustomizerModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-medium">
+            අවලංගු කරන්න
+          </button>
+          <button onclick="saveCustomLocations()" class="px-5 py-2 rounded-xl bg-jw-blue hover:bg-blue-700 text-white font-semibold shadow-md">
+            සුරකින්න (Save Changes)
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Modal 4: Location Photo Lightbox Modal -->
+  <div id="photoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20 flex flex-col">
+      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
+            <i data-lucide="camera" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 id="photoModalTitle" class="font-bold text-sm sm:text-base leading-tight">ස්ථානයේ පිවිසුම් ඡායාරූපය</h3>
+            <p id="photoModalSubtitle" class="text-xs text-slate-300">සහෝ. බර්නාඩ්ගේ නිවස</p>
+          </div>
+        </div>
+        <button onclick="closePhotoModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="relative bg-slate-950 flex items-center justify-center max-h-[70vh] overflow-hidden p-1">
+        <img id="photoModalImg" src="" alt="Location photo" class="max-w-full max-h-[68vh] rounded-lg object-contain shadow-2xl">
+      </div>
+
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <p id="photoModalCaption" class="text-slate-600 font-medium text-center sm:text-left flex items-center gap-1.5">
+          <i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i>
+          <span>කහ පැහැති තාප්පය අසලින් ඇති මාර්ගය ඔස්සේ No. 154 ගේට්ටුව වෙත යන්න.</span>
+        </p>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="closePhotoModal()" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-medium">
+            වසන්න (Close)
+          </button>
+          <a id="photoModalNavBtn" href="#" target="_blank" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center justify-center gap-1.5 shadow-sm transition">
+            <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+            <span>Google Maps</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC                           -->
+  <!-- ========================================== -->
+  <script>
+    // -------------------------------------------------------------
+    // DATA STORE: Default Schedule and Locations for Batagama
+    // Coordinates default centered in Batagama, Ja-Ela (Sri Lanka)
+    // -------------------------------------------------------------
+    const DEFAULT_SCHEDULE = [
+      {
+        id: "wed",
+        date: "නොවැම්බර් 25 බදාදා",
+        dayName: "බදාදා (Wednesday)",
+        highlight: true,
+        morning: {
+          time: "උදේ 9:00",
+          host: "සහෝ. බර්නාඩ්ගේ නිවස",
+          address: "බටගම (Batagama)",
+          phone: "",
+          lat: 7.0677345,
+          lng: 79.8874789,
+          customUrl: "https://maps.app.goo.gl/MWUnSkR8gZsy3vmF9?g_st=iw",
+          mapsQuery: "Batagama, Ja-Ela, Sri Lanka",
+          image: "assets/bernard_location.jpg",
+          imageCaption: "කහ පැහැති තාප්පය අසලින් ඇති මාර්ගය ඔස්සේ No. 154 ගේට්ටුව වෙත"
+        },
+        evening: {
+          time: "සවස 4:00",
+          host: "සහෝ. බර්නාඩ්ගේ නිවස",
+          address: "බටගම (Batagama)",
+          phone: "",
+          lat: 7.0677345,
+          lng: 79.8874789,
+          customUrl: "https://maps.app.goo.gl/MWUnSkR8gZsy3vmF9?g_st=iw",
+          mapsQuery: "Batagama, Ja-Ela, Sri Lanka",
+          image: "assets/bernard_location.jpg",
+          imageCaption: "කහ පැහැති තාප්පය අසලින් ඇති මාර්ගය ඔස්සේ No. 154 ගේට්ටුව වෙත"
+        }
+      },
+      {
+        id: "thu",
+        date: "නොවැම්බර් 26 බ්‍රහස්පතින්දා",
+        dayName: "බ්‍රහස්පතින්දා (Thursday)",
+        highlight: false,
+        morning: {
+          time: "උදේ 9:00",
+          host: "සහෝ. චිතාල්ගේ නිවස (චිතා)",
+          address: "බටගම, ජා-ඇල (Batagama, Ja-Ela)",
+          phone: "",
+          lat: 7.0737,
+          lng: 79.9159,
+          customUrl: "https://www.google.com/maps/search/3WF8%2B94%2C%20Ja-Ela%2C%20Sri%20Lanka/@7.0737,79.9159,17z?hl=en",
+          mapsQuery: "3WF8+94, Ja-Ela, Sri Lanka"
+        },
+        evening: null
+      },
+      {
+        id: "fri",
+        date: "නොවැම්බර් 27 සිකුරාදා",
+        dayName: "සිකුරාදා (Friday)",
+        highlight: false,
+        morning: {
+          time: "උදේ 9:00",
+          host: "සහෝ. චමින්දගේ නිවස",
+          address: "බටගම (Batagama)",
+          phone: "",
+          lat: 7.0750,
+          lng: 79.9110,
+          mapsQuery: "Batagama, Ja-Ela, Sri Lanka"
+        },
+        evening: {
+          time: "සවස 4:00",
+          host: "සහෝ. මොහාන්ගේ නිවස",
+          address: "බටගම (Batagama)",
+          phone: "",
+          lat: 7.0810,
+          lng: 79.9195,
+          mapsQuery: "Batagama, Ja-Ela, Sri Lanka"
+        }
+      },
+      {
+        id: "sat",
+        date: "නොවැම්බර් 28 සෙනසුරාදා",
+        dayName: "සෙනසුරාදා (Saturday)",
+        highlight: false,
+        morning: {
+          time: "උදේ 9:00",
+          host: "සහෝ. සිසිරගේ නිවස",
+          address: "බටගම (Batagama)",
+          phone: "",
+          lat: 7.0710,
+          lng: 79.9130,
+          mapsQuery: "Batagama, Ja-Ela, Sri Lanka"
+        },
+        evening: null
+      },
+      {
+        id: "sun",
+        date: "නොවැම්බර් 29 ඉරිදා",
+        dayName: "ඉරිදා (Sunday)",
+        highlight: false,
+        morning: {
+          time: "උදේ 9:00",
+          host: "සහෝ. තරංග කුමාරගේ නිවස",
+          address: "බටගම (Batagama)",
+          phone: "",
+          lat: 7.0765,
+          lng: 79.9220,
+          mapsQuery: "Batagama, Ja-Ela, Sri Lanka"
+        },
+        evening: null
+      }
+    ];
+
+    // Load from LocalStorage if present, else use default
+    let scheduleData = JSON.parse(localStorage.getItem('jw_batagama_co_schedule_v4')) || DEFAULT_SCHEDULE;
+    let currentFilter = 'all';
+    let map = null;
+    let mapMarkers = [];
+    let soundEnabled = true;
+
+    // Web Audio Synthesizer for gentle audio chime
+    function playChime(freq = 520, duration = 0.25) {
+      if (!soundEnabled) return;
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // audio context blocked or not supported
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      if (soundEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        playChime(660, 0.2);
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+      }
+      lucide.createIcons();
+    }
+
+    // -------------------------------------------------------------
+    // 1% to 100% WELCOME / SPLASH SCREEN CONTROLLER
+    // -------------------------------------------------------------
+    let splashPercent = 1;
+    const splashBar = document.getElementById('splashProgressBar');
+    const splashText = document.getElementById('splashPercentText');
+    const splashStatus = document.getElementById('splashStatusText');
+    const splashScreen = document.getElementById('welcomeSplash');
+    const mainApp = document.getElementById('mainApp');
+    const skipBtn = document.getElementById('skipSplashBtn');
+
+    const statusPhrases = [
+      { at: 10, text: "සැලසුම් සූදානම් කරමින්... (Loading Plans)" },
+      { at: 35, text: "ස්ථාන සිතියම සකසමින්... (Configuring Map)" },
+      { at: 65, text: "චාරිකා සතියේ විස්තර සකසමින්... (Circuit Overseer Details)" },
+      { at: 85, text: "අවසන් සැකසුම් කරමින්... (Polishing Interface)" },
+      { at: 99, text: "සාදරයෙන් පිළිගනිමු! (Welcome!) ✨" }
+    ];
+
+    setTimeout(() => {
+      if (skipBtn) skipBtn.style.opacity = '1';
+    }, 1800);
+
+    const splashInterval = setInterval(() => {
+      // Smooth dynamic increments
+      let inc = Math.floor(Math.random() * 3) + 2;
+      splashPercent += inc;
+
+      if (splashPercent >= 100) {
+        splashPercent = 100;
+        clearInterval(splashInterval);
+        splashBar.style.width = '100%';
+        splashText.innerText = '100%';
+        splashStatus.innerText = 'සාදරයෙන් පිළිගනිමු! ✨';
+        playChime(784, 0.4);
+
+        // Confetti burst on load complete!
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.6 }
+        });
+
+        setTimeout(finishSplash, 600);
+      } else {
+        splashBar.style.width = splashPercent + '%';
+        splashText.innerText = splashPercent + '%';
+        
+        for (let phrase of statusPhrases) {
+          if (splashPercent >= phrase.at) {
+            splashStatus.innerText = phrase.text;
+          }
+        }
+      }
+    }, 40);
+
+    function finishSplash() {
+      clearInterval(splashInterval);
+      splashScreen.classList.add('opacity-0', 'pointer-events-none');
+      mainApp.classList.remove('opacity-0');
+      setTimeout(() => {
+        splashScreen.style.display = 'none';
+        initMap();
+        renderScheduleGrid();
+      }, 700);
+    }
+
+    // -------------------------------------------------------------
+    // GOOGLE MAPS DIRECT NAVIGATION LINK HELPER
+    // -------------------------------------------------------------
+    function getGoogleMapsUrl(item) {
+      if (item.customUrl && item.customUrl.trim().startsWith('http')) {
+        return item.customUrl.trim();
+      }
+      if (item.lat && item.lng) {
+        return `https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}`;
+      }
+      const q = encodeURIComponent(`${item.host}, ${item.address}, Sri Lanka`);
+      return `https://www.google.com/maps/search/?api=1&query=${q}`;
+    }
+
+    // -------------------------------------------------------------
+    // SCHEDULE GRID RENDERING
+    // -------------------------------------------------------------
+    function renderScheduleGrid() {
+      const container = document.getElementById('scheduleGrid');
+      container.innerHTML = '';
+
+      const filtered = scheduleData.filter(d => {
+        if (currentFilter === 'all') return true;
+        return d.id === currentFilter;
+      });
+
+      filtered.forEach((day, index) => {
+        const card = document.createElement('div');
+        card.className = "glass-panel rounded-3xl p-6 shadow-glass card-hover border border-slate-200/90 relative overflow-hidden flex flex-col justify-between";
+
+        // Card Header
+        let cardHtml = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="w-8 h-8 rounded-xl bg-blue-100 text-jw-blue flex items-center justify-center font-bold text-xs">
+                  ${index + 1}
+                </span>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base leading-tight">${day.date}</h4>
+                  <span class="text-xs text-slate-500 font-medium">${day.dayName}</span>
+                </div>
+              </div>
+              <button onclick="shareSingleDay('${day.id}')" title="WhatsApp යවන්න" class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition">
+                <i data-lucide="share-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <div class="space-y-4">
+              <!-- MORNING SERVICE -->
+              <div class="p-3.5 rounded-2xl bg-blue-50/70 border border-blue-100">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-blue-600 text-white text-[11px] font-semibold">
+                    <i data-lucide="sun" class="w-3 h-3"></i>
+                    උදෑසන සේවය
+                  </span>
+                  <span class="text-xs font-bold text-blue-900 flex items-center gap-1">
+                    <i data-lucide="clock" class="w-3 h-3 text-blue-600"></i>
+                    ${day.morning.time}
+                  </span>
+                </div>
+                
+                <div class="font-bold text-slate-800 text-sm mt-1 flex items-start gap-1.5">
+                  <i data-lucide="home" class="w-4 h-4 text-jw-blue shrink-0 mt-0.5"></i>
+                  <span>${day.morning.host}</span>
+                </div>
+                
+                <div class="text-xs text-slate-500 ml-5.5 mt-0.5">
+                  ස්ථානය: ${day.morning.address}
+                  ${day.morning.phone ? `<br><span class="text-blue-600">දුරකථන: ${day.morning.phone}</span>` : ''}
+                </div>
+
+                ${day.morning.image ? `
+                  <div class="mt-2.5 overflow-hidden rounded-xl border border-blue-200/90 bg-white group cursor-pointer relative shadow-sm" onclick="openPhotoModal('${day.morning.image}', '${day.morning.host}', '${day.morning.imageCaption || ''}', '${getGoogleMapsUrl(day.morning)}')">
+                    <div class="relative h-28 w-full overflow-hidden">
+                      <img src="${day.morning.image}" alt="${day.morning.host}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex items-end p-2">
+                        <span class="text-[11px] font-semibold text-white flex items-center gap-1 drop-shadow">
+                          <i data-lucide="camera" class="w-3.5 h-3.5 text-cyan-300"></i>
+                          <span>පිවිසුම් මාර්ගයේ ඡායාරූපය</span>
+                        </span>
+                      </div>
+                      <div class="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-black/60 text-[10px] text-white flex items-center gap-0.5 backdrop-blur-sm">
+                        <i data-lucide="zoom-in" class="w-2.5 h-2.5"></i>
+                        <span>බලන්න</span>
+                      </div>
+                    </div>
+                    ${day.morning.imageCaption ? `<div class="p-1.5 px-2 text-[10px] text-slate-600 font-medium">${day.morning.imageCaption}</div>` : ''}
+                  </div>
+                ` : ''}
+
+                <!-- Action buttons -->
+                <div class="mt-3 flex items-center gap-2">
+                  <a href="${getGoogleMapsUrl(day.morning)}" target="_blank" class="flex-1 py-1.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center justify-center gap-1 shadow-sm transition">
+                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                    <span>Google Maps මඟින් යන්න</span>
+                  </a>
+                  <button onclick="focusMapLocation(${day.morning.lat}, ${day.morning.lng}, '${day.morning.host}')" title="සිතියමේ පෙන්වන්න" class="p-1.5 rounded-xl border border-blue-200 text-blue-700 hover:bg-blue-100/80 transition">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+        `;
+
+        // AFTERNOON SERVICE
+        if (day.evening) {
+          cardHtml += `
+              <div class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-100">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-600 text-white text-[11px] font-semibold">
+                    <i data-lucide="sunset" class="w-3 h-3"></i>
+                    සවස් සේවය
+                  </span>
+                  <span class="text-xs font-bold text-amber-900 flex items-center gap-1">
+                    <i data-lucide="clock" class="w-3 h-3 text-amber-600"></i>
+                    ${day.evening.time}
+                  </span>
+                </div>
+
+                <div class="font-bold text-slate-800 text-sm mt-1 flex items-start gap-1.5">
+                  <i data-lucide="home" class="w-4 h-4 text-amber-700 shrink-0 mt-0.5"></i>
+                  <span>${day.evening.host}</span>
+                </div>
+
+                <div class="text-xs text-slate-500 ml-5.5 mt-0.5">
+                  ස්ථානය: ${day.evening.address}
+                  ${day.evening.phone ? `<br><span class="text-amber-700">දුරකථන: ${day.evening.phone}</span>` : ''}
+                </div>
+
+                ${day.evening.image ? `
+                  <div class="mt-2.5 overflow-hidden rounded-xl border border-amber-200/90 bg-white group cursor-pointer relative shadow-sm" onclick="openPhotoModal('${day.evening.image}', '${day.evening.host}', '${day.evening.imageCaption || ''}', '${getGoogleMapsUrl(day.evening)}')">
+                    <div class="relative h-28 w-full overflow-hidden">
+                      <img src="${day.evening.image}" alt="${day.evening.host}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex items-end p-2">
+                        <span class="text-[11px] font-semibold text-white flex items-center gap-1 drop-shadow">
+                          <i data-lucide="camera" class="w-3.5 h-3.5 text-amber-300"></i>
+                          <span>පිවිසුම් මාර්ගයේ ඡායාරූපය</span>
+                        </span>
+                      </div>
+                      <div class="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-black/60 text-[10px] text-white flex items-center gap-0.5 backdrop-blur-sm">
+                        <i data-lucide="zoom-in" class="w-2.5 h-2.5"></i>
+                        <span>බලන්න</span>
+                      </div>
+                    </div>
+                    ${day.evening.imageCaption ? `<div class="p-1.5 px-2 text-[10px] text-slate-600 font-medium">${day.evening.imageCaption}</div>` : ''}
+                  </div>
+                ` : ''}
+
+                <!-- Action buttons -->
+                <div class="mt-3 flex items-center gap-2">
+                  <a href="${getGoogleMapsUrl(day.evening)}" target="_blank" class="flex-1 py-1.5 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold flex items-center justify-center gap-1 shadow-sm transition">
+                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                    <span>Google Maps මඟින් යන්න</span>
+                  </a>
+                  <button onclick="focusMapLocation(${day.evening.lat}, ${day.evening.lng}, '${day.evening.host}')" title="සිතියමේ පෙන්වන්න" class="p-1.5 rounded-xl border border-amber-200 text-amber-700 hover:bg-amber-100/80 transition">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+          `;
+        } else {
+          cardHtml += `
+              <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                <span class="flex items-center gap-1">
+                  <i data-lucide="moon" class="w-3.5 h-3.5"></i>
+                  <span>සවස් සේවය</span>
+                </span>
+                <span class="font-medium">— සැලසුම් කර නොමැත</span>
+              </div>
+          `;
+        }
+
+        cardHtml += `
+            </div>
+          </div>
+        `;
+
+        card.innerHTML = cardHtml;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // -------------------------------------------------------------
+    // FILTER CONTROLLER
+    // -------------------------------------------------------------
+    function filterSchedule(dayId) {
+      currentFilter = dayId;
+      playChime(440, 0.15);
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-jw-blue', 'shadow-sm');
+        btn.classList.add('text-slate-600');
+      });
+
+      const activeBtn = document.getElementById(`tab-${dayId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-white', 'text-jw-blue', 'shadow-sm');
+        activeBtn.classList.remove('text-slate-600');
+      }
+
+      renderScheduleGrid();
+    }
+
+    // -------------------------------------------------------------
+    // LEAFLET INTERACTIVE MAP CONTROLLER
+    // -------------------------------------------------------------
+    function initMap() {
+      if (map) return;
+
+      // Batagama, Ja-Ela Center (approx 7.0760, 79.9150)
+      map = L.map('mapView', {
+        scrollWheelZoom: false
+      }).setView([7.0760, 79.9155], 14);
+
+      // OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      plotMarkers();
+    }
+
+    function plotMarkers() {
+      // Clear old markers
+      mapMarkers.forEach(m => map.removeLayer(m));
+      mapMarkers = [];
+
+      const bounds = L.latLngBounds([]);
+
+      scheduleData.forEach(day => {
+        // Morning marker
+        if (day.morning && day.morning.lat && day.morning.lng) {
+          const mMarker = L.circleMarker([day.morning.lat, day.morning.lng], {
+            radius: 9,
+            fillColor: '#2563eb',
+            color: '#ffffff',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.95
+          }).addTo(map);
+
+          const popupContent = `
+            <div style="font-family: 'Noto Sans Sinhala', sans-serif; font-size: 12px; min-width: 190px;">
+              <strong style="color: #1e3d6b; font-size: 13px;">${day.morning.host}</strong><br>
+              <span style="color: #059669; font-weight: 600;">${day.date} — ${day.morning.time}</span><br>
+              <span style="color: #64748b;">${day.morning.address}</span><br>
+              ${day.morning.image ? `
+                <div style="margin: 6px 0; border-radius: 6px; overflow: hidden; cursor: pointer; border: 1px solid #cbd5e1;" onclick="openPhotoModal('${day.morning.image}', '${day.morning.host}', '${day.morning.imageCaption || ''}', '${getGoogleMapsUrl(day.morning)}')">
+                  <img src="${day.morning.image}" style="width: 100%; height: 75px; object-fit: cover; display: block;">
+                  <div style="font-size: 10px; background: #f8fafc; padding: 2px 4px; color: #475569; text-align: center;">📸 පිවිසුම් ඡායාරූපය බලන්න</div>
+                </div>
+              ` : ''}
+              <div style="margin-top: 6px;">
+                <a href="${getGoogleMapsUrl(day.morning)}" target="_blank" style="background: #2563eb; color: #fff; padding: 4px 8px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 11px;">
+                  📍 Google Maps මඟින් යන්න
+                </a>
+              </div>
+            </div>
+          `;
+          mMarker.bindPopup(popupContent);
+          mapMarkers.push(mMarker);
+          bounds.extend([day.morning.lat, day.morning.lng]);
+        }
+
+        // Evening marker
+        if (day.evening && day.evening.lat && day.evening.lng) {
+          const eMarker = L.circleMarker([day.evening.lat, day.evening.lng], {
+            radius: 9,
+            fillColor: '#d97706',
+            color: '#ffffff',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.95
+          }).addTo(map);
+
+          const popupContent = `
+            <div style="font-family: 'Noto Sans Sinhala', sans-serif; font-size: 12px; min-width: 190px;">
+              <strong style="color: #b45309; font-size: 13px;">${day.evening.host}</strong><br>
+              <span style="color: #d97706; font-weight: 600;">${day.date} — ${day.evening.time}</span><br>
+              <span style="color: #64748b;">${day.evening.address}</span><br>
+              ${day.evening.image ? `
+                <div style="margin: 6px 0; border-radius: 6px; overflow: hidden; cursor: pointer; border: 1px solid #cbd5e1;" onclick="openPhotoModal('${day.evening.image}', '${day.evening.host}', '${day.evening.imageCaption || ''}', '${getGoogleMapsUrl(day.evening)}')">
+                  <img src="${day.evening.image}" style="width: 100%; height: 75px; object-fit: cover; display: block;">
+                  <div style="font-size: 10px; background: #f8fafc; padding: 2px 4px; color: #475569; text-align: center;">📸 පිවිසුම් ඡායාරූපය බලන්න</div>
+                </div>
+              ` : ''}
+              <div style="margin-top: 6px;">
+                <a href="${getGoogleMapsUrl(day.evening)}" target="_blank" style="background: #d97706; color: #fff; padding: 4px 8px; border-radius: 6px; text-decoration: none; display: inline-block; font-size: 11px;">
+                  📍 Google Maps මඟින් යන්න
+                </a>
+              </div>
+            </div>
+          `;
+          eMarker.bindPopup(popupContent);
+          mapMarkers.push(eMarker);
+          bounds.extend([day.evening.lat, day.evening.lng]);
+        }
+      });
+
+      if (bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [30, 30] });
+      }
+    }
+
+    function resetMapView() {
+      if (map) {
+        plotMarkers();
+        playChime(500, 0.15);
+      }
+    }
+
+    function focusMapLocation(lat, lng, title) {
+      if (!map) return;
+      document.getElementById('interactiveMapContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      map.setView([lat, lng], 16, { animate: true });
+      playChime(600, 0.2);
+
+      mapMarkers.forEach(m => {
+        const pos = m.getLatLng();
+        if (Math.abs(pos.lat - lat) < 0.0001 && Math.abs(pos.lng - lng) < 0.0001) {
+          m.openPopup();
+        }
+      });
+    }
+
+    let isMapExpanded = false;
+    function toggleMapHeight() {
+      const el = document.getElementById('mapView');
+      const text = document.getElementById('expandMapText');
+      if (!isMapExpanded) {
+        el.style.height = '500px';
+        text.innerText = 'කුඩා කරන්න';
+        isMapExpanded = true;
+      } else {
+        el.style.height = '300px';
+        text.innerText = 'විශාල කරන්න';
+        isMapExpanded = false;
+      }
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 400);
+    }
+
+    function toggleMapModal() {
+      document.getElementById('interactiveMapContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function navigateToNextMeeting() {
+      const first = scheduleData[0];
+      if (first && first.morning) {
+        window.open(getGoogleMapsUrl(first.morning), '_blank');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // WHATSAPP SHARE CONTROLLER
+    // -------------------------------------------------------------
+    function openShareModal() {
+      const modal = document.getElementById('shareModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      updateSharePreview();
+      playChime(550, 0.15);
+      lucide.createIcons();
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('shareModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    function shareSingleDay(dayId) {
+      document.getElementById('shareDaySelect').value = dayId;
+      openShareModal();
+    }
+
+    function buildShareMessage(selected) {
+      let text = "🌟 *යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව*\n";
+      text += "📋 *චාරිකා සතියේ ක්ෂේත්‍ර සේවා සැලසුම්*\n";
+      text += "👤 චාරිකා සේවක: සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා\n";
+      text += "📅 කාලසීමාව: 2026 නොවැම්බර් 24 සිට 29 දක්වා\n";
+      text += "━━━━━━━━━━━━━━━━━━━━━\n\n";
+
+      const daysToInclude = scheduleData.filter(d => selected === 'all' || d.id === selected);
+
+      daysToInclude.forEach(day => {
+        text += `🗓️ *${day.date} (${day.dayName})*\n`;
+        text += ` ☀️ *උදෑසන සේවය*: ${day.morning.time}\n`;
+        text += `    🏠 ${day.morning.host}\n`;
+        text += `    📍 Google Map: ${getGoogleMapsUrl(day.morning)}\n`;
+        if (day.morning.phone) text += `    📞 දුරකථන: ${day.morning.phone}\n`;
+
+        if (day.evening) {
+          text += ` 🌅 *සවස් සේවය*: ${day.evening.time}\n`;
+          text += `    🏠 ${day.evening.host}\n`;
+          text += `    📍 Google Map: ${getGoogleMapsUrl(day.evening)}\n`;
+          if (day.evening.phone) text += `    📞 දුරකථන: ${day.evening.phone}\n`;
+        }
+        text += "\n";
+      });
+
+      text += "━━━━━━━━━━━━━━━━━━━━━\n";
+      text += "✨ *සියලුදෙනාම ආදරයෙන් සාදරයෙන් පිළිගනිමු!*";
+      return text;
+    }
+
+    function updateSharePreview() {
+      const select = document.getElementById('shareDaySelect');
+      const preview = document.getElementById('sharePreviewText');
+      preview.value = buildShareMessage(select.value);
+    }
+
+    function copyShareText() {
+      const preview = document.getElementById('sharePreviewText');
+      navigator.clipboard.writeText(preview.value).then(() => {
+        const copyBtn = document.getElementById('copyBtnText');
+        copyBtn.innerText = "Copied! ✓";
+        playChime(700, 0.2);
+        setTimeout(() => copyBtn.innerText = "Copy Text", 2000);
+      });
+    }
+
+    function sendToWhatsApp() {
+      const preview = document.getElementById('sharePreviewText');
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(preview.value)}`;
+      window.open(url, '_blank');
+    }
+
+    // -------------------------------------------------------------
+    // ORIGINAL SCHEDULE IMAGE MODAL
+    // -------------------------------------------------------------
+    function openScheduleModal() {
+      const modal = document.getElementById('scheduleModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      playChime(500, 0.15);
+      lucide.createIcons();
+    }
+
+    function closeScheduleModal() {
+      const modal = document.getElementById('scheduleModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    // -------------------------------------------------------------
+    // LOCATION PHOTO MODAL
+    // -------------------------------------------------------------
+    function openPhotoModal(imgSrc, hostName, caption, mapUrl) {
+      document.getElementById('photoModalImg').src = imgSrc;
+      document.getElementById('photoModalSubtitle').innerText = hostName;
+      document.getElementById('photoModalCaption').innerHTML = `<i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i><span>${caption || 'පිවිසුම් මාර්ගයේ ඡායාරූපය'}</span>`;
+      const navBtn = document.getElementById('photoModalNavBtn');
+      if (mapUrl) {
+        navBtn.href = mapUrl;
+        navBtn.classList.remove('hidden');
+      } else {
+        navBtn.classList.add('hidden');
+      }
+      const modal = document.getElementById('photoModal');
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      playChime(600, 0.15);
+      lucide.createIcons();
+    }
+
+    function closePhotoModal() {
+      const modal = document.getElementById('photoModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    // -------------------------------------------------------------
+    // LOCATION CUSTOMIZER & PERSISTENCE
+    // -------------------------------------------------------------
+    function openCustomizerModal() {
+      const modal = document.getElementById('customizerModal');
+      const form = document.getElementById('customizerForm');
+      form.innerHTML = '';
+
+      scheduleData.forEach((day, dIdx) => {
+        let sec = `
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <h5 class="font-bold text-slate-800 text-sm text-blue-700">${day.date}</h5>
+            
+            <!-- Morning edit -->
+            <div class="space-y-1">
+              <label class="font-semibold text-slate-600">උදෑසන සත්කාරක (Host Name):</label>
+              <input type="text" id="host_m_${dIdx}" value="${day.morning.host}" class="w-full p-2 rounded-lg border border-slate-300 text-xs">
+              <div class="grid grid-cols-2 gap-2 mt-1">
+                <div>
+                  <label class="text-[10px] text-slate-500">Latitude (අක්ෂාංශ):</label>
+                  <input type="number" step="0.0001" id="lat_m_${dIdx}" value="${day.morning.lat || ''}" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="text-[10px] text-slate-500">Longitude (දේශාංශ):</label>
+                  <input type="number" step="0.0001" id="lng_m_${dIdx}" value="${day.morning.lng || ''}" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+                </div>
+              </div>
+              <label class="text-[10px] text-slate-500">Custom Google Maps Link (විකල්ප):</label>
+              <input type="text" id="url_m_${dIdx}" value="${day.morning.customUrl || ''}" placeholder="https://maps.app.goo.gl/..." class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+            </div>
+
+            ${day.evening ? `
+            <!-- Evening edit -->
+            <div class="space-y-1 pt-2 border-t border-slate-200">
+              <label class="font-semibold text-slate-600">සවස් සත්කාරක (Host Name):</label>
+              <input type="text" id="host_e_${dIdx}" value="${day.evening.host}" class="w-full p-2 rounded-lg border border-slate-300 text-xs">
+              <div class="grid grid-cols-2 gap-2 mt-1">
+                <div>
+                  <label class="text-[10px] text-slate-500">Latitude:</label>
+                  <input type="number" step="0.0001" id="lat_e_${dIdx}" value="${day.evening.lat || ''}" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+                </div>
+                <div>
+                  <label class="text-[10px] text-slate-500">Longitude:</label>
+                  <input type="number" step="0.0001" id="lng_e_${dIdx}" value="${day.evening.lng || ''}" class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+                </div>
+              </div>
+              <label class="text-[10px] text-slate-500">Custom Google Maps Link (විකල්ප):</label>
+              <input type="text" id="url_e_${dIdx}" value="${day.evening.customUrl || ''}" placeholder="https://maps.app.goo.gl/..." class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+            </div>
+            ` : ''}
+          </div>
+        `;
+        form.innerHTML += sec;
+      });
+
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      lucide.createIcons();
+    }
+
+    function closeCustomizerModal() {
+      const modal = document.getElementById('customizerModal');
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    function saveCustomLocations() {
+      scheduleData.forEach((day, dIdx) => {
+        const hostM = document.getElementById(`host_m_${dIdx}`);
+        const latM = document.getElementById(`lat_m_${dIdx}`);
+        const lngM = document.getElementById(`lng_m_${dIdx}`);
+        const urlM = document.getElementById(`url_m_${dIdx}`);
+
+        if (hostM) day.morning.host = hostM.value;
+        if (latM && latM.value) day.morning.lat = parseFloat(latM.value);
+        if (lngM && lngM.value) day.morning.lng = parseFloat(lngM.value);
+        if (urlM) day.morning.customUrl = urlM.value;
+
+        if (day.evening) {
+          const hostE = document.getElementById(`host_e_${dIdx}`);
+          const latE = document.getElementById(`lat_e_${dIdx}`);
+          const lngE = document.getElementById(`lng_e_${dIdx}`);
+          const urlE = document.getElementById(`url_e_${dIdx}`);
+
+          if (hostE) day.evening.host = hostE.value;
+          if (latE && latE.value) day.evening.lat = parseFloat(latE.value);
+          if (lngE && lngE.value) day.evening.lng = parseFloat(lngE.value);
+          if (urlE) day.evening.customUrl = urlE.value;
+        }
+      });
+
+      localStorage.setItem('jw_batagama_co_schedule_v4', JSON.stringify(scheduleData));
+      closeCustomizerModal();
+      renderScheduleGrid();
+      plotMarkers();
+      playChime(650, 0.25);
+    }
+
+    function resetToDefaults() {
+      if (confirm('ඔබට සියලුම තොරතුරු මුල් තත්වයට පත් කිරීමට අවශ්‍යද?')) {
+        localStorage.removeItem('jw_batagama_co_schedule_v4');
+        scheduleData = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        closeCustomizerModal();
+        renderScheduleGrid();
+        plotMarkers();
+      }
+    }
+
+    // Close modals on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeScheduleModal();
+        closeShareModal();
+        closeCustomizerModal();
+        closePhotoModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
