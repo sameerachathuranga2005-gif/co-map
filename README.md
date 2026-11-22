@@ -1,49 +1,104 @@
-# චාරිකා සතියේ සේවා සැලසුම් සහ ස්ථාන සිතියම (Batagama Congregation - Circuit Week Web App)
+# චාරිකා සතියේ සේවා සැලසුම්, සේවා ප්‍රදේශ සහ ආහාර සත්කාර (Batagama Circuit Week Web App)
 
-යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — **බටගම සභාව**  
+**යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව**  
 **චාරිකා සේවක:** සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා  
 **දිනයන්:** 2026 නොවැම්බර් 24 සිට 29 දක්වා
 
 ---
 
-## 🌟 විශේෂාංග (Key Features)
+## 🌟 1. චාරිකා සේවක යුවළගේ ආහාර සත්කාර සැලසුම් (Circuit Overseer Meals Hospitality)
 
-1. **සුපිරි Welcome Screen (1% - 100% Loader)**:
-   - නවීන Glassmorphic ඩිසයින් එකක් සමඟ 1% සිට 100% දක්වා Loading Animation.
-   - Dynamic Status Messages, Particle Glow & Confetti Effects.
-   - සුමට ශ්‍රව්‍ය නාද (Gentle Audio Chime).
+> [!IMPORTANT]
+> **වැඩිමහල්ලන්ගේ අවධානයට:** "චාරිකා සතිය ගැන වැඩිමහල්ලන්ට එවූ ලිපියේ ආහාර සම්බන්ධ උපදෙස් බලන්න."
 
-2. **ස්ථාන සිතියම (Interactive Map - OpenStreetMap & Leaflet)**:
-   - බටගම සහ ඒ අවට සේවා ස්ථාන (සහෝදරයන්ගේ නිවාස) සිතියමේ පැහැදිලිව සලකුණු කර ඇත.
-   - සිතියමේ Marker එකක් ක්ලික් කළ විට විස්තර සහ සෘජුවම Google Maps හරහා Navigation ලබාගැනීමේ හැකියාව.
+| දිනය (Date) | ☀️ දවල් ආහාරය (Lunch) | 🌙 රාත්‍රී ආහාරය (Dinner) |
+| :--- | :--- | :--- |
+| **නොවැම්බර් 24 අඟහරුවාදා** | **රීටා** — 📞 `0778468534` | **දිනේෂ් ගොඩකුඹුර** — 📞 `0712200908` |
+| **නොවැම්බර් 25 බදාදා** | **ප්‍රවීන්** — 📞 `0776589614` | **රංජනී** — 📞 `0701188733` |
+| **නොවැම්බර් 26 බ්‍රහස්පතින්දා** | **රෝලන්ඩ්** (*නවාතැන් ගන්නා තැන*) — 📞 `0772749913` | **රජිත චන්ද්‍රසේකර** — 📞 `0717549900` |
+| **නොවැම්බර් 27 සිකුරාදා** | **ඉශාකා** — 📞 `0783155021` | **මොහාන් ඩේවිඩ්** — 📞 `0714899518` |
+| **නොවැම්බර් 28 සෙනසුරාදා** | **සිදත්** — 📞 `0760326161` | — *(රාත්‍රී ආහාර සත්කාරයක් නොමැත)* |
+| **නොවැම්බර් 29 ඉරිදා** | **ආශා** *(දුරකථන අංකයක් සඳහන් කර නැත)* | — *(රාත්‍රී ආහාර සත්කාරයක් නොමැත)* |
 
-3. **දින අනුව වෙන් කරන ලද කාඩ්පත් (Day-by-Day Schedule Cards)**:
-   - **නොවැම්බර් 25 බදාදා**: 
-     - උදේ 9:00 - සහෝ. බර්නාඩ්ගේ නිවස (Google Maps: `https://maps.app.goo.gl/MWUnSkR8gZsy3vmF9?g_st=iw` | GPS: 7.06773, 79.88748 | 📸 පිවිසුම් මාර්ගයේ ඡායාරූපය ඇතුළත් කර ඇත)
-     - සවස 4:00 - සහෝ. බර්නාඩ්ගේ නිවස
-   - **නොවැම්බර් 26 බ්‍රහස්පතින්දා**: 
-     - උදේ 9:00 - සහෝ. චිතාල්ගේ නිවස (සහෝ. චිතා) (Plus Code: `3WF8+94, Ja-Ela` | GPS: 7.0737, 79.9159 | Google Maps: `https://www.google.com/maps/search/3WF8%2B94%2C%20Ja-Ela%2C%20Sri%20Lanka/@7.0737,79.9159,17z?hl=en`)
-   - **නොවැම්බර් 27 සිකුරාදා**: උදේ 9:00 - සහෝ. චමින්දගේ නිවස | සවස 4:00 - සහෝ. මොහාන්ගේ නිවස
-   - **නොවැම්බර් 28 සෙනසුරාදා**: උදේ 9:00 - සහෝ. සිසිරගේ නිවස
-   - **නොවැම්බර් 29 ඉරිදා**: උදේ 9:00 - සහෝ. තරංග කුමාරගේ නිවස
+*Web App එක තුළ එක් එක් සත්කාරක සහෝදර/සහෝදරියගේ දුරකථන අංකය ක්ලික් කිරීමෙන් එකවරම Call හෝ WhatsApp පණිවිඩයක් යැවිය හැක.*
 
-4. **Google Maps වෙත ක්ෂණික පිවිසුම**:
-   - සෑම සේවා ස්ථානයක් යටතෙන්ම ඇති `"Google Maps මඟින් යන්න"` බටනය මඟින් Turn-by-Turn GPS Navigation ක්ෂණිකව ආරම්භ වේ.
+---
 
-5. **WhatsApp මඟින් ක්ෂණිකව බෙදාගැනීම (One-Click WhatsApp Share)**:
-   - එක් දිනක හෝ සම්පූර්ණ සතියේ වැඩසටහනම සහ ස්ථාන වල Google Map සබැඳි සමඟින් සකසන ලද සිංහල පණිවිඩයක් එක ක්ලික් එකෙන් WhatsApp හරහා සහෝදර සහෝදරියන්ට යැවීමේ හැකියාව.
+## 🗺️ 2. සතියේ සම්පූර්ණ ක්ෂේත්‍ර සේවා සැලසුම් සහ සේවා ප්‍රදේශ (Full Week Field Service Territories)
 
-6. **ස්ථාන හා දුරකථන අංක සංස්කරණය කිරීම (Live Editor)**:
-   - සහෝදරයන්ගේ නිවෙස් වල නියම Google Maps Link එකක් හෝ GPS Coordinates (Lat/Long) තිබේ නම්, App එක තුළින්ම Save කරගත හැක (Browser එකේ ස්ථිරව සුරැකේ).
+### 🗓️ නොවැම්බර් 25 බදාදා (Wednesday)
+* **☀️ උදෑසන සේවය (උදේ 9:00)** — **සහෝ. බර්නාඩ්ගේ නිවස**
+  - 📍 Google Maps: [බර්නාඩ්ගේ නිවස වෙත](https://maps.app.goo.gl/MWUnSkR8gZsy3vmF9?g_st=iw) (GPS: 7.067735, 79.887479)
+  - 📸 පිවිසුම් ඡායාරූපය: කහ තාප්පය අසලින් No. 154 ගේට්ටුව වෙත
+  - 🍽️ අද දවසේ ආහාර: දවල් - ප්‍රවීන් (0776589614) | රෑ - රංජනී (0701188733)
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0880A` — [Google Maps සිතියම](https://maps.app.goo.gl/ZWsZsf5tiE3PxNae8)
+    2. `WP - 0880B` — [Google Maps සිතියම](https://maps.app.goo.gl/zcc459f53rGtTk6RA)
+    3. `WP - 0881` — [Google Maps සිතියම](https://maps.app.goo.gl/xcttVTbzhwX1We867)
+    4. `WP - 0878B` — [Google Maps සිතියම](https://maps.app.goo.gl/Ay4MjfSL3ZzH82he7)
+* **🌅 සවස් සේවය (සවස 4:00)** — **සහෝ. බර්නාඩ්ගේ නිවස**
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0875` — [Google Maps සිතියම](https://maps.app.goo.gl/SFXuaogk1i8DuLWn6)
+    2. `WP - 0878A` — [Google Maps සිතියම](https://maps.app.goo.gl/y3yRbcXqNBqLBvkLA)
+    3. `WP - 0869B` — [Google Maps සිතියම](https://maps.app.goo.gl/DeP7Dk1Sj8aCc3Yv8)
 
-7. **මුල් ලේඛනය නැරඹීම**:
-   - සභාවේ නිල සේවා සැලසුම් පත්‍රිකාවේ ඡායාරූපය කෙලින්ම Pop-up Modal එකකින් නැරඹිය හැක.
+---
+
+### 🗓️ නොවැම්බර් 26 බ්‍රහස්පතින්දා (Thursday)
+* **☀️ උදෑසන සේවය (උදේ 9:00)** — **සහෝ. චිතාල්ගේ නිවස (චිතා)**
+  - 📍 Plus Code: `3WF8+94, Ja-Ela` [Google Maps සිතියම](https://www.google.com/maps/search/3WF8%2B94%2C%20Ja-Ela%2C%20Sri%20Lanka/@7.0737,79.9159,17z?hl=en)
+  - 🍽️ අද දවසේ ආහාර: දවල් - රෝලන්ඩ් (0772749913) [නවාතැන් ගන්නා තැන] | රෑ - රජිත (0717549900)
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0972` — [Google Maps සිතියම](https://maps.app.goo.gl/XSUZ6fQofceMBTCR9)
+    2. `WP - 0971` — [Google Maps සිතියම](https://maps.app.goo.gl/tRpTpGfv3Cu1oQ29A)
+    3. `WP - 0969A` — [Google Maps සිතියම](https://maps.app.goo.gl/9i17uUy4dLFXZ9RA6)
+    4. `WP - 0969B` — [Google Maps සිතියම](https://maps.app.goo.gl/VikcvfQKFTNdjpVm9)
+    5. `WP - 0970` — [Google Maps සිතියම](https://maps.app.goo.gl/U6Eq5BQu6cytPg298)
+
+---
+
+### 🗓️ නොවැම්බර් 27 සිකුරාදා (Friday)
+* **☀️ උදෑසන සේවය (උදේ 9:00)** — **සහෝ. චමින්ද මවුබන්දාරගේ නිවස**
+  - 📍 Google Maps: [චමින්දගේ නිවස වෙත](https://maps.app.goo.gl/644b8w9PyFH1v2iRA) (GPS: 7.070286, 79.900742)
+  - 📸 පිවිසුම් ඡායාරූපය: Litro Gas Dealer බෝර්ඩ් එක අසල නිවස
+  - 🍽️ අද දවසේ ආහාර: දවල් - ඉශාකා (0783155021) | රෑ - මොහාන් ඩේවිඩ් (0714899518)
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0973` — [Google Maps සිතියම](https://maps.app.goo.gl/dCRSTmT5kRBBeScX6)
+    2. `WP - 0974` — [Google Maps සිතියම](https://maps.app.goo.gl/dCRSTmT5kRBBeScX6)
+* **🌅 සවස් සේවය (සවස 4:00)** — **සහෝ. මොහාන්ගේ නිවස**
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0963` — [Google Maps සිතියම](https://maps.app.goo.gl/JCoVcpaFRjN9Lj1n8)
+    2. `WP - 0964` — [Google Maps සිතියම](https://maps.app.goo.gl/fQkKFWEYbxFEyAwE9)
+    3. `WP - 0961` — [Google Maps සිතියම](https://maps.app.goo.gl/16QFoxoC89i6F4rU8)
+
+---
+
+### 🗓️ නොවැම්බර් 28 සෙනසුරාදා (Saturday)
+* **☀️ උදෑසන සේවය (උදේ 9:00)** — **සහෝ. සිසිරගේ නිවස**
+  - 📍 Google Maps: [සිසිරගේ නිවස වෙත](https://maps.app.goo.gl/xobfwzL5Yi4Dwjcv6) (GPS: 7.072688, 79.896789)
+  - 📸 පිවිසුම් ඡායාරූපය: කොන්ක්‍රීට් මාර්ගය ඔස්සේ කෙලින්ම නිවස වෙත
+  - 🍽️ අද දවසේ ආහාර: දවල් - සිදත් (0760326161) | රෑ - නැත
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0980` — [Google Maps සිතියම](https://maps.app.goo.gl/EXAgKvqyxcYSxPYs6)
+    2. `WP - 0982` — [Google Maps සිතියම](https://maps.app.goo.gl/gwwBmmSr9AMmvy3L8)
+    3. `WP - 0983` — [Google Maps සිතියම](https://maps.app.goo.gl/QAUbJiHxa5toRVvq8)
+    4. `WP - 0879` — [Google Maps සිතියම](https://maps.app.goo.gl/94je4ZHofS4SJdnf6)
+
+---
+
+### 🗓️ නොවැම්බර් 29 ඉරිදා (Sunday)
+* **☀️ උදෑසන සේවය (උදේ 9:00)** — **සහෝ. තරංග කුමාරගේ නිවස**
+  - 📍 Google Maps: [තරංගගේ නිවස වෙත](https://maps.app.goo.gl/Dj4oZ4z2D3d8XWUE8) (GPS: 7.063612, 79.881148)
+  - 📸 පිවිසුම් ඡායාරූපය: ගේට්ටුව අසල රතු ත්‍රිරෝද රථය ඇති නිවස
+  - 🍽️ අද දවසේ ආහාර: දවල් - ආශා | රෑ - නැත
+  - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
+    1. `WP - 0869E` — [Google Maps සිතියම](https://maps.app.goo.gl/dn43DUgAdChQKStu6)
+    2. `WP - 0869F` — [Google Maps සිතියම](https://maps.app.goo.gl/Km6UdKnx6kDTD7LAA)
+    3. `WP - 0869C` — [Google Maps සිතියම](https://maps.app.goo.gl/UiUZzK9S7htXiiir8)
 
 ---
 
 ## 🚀 භාවිතා කරන්නේ කෙසේද? (How to Run)
 
-- **ක්‍රමය 1**: `run_app.bat` ගොනුව Double Click කරන්න.
-- **ක්‍රමය 2**: `index.html` ගොනුව ඔබගේ Google Chrome හෝ ඕනෑම Browser එකකින් Open කරන්න.
-- **Online Publish කිරීමට**: මෙම ෆෝල්ඩරය Netlify, Vercel හෝ GitHub Pages වෙත Upload කිරීමෙන් ඕනෑම ස්මාර්ට්ෆෝන් එකකින් link එකක් හරහා භාවිතා කළ හැක.
-
+- **ක්‍රමය 1**: [run_app.bat](file:///i:/co%20map/run_app.bat) ගොනුව Double Click කරන්න.
+- **ක්‍රමය 2**: [index.html](file:///i:/co%20map/index.html) ගොනුව Google Chrome හෝ Edge මඟින් Open කරන්න.
