@@ -237,63 +237,29 @@
         <div class="relative w-full h-44 sm:h-64 overflow-hidden">
           <img src="assets/header_banner.jpg" alt="චාරිකා සතියේ වැඩසටහන" class="w-full h-full object-cover object-center opacity-85 transform hover:scale-105 transition-transform duration-700">
           <div class="absolute inset-0 bg-gradient-to-t from-jw-navy via-jw-navy/40 to-transparent"></div>
-          
-          <!-- Floating original schedule image toggle button -->
-          <div class="absolute top-4 right-4 flex items-center gap-2">
-            <button onclick="openScheduleModal()" class="px-3 py-1.5 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur text-white text-xs font-medium flex items-center gap-1.5 border border-white/20 transition shadow-sm">
-              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-              <span>සේවා පත්‍රිකාව</span>
-            </button>
-            <button onclick="openMealsDocModal()" class="px-3 py-1.5 rounded-full bg-amber-600/80 hover:bg-amber-600 backdrop-blur text-white text-xs font-medium flex items-center gap-1.5 border border-amber-300/30 transition shadow-sm">
-              <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
-              <span>ආහාර ලේඛනය</span>
-            </button>
-          </div>
         </div>
 
         <!-- Banner Content -->
         <div class="p-6 sm:p-8 -mt-12 relative z-10">
-          <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-semibold">
+                චාරිකා සතියේ වැඩසටහන
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-200 text-xs font-medium flex items-center gap-1">
+                <i data-lucide="calendar" class="w-3 h-3"></i>
+                2026 නොවැම්බර් 24 සිට 29 දක්වා
+              </span>
+            </div>
             
-            <div class="space-y-1.5">
-              <div class="flex items-center gap-2">
-                <span class="px-2.5 py-0.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-semibold">
-                  චාරිකා සතියේ වැඩසටහන
-                </span>
-                <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-200 text-xs font-medium flex items-center gap-1">
-                  <i data-lucide="calendar" class="w-3 h-3"></i>
-                  2026 නොවැම්බර් 24 සිට 29 දක්වා
-                </span>
-              </div>
-              
-              <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-                සේවා රැස්වීම්, ප්‍රදේශ සහ ආහාර සත්කාර සැලසුම්
-              </h1>
-              
-              <p class="text-sm sm:text-base text-blue-100/90 flex items-center gap-2 font-medium">
-                <i data-lucide="users" class="w-4 h-4 text-blue-300 shrink-0"></i>
-                <span>චාරිකා සේවක: <strong>සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා</strong></span>
-              </p>
-            </div>
-
-            <!-- Quick Next Meeting Countdown Card -->
-            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 sm:px-5 sm:py-4 text-center min-w-[220px] shadow-glass">
-              <div class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold mb-1 flex items-center justify-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span>ඉදිරි සේවා රැස්වීම</span>
-              </div>
-              <div id="nextMeetingTitle" class="text-sm font-bold text-white mb-0.5">
-                නොවැ 25 බදාදා — උදේ 9:00
-              </div>
-              <div id="nextMeetingLocation" class="text-xs text-blue-200 font-medium mb-1">
-                සහෝ. බර්නාඩ්ගේ නිවස (WP-0880A/B..)
-              </div>
-              <button onclick="navigateToNextMeeting()" class="mt-2 w-full py-1.5 px-3 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold flex items-center justify-center gap-1 transition shadow-sm">
-                <i data-lucide="navigation" class="w-3 h-3"></i>
-                <span>රැස්වන ස්ථානයට Google Map</span>
-              </button>
-            </div>
-
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+              සේවා රැස්වීම්, ප්‍රදේශ සහ ආහාර සත්කාර සැලසුම්
+            </h1>
+            
+            <p class="text-sm sm:text-base text-blue-100/90 flex items-center gap-2 font-medium">
+              <i data-lucide="users" class="w-4 h-4 text-blue-300 shrink-0"></i>
+              <span>චාරිකා සේවක: <strong>සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා</strong></span>
+            </p>
           </div>
         </div>
 
@@ -318,67 +284,41 @@
 
 
       <!-- ========================================== -->
-      <!-- VIEW 1: FIELD SERVICE & TERRITORIES        -->
+      <!-- VIEW 1: FIELD SERVICE (DAY BY DAY)         -->
       <!-- ========================================== -->
       <div id="serviceViewSection" class="transition-opacity duration-300">
 
-        <!-- DAY FILTER TABS & SESSIONS -->
-        <div class="mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <!-- CLEAN ENGLISH DAY NAVIGATION TABS (Wednesday to Sunday) -->
+        <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           
-          <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
-            <!-- Day Tabs -->
-            <div class="flex items-center gap-1 p-1.5 bg-slate-200/80 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full">
-              <button onclick="filterSchedule('all')" id="tab-all" class="tab-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-jw-blue shadow-sm whitespace-nowrap">
-                සියලු දින (All Days)
-              </button>
-              <button onclick="filterSchedule('wed')" id="tab-wed" class="tab-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                බදාදා (25)
-              </button>
-              <button onclick="filterSchedule('thu')" id="tab-thu" class="tab-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                බ්‍රහස් (26)
-              </button>
-              <button onclick="filterSchedule('fri')" id="tab-fri" class="tab-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                සිකුරාදා (27)
-              </button>
-              <button onclick="filterSchedule('sat')" id="tab-sat" class="tab-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                සෙනසු (28)
-              </button>
-              <button onclick="filterSchedule('sun')" id="tab-sun" class="tab-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-                ඉරිදා (29)
-              </button>
-            </div>
-
-            <!-- Session sub-filter -->
-            <div class="flex items-center gap-1 p-1 bg-slate-200/60 rounded-xl">
-              <button onclick="filterSessionType('all')" id="sess-all" class="sess-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-white text-slate-800 shadow-xs">සියලු වාර</button>
-              <button onclick="filterSessionType('morning')" id="sess-morning" class="sess-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1">
-                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                <span>උදෑසන</span>
-              </button>
-              <button onclick="filterSessionType('evening')" id="sess-evening" class="sess-btn px-2.5 py-1 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1">
-                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                <span>සවස</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Quick Stats / Helper -->
-          <div class="flex items-center gap-2 text-xs text-slate-500 justify-end w-full md:w-auto">
-            <span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-slate-200 shadow-sm font-medium">
-              <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-600"></i>
-              <span>වාර 7 ක් & සේවා ප්‍රදේශ 24 ක්</span>
-            </span>
-            <button onclick="openCustomizerModal()" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 shadow-sm font-medium transition">
-              <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-600"></i>
-              <span>ස්ථාන සංස්කරණය</span>
+          <div class="flex items-center gap-2 p-1.5 bg-slate-200/90 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full">
+            <button onclick="filterSchedule('wed')" id="tab-wed" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black transition bg-white text-jw-blue shadow-md whitespace-nowrap">
+              🗓️ Wednesday (25)
+            </button>
+            <button onclick="filterSchedule('thu')" id="tab-thu" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+              🗓️ Thursday (26)
+            </button>
+            <button onclick="filterSchedule('fri')" id="tab-fri" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+              🗓️ Friday (27)
+            </button>
+            <button onclick="filterSchedule('sat')" id="tab-sat" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+              🗓️ Saturday (28)
+            </button>
+            <button onclick="filterSchedule('sun')" id="tab-sun" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+              🗓️ Sunday (29)
             </button>
           </div>
 
+          <button onclick="openCustomizerModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 shadow-sm text-xs font-bold transition">
+            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span>ස්ථාන සංස්කරණය</span>
+          </button>
+
         </div>
 
-        <!-- SCHEDULE CARDS GRID (SEPARATE SESSIONS) -->
-        <div id="scheduleGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Rendered dynamically by JavaScript -->
+        <!-- DAY-BY-DAY SCHEDULE CONTAINER -->
+        <div id="scheduleGrid" class="space-y-8">
+          <!-- Rendered dynamically DAY BY DAY by JavaScript -->
         </div>
 
       </div>
@@ -389,71 +329,37 @@
       <!-- ========================================== -->
       <div id="mealsViewSection" class="hidden transition-opacity duration-300">
         
-        <!-- Meals Notice & Header Card -->
-        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-900 via-amber-800 to-slate-900 text-white p-6 sm:p-8 shadow-xl mb-8 border border-amber-500/20">
-          <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            
-            <div class="space-y-2 max-w-2xl">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/30 border border-amber-400/40 text-amber-200 text-xs font-bold">
-                <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
-                <span>චාරිකා සේවක යුවළගේ ආහාර සත්කාර සැලසුම</span>
-              </div>
-              <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                දිනපතා ආහාර සත්කාර සැලසුම් (Meals Schedule)
-              </h2>
-              <p class="text-sm text-amber-100/90 font-medium leading-relaxed">
-                චාරිකා සේවක <strong>සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා</strong> වෙනුවෙන් සභාවේ සහෝදර සහෝදරියන් විසින් ආදරයෙන් පිළියෙල කරන ලද දවල් සහ රාත්‍රී ආහාර සත්කාර.
-              </p>
-
-              <!-- Elders' Letter Reminder Alert -->
-              <div class="mt-3 p-3.5 rounded-2xl bg-black/40 backdrop-blur-md border border-amber-400/30 flex items-start gap-3">
-                <div class="w-7 h-7 rounded-lg bg-amber-500/30 text-amber-300 flex items-center justify-center shrink-0 mt-0.5">
-                  <i data-lucide="info" class="w-4 h-4"></i>
-                </div>
-                <div class="text-xs text-amber-100 leading-snug">
-                  <strong class="text-amber-300 font-bold">වැදගත් සිහිපත් කිරීමක්:</strong><br>
-                  "චාරිකා සතිය ගැන වැඩිමහල්ලන්ට එවූ ලිපියේ ආහාර සම්බන්ධ උපදෙස් බලන්න."
-                </div>
-              </div>
-            </div>
-
-            <!-- Meals Actions Box -->
-            <div class="flex flex-col sm:flex-row md:flex-col gap-2.5 w-full md:w-auto shrink-0">
-              <button onclick="openMealsDocModal()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-sm">
-                <i data-lucide="file-text" class="w-4 h-4 text-amber-300"></i>
-                <span>මුල් ආහාර ලේඛනය බලන්න</span>
-              </button>
-              <button onclick="shareAllMeals()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 transition shadow-md shadow-emerald-700/30">
-                <i data-lucide="message-circle" class="w-4 h-4"></i>
-                <span>ආහාර සැලසුම WhatsApp යවන්න</span>
-              </button>
-            </div>
-
+        <!-- Discreet Note & Actions Bar -->
+        <div class="mb-6 p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-amber-950 shadow-xs">
+          <div class="flex items-center gap-2">
+            <i data-lucide="info" class="w-4 h-4 text-amber-700 shrink-0"></i>
+            <span>📌 <strong>සටහන:</strong> "චාරිකා සතිය ගැන වැඩිමහල්ලන්ට එවූ ලිපියේ ආහාර සම්බන්ධ උපදෙස් බලන්න."</span>
           </div>
+          <button onclick="shareAllMeals()" class="shrink-0 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 transition shadow-xs">
+            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+            <span>ආහාර සැලසුම WhatsApp යවන්න</span>
+          </button>
         </div>
 
-        <!-- Meals Day Filter Tabs -->
-        <div class="mb-6 flex items-center gap-1.5 p-1.5 bg-slate-200/80 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full">
-          <button onclick="filterMeals('all')" id="meal-tab-all" class="meal-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-white text-amber-800 shadow-sm whitespace-nowrap">
-            සියලු දින (All Days)
+        <!-- Meals Day Filter Tabs in English -->
+        <div class="mb-6 flex items-center gap-2 p-1.5 bg-slate-200/80 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full">
+          <button onclick="filterMeals('tue')" id="meal-tab-tue" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black transition bg-white text-amber-800 shadow-md whitespace-nowrap">
+            🍽️ Tuesday (24)
           </button>
-          <button onclick="filterMeals('tue')" id="meal-tab-tue" class="meal-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-            අඟහරුවාදා (24)
+          <button onclick="filterMeals('wed')" id="meal-tab-wed" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            🍽️ Wednesday (25)
           </button>
-          <button onclick="filterMeals('wed')" id="meal-tab-wed" class="meal-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-            බදාදා (25)
+          <button onclick="filterMeals('thu')" id="meal-tab-thu" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            🍽️ Thursday (26)
           </button>
-          <button onclick="filterMeals('thu')" id="meal-tab-thu" class="meal-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-            බ්‍රහස් (26)
+          <button onclick="filterMeals('fri')" id="meal-tab-fri" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            🍽️ Friday (27)
           </button>
-          <button onclick="filterMeals('fri')" id="meal-tab-fri" class="meal-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-            සිකුරාදා (27)
+          <button onclick="filterMeals('sat')" id="meal-tab-sat" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            🍽️ Saturday (28)
           </button>
-          <button onclick="filterMeals('sat')" id="meal-tab-sat" class="meal-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-            සෙනසු (28)
-          </button>
-          <button onclick="filterMeals('sun')" id="meal-tab-sun" class="meal-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-            ඉරිදා (29)
+          <button onclick="filterMeals('sun')" id="meal-tab-sun" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            🍽️ Sunday (29)
           </button>
         </div>
 
@@ -469,21 +375,17 @@
     <!-- Floating Quick Actions Bar on Mobile -->
     <div class="fixed bottom-4 left-4 right-4 sm:hidden z-30">
       <div class="glass-dark text-white rounded-2xl p-2.5 flex items-center justify-around shadow-2xl border border-white/20">
-        <button onclick="switchMainView('service'); filterSchedule('all'); filterSessionType('all'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white">
+        <button onclick="switchMainView('service'); filterSchedule('wed'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white font-bold">
           <i data-lucide="map-pin" class="w-5 h-5 mb-0.5"></i>
           <span>සේවා</span>
         </button>
-        <button onclick="switchMainView('meals'); filterMeals('all'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-amber-300 hover:text-white">
+        <button onclick="switchMainView('meals'); filterMeals('tue'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-amber-300 hover:text-white font-bold">
           <i data-lucide="utensils" class="w-5 h-5 mb-0.5"></i>
           <span>ආහාර</span>
         </button>
         <button onclick="openShareModal()" class="flex flex-col items-center text-[10px] text-emerald-300 hover:text-emerald-200 font-bold">
           <i data-lucide="send" class="w-5 h-5 mb-0.5"></i>
           <span>WhatsApp</span>
-        </button>
-        <button onclick="openScheduleModal()" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white">
-          <i data-lucide="file-text" class="w-5 h-5 mb-0.5"></i>
-          <span>පත්‍රිකාව</span>
         </button>
       </div>
     </div>
@@ -495,62 +397,7 @@
   <!-- MODALS                                     -->
   <!-- ========================================== -->
 
-  <!-- Modal 1: Original Schedule Image Viewer -->
-  <div id="scheduleModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20">
-      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="calendar" class="w-5 h-5 text-jw-blue"></i>
-          <h3 class="font-bold text-slate-800 text-base sm:text-lg">සේවය සඳහා සැලසුම් — මුල් ලේඛනය</h3>
-        </div>
-        <button onclick="closeScheduleModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <div class="p-4 max-h-[75vh] overflow-auto flex items-center justify-center bg-slate-50">
-        <img src="assets/schedule_table.jpg" alt="Original Schedule" class="max-w-full rounded-xl shadow-md border border-slate-200">
-      </div>
-      <div class="p-4 bg-slate-100/70 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
-        <span>බටගම සභාව • නොවැම්බර් 24 සිට 29</span>
-        <button onclick="closeScheduleModal()" class="px-4 py-2 rounded-xl bg-jw-blue text-white font-medium hover:bg-blue-700 transition">
-          වසන්න (Close)
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Modal 2: Original Meals Document Viewer -->
-  <div id="mealsDocModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
-    <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20">
-      <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-amber-50/80">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center shadow-xs">
-            <i data-lucide="utensils" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <h3 class="font-bold text-slate-800 text-base">ආහාර සත්කාර සැලසුම් — මුල් ලේඛනය</h3>
-            <p class="text-xs text-amber-800">චාරිකා සේවක යුවළගේ ආහාර සත්කාර ලැයිස්තුව</p>
-          </div>
-        </div>
-        <button onclick="closeMealsDocModal()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 flex items-center justify-center text-slate-600 transition shadow-xs">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <div class="p-4 max-h-[75vh] overflow-auto flex items-center justify-center bg-slate-50">
-        <img src="assets/meals_schedule.jpg" alt="Original Meals Schedule" class="max-w-full rounded-xl shadow-md border border-slate-200">
-      </div>
-      <div class="p-4 bg-slate-100/80 border-t border-slate-200 flex items-center justify-between text-xs text-slate-600">
-        <span class="font-medium text-amber-900">📌 ලිපියේ සඳහන් ආහාර උපදෙස් අනුව කටයුතු කරන්න</span>
-        <button onclick="closeMealsDocModal()" class="px-4 py-2 rounded-xl bg-amber-700 text-white font-medium hover:bg-amber-800 transition">
-          වසන්න (Close)
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Modal 3: WhatsApp Share Modal -->
+  <!-- Modal 1: WhatsApp Share Modal -->
   <div id="shareModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-white/20">
       <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-emerald-50">
@@ -573,27 +420,23 @@
           <label class="block text-xs font-semibold text-slate-700 mb-1.5">බෙදාහැරීමට අවශ්‍ය වැඩසටහන තෝරන්න:</label>
           <select id="shareDaySelect" onchange="updateSharePreview()" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
             <optgroup label="🌟 සම්පූර්ණ වැඩසටහන්">
-              <option value="all">🗺️ සම්පූර්ණ සතියේ සේවා සැලසුම් (All Service Schedule)</option>
-              <option value="all-meals">🍽️ සම්පූර්ණ සතියේ ආහාර සත්කාර (All Meals Schedule)</option>
+              <option value="all">🗺️ All Field Service Schedule (සම්පූර්ණ සේවා සැලසුම්)</option>
+              <option value="all-meals">🍽️ All Meals Schedule (සම්පූර්ණ ආහාර සත්කාර)</option>
             </optgroup>
-            <optgroup label="🗺️ ක්ෂේත්‍ර සේවා රැස්වීම් (Field Service)">
-              <option value="wed">🗓️ නොවැ 25 බදාදා සේවා (උදේ & සවස)</option>
-              <option value="wed-morning">☀️ නොවැ 25 බදාදා උදෑසන (9:00 AM — සහෝ. බර්නාඩ්)</option>
-              <option value="wed-evening">🌅 නොවැ 25 බදාදා සවස (4:00 PM — සහෝ. බර්නාඩ්)</option>
-              <option value="thu-morning">☀️ නොවැ 26 බ්‍රහස් උදෑසන (9:00 AM — සහෝ. චිතාල්)</option>
-              <option value="fri">🗓️ නොවැ 27 සිකුරාදා සේවා (උදේ & සවස)</option>
-              <option value="fri-morning">☀️ නොවැ 27 සිකුරාදා උදෑසන (9:00 AM — සහෝ. චමින්ද)</option>
-              <option value="fri-evening">🌅 නොවැ 27 සිකුරාදා සවස (4:00 PM — සහෝ. මොහාන්)</option>
-              <option value="sat-morning">☀️ නොවැ 28 සෙනසු උදෑසන (9:00 AM — සහෝ. සිසිර)</option>
-              <option value="sun-morning">☀️ නොවැ 29 ඉරිදා උදෑසන (9:00 AM — සහෝ. තරංග)</option>
+            <optgroup label="🗺️ Field Service (Day by Day)">
+              <option value="wed">🗓️ Wednesday, Nov 25 (උදේ & සවස — සහෝ. බර්නාඩ්)</option>
+              <option value="thu">🗓️ Thursday, Nov 26 (උදේ 9:00 AM — සහෝ. චිතාල්)</option>
+              <option value="fri">🗓️ Friday, Nov 27 (උදේ සහෝ. චමින්ද / සවස සහෝ. මොහාන්)</option>
+              <option value="sat">🗓️ Saturday, Nov 28 (උදේ 9:00 AM — සහෝ. සිසිර)</option>
+              <option value="sun">🗓️ Sunday, Nov 29 (උදේ 9:00 AM — සහෝ. තරංග)</option>
             </optgroup>
-            <optgroup label="🍽️ ආහාර සත්කාර (Daily Meals)">
-              <option value="meal-tue">🍽️ නොවැ 24 අඟහරුවාදා ආහාර (රීටා / දිනේෂ්)</option>
-              <option value="meal-wed">🍽️ නොවැ 25 බදාදා ආහාර (ප්‍රවීන් / රංජනී)</option>
-              <option value="meal-thu">🍽️ නොවැ 26 බ්‍රහස්පතින්දා ආහාර (රෝලන්ඩ් / රජිත)</option>
-              <option value="meal-fri">🍽️ නොවැ 27 සිකුරාදා ආහාර (ඉශාකා / මොහාන්)</option>
-              <option value="meal-sat">🍽️ නොවැ 28 සෙනසුරාදා ආහාර (සිදත්)</option>
-              <option value="meal-sun">🍽️ නොවැ 29 ඉරිදා ආහාර (ආශා)</option>
+            <optgroup label="🍽️ Daily Meals Plan">
+              <option value="meal-tue">🍽️ Tuesday, Nov 24 (රීටා / දිනේෂ්)</option>
+              <option value="meal-wed">🍽️ Wednesday, Nov 25 (ප්‍රවීන් / රංජනී)</option>
+              <option value="meal-thu">🍽️ Thursday, Nov 26 (රෝලන්ඩ් / රජිත)</option>
+              <option value="meal-fri">🍽️ Friday, Nov 27 (ඉශාකා / මොහාන්)</option>
+              <option value="meal-sat">🍽️ Saturday, Nov 28 (සිදත්)</option>
+              <option value="meal-sun">🍽️ Sunday, Nov 29 (ආශා)</option>
             </optgroup>
           </select>
         </div>
@@ -619,7 +462,7 @@
   </div>
 
 
-  <!-- Modal 4: Location Customizer & GPS Editor -->
+  <!-- Modal 2: Location Customizer & GPS Editor -->
   <div id="customizerModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
     <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-white/20">
       
@@ -660,7 +503,7 @@
   </div>
 
 
-  <!-- Modal 5: Location Photo Lightbox Modal -->
+  <!-- Modal 3: Location Photo Lightbox Modal -->
   <div id="photoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
     <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20 flex flex-col">
       <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
@@ -715,17 +558,63 @@
   <!-- ========================================== -->
   <script>
     // -------------------------------------------------------------
+    // DAY-BY-DAY CONFIGURATION (ENGLISH DAY HEADINGS)
+    // -------------------------------------------------------------
+    const DAYS_CONFIG = [
+      {
+        id: "wed",
+        dateNum: "25",
+        dateTitle: "Wednesday, November 25",
+        sinhalaTitle: "නොවැම්බර් 25 බදාදා",
+        badgeText: "2 Sessions (Morning & Evening)",
+        hostSummary: "Meeting at Bro. Bernard's Residence"
+      },
+      {
+        id: "thu",
+        dateNum: "26",
+        dateTitle: "Thursday, November 26",
+        sinhalaTitle: "නොවැම්බර් 26 බ්‍රහස්පතින්දා",
+        badgeText: "Morning Session (9:00 AM)",
+        hostSummary: "Meeting at Bro. Chithal's Residence (Chitha)"
+      },
+      {
+        id: "fri",
+        dateNum: "27",
+        dateTitle: "Friday, November 27",
+        sinhalaTitle: "නොවැම්බර් 27 සිකුරාදා",
+        badgeText: "2 Sessions (Morning & Evening)",
+        hostSummary: "Morning: Bro. Chaminda / Evening: Bro. Mohan"
+      },
+      {
+        id: "sat",
+        dateNum: "28",
+        dateTitle: "Saturday, November 28",
+        sinhalaTitle: "නොවැම්බර් 28 සෙනසුරාදා",
+        badgeText: "Morning Session (9:00 AM)",
+        hostSummary: "Meeting at Bro. Sisira's Residence"
+      },
+      {
+        id: "sun",
+        dateNum: "29",
+        dateTitle: "Sunday, November 29",
+        sinhalaTitle: "නොවැම්බර් 29 ඉරිදා",
+        badgeText: "Morning Session (9:00 AM)",
+        hostSummary: "Meeting at Bro. Tharanga Kumara's Residence"
+      }
+    ];
+
+    // -------------------------------------------------------------
     // DATA STORE: Default Schedule and Territories
     // -------------------------------------------------------------
     const DEFAULT_SCHEDULE = [
       {
         id: "wed-morning",
         dayId: "wed",
-        date: "නොවැම්බර් 25 බදාදා",
-        dayName: "බදාදා (Wednesday)",
+        date: "Wednesday, November 25",
+        dayName: "Wednesday",
         sessionType: "morning",
-        sessionTitle: "උදෑසන සේවය",
-        time: "උදේ 9:00",
+        sessionTitle: "උදෑසන සේවය (Morning)",
+        time: "9:00 AM",
         host: "සහෝ. බර්නාඩ්ගේ නිවස",
         address: "බටගම (Batagama)",
         phone: "",
@@ -744,11 +633,11 @@
       {
         id: "wed-evening",
         dayId: "wed",
-        date: "නොවැම්බර් 25 බදාදා",
-        dayName: "බදාදා (Wednesday)",
+        date: "Wednesday, November 25",
+        dayName: "Wednesday",
         sessionType: "evening",
-        sessionTitle: "සවස් සේවය",
-        time: "සවස 4:00",
+        sessionTitle: "සවස් සේවය (Evening)",
+        time: "4:00 PM",
         host: "සහෝ. බර්නාඩ්ගේ නිවස",
         address: "බටගම (Batagama)",
         phone: "",
@@ -766,11 +655,11 @@
       {
         id: "thu-morning",
         dayId: "thu",
-        date: "නොවැම්බර් 26 බ්‍රහස්පතින්දා",
-        dayName: "බ්‍රහස්පතින්දා (Thursday)",
+        date: "Thursday, November 26",
+        dayName: "Thursday",
         sessionType: "morning",
-        sessionTitle: "උදෑසන සේවය",
-        time: "උදේ 9:00",
+        sessionTitle: "උදෑසන සේවය (Morning)",
+        time: "9:00 AM",
         host: "සහෝ. චිතාල්ගේ නිවස (චිතා)",
         address: "බටගම, ජා-ඇල (Batagama, Ja-Ela)",
         phone: "",
@@ -789,11 +678,11 @@
       {
         id: "fri-morning",
         dayId: "fri",
-        date: "නොවැම්බර් 27 සිකුරාදා",
-        dayName: "සිකුරාදා (Friday)",
+        date: "Friday, November 27",
+        dayName: "Friday",
         sessionType: "morning",
-        sessionTitle: "උදෑසන සේවය",
-        time: "උදේ 9:00",
+        sessionTitle: "උදෑසන සේවය (Morning)",
+        time: "9:00 AM",
         host: "සහෝ. චමින්ද මවුබන්දාරගේ නිවස",
         address: "බටගම (Batagama)",
         phone: "",
@@ -810,11 +699,11 @@
       {
         id: "fri-evening",
         dayId: "fri",
-        date: "නොවැම්බර් 27 සිකුරාදා",
-        dayName: "සිකුරාදා (Friday)",
+        date: "Friday, November 27",
+        dayName: "Friday",
         sessionType: "evening",
-        sessionTitle: "සවස් සේවය",
-        time: "සවස 4:00",
+        sessionTitle: "සවස් සේවය (Evening)",
+        time: "4:00 PM",
         host: "සහෝ. මොහාන්ගේ නිවස",
         address: "බටගම (Batagama)",
         phone: "",
@@ -830,11 +719,11 @@
       {
         id: "sat-morning",
         dayId: "sat",
-        date: "නොවැම්බර් 28 සෙනසුරාදා",
-        dayName: "සෙනසුරාදා (Saturday)",
+        date: "Saturday, November 28",
+        dayName: "Saturday",
         sessionType: "morning",
-        sessionTitle: "උදෑසන සේවය",
-        time: "උදේ 9:00",
+        sessionTitle: "උදෑසන සේවය (Morning)",
+        time: "9:00 AM",
         host: "සහෝ. සිසිරගේ නිවස",
         address: "බටගම (Batagama)",
         phone: "",
@@ -853,11 +742,11 @@
       {
         id: "sun-morning",
         dayId: "sun",
-        date: "නොවැම්බර් 29 ඉරිදා",
-        dayName: "ඉරිදා (Sunday)",
+        date: "Sunday, November 29",
+        dayName: "Sunday",
         sessionType: "morning",
-        sessionTitle: "උදෑසන සේවය",
-        time: "උදේ 9:00",
+        sessionTitle: "උදෑසන සේවය (Morning)",
+        time: "9:00 AM",
         host: "සහෝ. තරංග කුමාරගේ නිවස",
         address: "බටගම (Batagama)",
         phone: "",
@@ -880,102 +769,131 @@
     const MEALS_SCHEDULE = [
       {
         dayId: "tue",
-        date: "නොවැම්බර් 24 අඟහරුවාදා",
-        dayName: "අඟහරුවාදා (Tuesday)",
+        dateTitle: "Tuesday, November 24",
+        sinhalaDate: "නොවැම්බර් 24 අඟහරුවාදා",
+        dayName: "Tuesday",
         lunch: {
           host: "රීටා",
           phone: "0778468534",
-          note: ""
+          note: "",
+          mapUrl: ""
         },
         dinner: {
           host: "දිනේෂ් ගොඩකුඹුර",
           phone: "0712200908",
-          note: ""
+          note: "",
+          mapUrl: ""
         }
       },
       {
         dayId: "wed",
-        date: "නොවැම්බර් 25 බදාදා",
-        dayName: "බදාදා (Wednesday)",
+        dateTitle: "Wednesday, November 25",
+        sinhalaDate: "නොවැම්බර් 25 බදාදා",
+        dayName: "Wednesday",
         lunch: {
           host: "ප්‍රවීන්",
           phone: "0776589614",
-          note: ""
+          note: "",
+          mapUrl: "https://www.google.com/maps/place/7%C2%B003'59.7%22N+79%C2%B053'42.9%22E/@7.0665901,79.8926845,1119m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d7.0665901!4d79.8952594"
         },
         dinner: {
           host: "රංජනී",
           phone: "0701188733",
-          note: ""
+          note: "",
+          mapUrl: ""
         }
       },
       {
         dayId: "thu",
-        date: "නොවැම්බර් 26 බ්‍රහස්පතින්දා",
-        dayName: "බ්‍රහස්පතින්දා (Thursday)",
+        dateTitle: "Thursday, November 26",
+        sinhalaDate: "නොවැම්බර් 26 බ්‍රහස්පතින්දා",
+        dayName: "Thursday",
         lunch: {
           host: "රෝලන්ඩ්",
           phone: "0772749913",
-          note: "නවාතැන් ගන්නා තැන"
+          note: "නවාතැන් ගන්නා තැන",
+          mapUrl: "https://maps.app.goo.gl/CSCW55fbRCwgqR9bA?g_st=aw"
         },
         dinner: {
           host: "රජිත චන්ද්‍රසේකර",
           phone: "0717549900",
-          note: ""
+          note: "",
+          mapUrl: ""
         }
       },
       {
         dayId: "fri",
-        date: "නොවැම්බර් 27 සිකුරාදා",
-        dayName: "සිකුරාදා (Friday)",
+        dateTitle: "Friday, November 27",
+        sinhalaDate: "නොවැම්බර් 27 සිකුරාදා",
+        dayName: "Friday",
         lunch: {
           host: "ඉශාකා",
           phone: "0783155021",
-          note: ""
+          note: "",
+          mapUrl: "https://maps.app.goo.gl/95w7hzrA7K3q6v2Q9"
         },
         dinner: {
           host: "මොහාන් ඩේවිඩ්",
           phone: "0714899518",
-          note: ""
+          note: "",
+          mapUrl: ""
         }
       },
       {
         dayId: "sat",
-        date: "නොවැම්බර් 28 සෙනසුරාදා",
-        dayName: "සෙනසුරාදා (Saturday)",
+        dateTitle: "Saturday, November 28",
+        sinhalaDate: "නොවැම්බර් 28 සෙනසුරාදා",
+        dayName: "Saturday",
         lunch: {
           host: "සිදත්",
           phone: "0760326161",
-          note: ""
+          note: "",
+          mapUrl: "https://maps.app.goo.gl/cNvvkrVMMWX8m7Ks9"
         },
         dinner: {
           host: "—",
           phone: "",
-          note: "රාත්‍රී ආහාර සත්කාරයක් නොමැත"
+          note: "රාත්‍රී ආහාර සත්කාරයක් නොමැත",
+          mapUrl: ""
         }
       },
       {
         dayId: "sun",
-        date: "නොවැම්බර් 29 ඉරිදා",
-        dayName: "ඉරිදා (Sunday)",
+        dateTitle: "Sunday, November 29",
+        sinhalaDate: "නොවැම්බර් 29 ඉරිදා",
+        dayName: "Sunday",
         lunch: {
           host: "ආශා",
           phone: "",
-          note: ""
+          note: "",
+          mapUrl: "https://maps.app.goo.gl/qBGAhBYKchGfLNAk7"
         },
         dinner: {
           host: "—",
           phone: "",
-          note: "රාත්‍රී ආහාර සත්කාරයක් නොමැත"
+          note: "රාත්‍රී ආහාර සත්කාරයක් නොමැත",
+          mapUrl: ""
         }
       }
     ];
 
     // Load from LocalStorage if present, else use default v10
     let scheduleData = JSON.parse(localStorage.getItem('jw_batagama_co_schedule_v10')) || DEFAULT_SCHEDULE;
+    try {
+      const savedMeals = localStorage.getItem('jw_batagama_meals_schedule_v10');
+      if (savedMeals) {
+        const parsed = JSON.parse(savedMeals);
+        parsed.forEach((pm, idx) => {
+          if (MEALS_SCHEDULE[idx]) {
+            if (pm.lunch && pm.lunch.mapUrl) MEALS_SCHEDULE[idx].lunch.mapUrl = pm.lunch.mapUrl;
+            if (pm.dinner && pm.dinner.mapUrl) MEALS_SCHEDULE[idx].dinner.mapUrl = pm.dinner.mapUrl;
+          }
+        });
+      }
+    } catch (e) {}
     let currentMainView = 'service'; // 'service' or 'meals'
-    let currentDayFilter = 'all';
-    let currentSessionFilter = 'all';
-    let currentMealFilter = 'all';
+    let currentDayFilter = 'wed'; // Default active day: Wednesday!
+    let currentMealFilter = 'tue'; // Default active meal day: Tuesday!
     let soundEnabled = true;
 
     // Web Audio Synthesizer for gentle audio chime
@@ -1037,11 +955,11 @@
     const skipBtn = document.getElementById('skipSplashBtn');
 
     const statusPhrases = [
-      { at: 10, text: "සේවා සැලසුම් සූදානම් කරමින්... (Loading Plans)" },
-      { at: 35, text: "සේවා ප්‍රදේශ සිතියම් සකසමින්... (Territories)" },
-      { at: 60, text: "ආහාර සත්කාර සැලසුම් සකසමින්... (Meals Plan)" },
-      { at: 85, text: "අවසන් සැකසුම් කරමින්... (Polishing Interface)" },
-      { at: 99, text: "සාදරයෙන් පිළිගනිමු! (Welcome!) ✨" }
+      { at: 10, text: "Loading Service Plans..." },
+      { at: 35, text: "Preparing Territories..." },
+      { at: 60, text: "Organizing Meals Arrangements..." },
+      { at: 85, text: "Polishing Interface..." },
+      { at: 99, text: "Welcome! සාදරයෙන් පිළිගනිමු! ✨" }
     ];
 
     setTimeout(() => {
@@ -1057,7 +975,7 @@
         clearInterval(splashInterval);
         splashBar.style.width = '100%';
         splashText.innerText = '100%';
-        splashStatus.innerText = 'සාදරයෙන් පිළිගනිමු! ✨';
+        splashStatus.innerText = 'Welcome! සාදරයෙන් පිළිගනිමු! ✨';
         playChime(784, 0.4);
 
         setTimeout(finishSplash, 400);
@@ -1079,8 +997,8 @@
       mainApp.classList.remove('opacity-0');
       setTimeout(() => {
         splashScreen.style.display = 'none';
-        renderScheduleGrid();
-        renderMealsGrid();
+        filterSchedule('wed');
+        filterMeals('tue');
       }, 500);
     }
 
@@ -1101,6 +1019,7 @@
         mealsSec.classList.add('hidden');
         btnService.className = "flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all bg-white text-jw-blue shadow-md";
         btnMeals.className = "flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all text-slate-600 hover:text-slate-900";
+        renderScheduleGrid();
       } else {
         serviceSec.classList.add('hidden');
         mealsSec.classList.remove('hidden');
@@ -1128,70 +1047,61 @@
     }
 
     // -------------------------------------------------------------
-    // SCHEDULE GRID RENDERING (INDIVIDUAL SESSIONS)
+    // SCHEDULE RENDERING (ACTIVE DAY VIEW)
     // -------------------------------------------------------------
     function renderScheduleGrid() {
       const container = document.getElementById('scheduleGrid');
       container.innerHTML = '';
 
-      const filtered = scheduleData.filter(session => {
-        const matchesDay = (currentDayFilter === 'all' || session.dayId === currentDayFilter || session.id === currentDayFilter);
-        const matchesSession = (currentSessionFilter === 'all' || session.sessionType === currentSessionFilter);
-        return matchesDay && matchesSession;
-      });
+      const day = DAYS_CONFIG.find(d => d.id === currentDayFilter);
+      if (!day) return;
 
-      filtered.forEach((session, index) => {
-        const card = document.createElement('div');
+      const daySessions = scheduleData.filter(s => s.dayId === day.id);
+      if (daySessions.length === 0) return;
+
+      // Day Section Card
+      const daySection = document.createElement('div');
+      daySection.className = "p-5 sm:p-7 rounded-3xl bg-white shadow-glass border border-slate-200/90";
+
+      // Day Header with English Title
+      let dayHeaderHtml = `
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 mb-6 border-b-2 border-slate-100">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-jw-navy to-jw-blue text-white flex flex-col items-center justify-center font-black shadow-md shrink-0">
+              <span class="text-[10px] uppercase font-bold text-blue-200 tracking-wider">NOV</span>
+              <span class="text-lg font-black leading-none font-mono">${day.dateNum}</span>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
+                  ${day.dateTitle}
+                </h3>
+                <span class="text-xs text-slate-400 font-medium">(${day.sinhalaTitle})</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-jw-blue text-xs font-bold shadow-2xs">
+                  ${day.badgeText}
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-500 font-semibold mt-0.5">
+                ${day.hostSummary}
+              </p>
+            </div>
+          </div>
+
+          <button onclick="shareDayGroup('${day.id}')" title="Share this day via WhatsApp" class="px-3.5 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-bold flex items-center gap-1.5 transition shadow-2xs self-end sm:self-auto">
+            <i data-lucide="share-2" class="w-4 h-4"></i>
+            <span>Share via WhatsApp</span>
+          </button>
+        </div>
+      `;
+
+      // Render sessions inside this day (Morning & Evening side-by-side or stacked)
+      let sessionsGridHtml = `<div class="grid grid-cols-1 ${daySessions.length > 1 ? 'lg:grid-cols-2' : ''} gap-6">`;
+
+      daySessions.forEach(session => {
         const isMorning = session.sessionType === 'morning';
         const themeColor = isMorning ? 'blue' : 'amber';
         const badgeBg = isMorning ? 'bg-blue-600' : 'bg-amber-600';
         const lightBg = isMorning ? 'bg-blue-50/80 border border-blue-100' : 'bg-amber-50/80 border border-amber-100';
-
-        card.className = "glass-panel rounded-3xl p-5 sm:p-6 shadow-glass card-hover border border-slate-200/90 relative overflow-hidden flex flex-col justify-between";
-
-        // Find today's meal info to show directly on service card
-        const mealInfo = MEALS_SCHEDULE.find(m => m.dayId === session.dayId);
-        let mealWidgetHtml = '';
-        if (mealInfo) {
-          mealWidgetHtml = `
-            <div class="mt-4 p-3 rounded-2xl bg-gradient-to-r from-amber-50/90 to-orange-50/90 border border-amber-200/80">
-              <div class="flex items-center justify-between mb-2">
-                <div class="flex items-center gap-1.5 text-xs font-black text-amber-950">
-                  <i data-lucide="utensils" class="w-3.5 h-3.5 text-amber-600"></i>
-                  <span>අද දවසේ ආහාර සත්කාර (Meals)</span>
-                </div>
-                <button onclick="switchMainView('meals'); filterMeals('${session.dayId}');" class="text-[11px] font-bold text-amber-800 hover:text-amber-950 flex items-center gap-0.5 transition">
-                  <span>විස්තර</span>
-                  <i data-lucide="chevron-right" class="w-3 h-3"></i>
-                </button>
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-xs">
-                <!-- Lunch -->
-                <div class="p-2 rounded-xl bg-white/95 border border-amber-100 flex flex-col justify-between shadow-2xs">
-                  <div class="text-[10px] text-amber-800 font-bold mb-0.5">☀️ දවල් ආහාරය:</div>
-                  <div class="font-black text-slate-900 text-sm truncate">${mealInfo.lunch.host}</div>
-                  ${mealInfo.lunch.phone ? `
-                    <a href="tel:${mealInfo.lunch.phone}" class="mt-1 inline-flex items-center gap-1 text-[11px] text-emerald-700 font-bold hover:underline">
-                      <i data-lucide="phone-call" class="w-3 h-3"></i>
-                      <span>${mealInfo.lunch.phone}</span>
-                    </a>
-                  ` : '<span class="text-[10px] text-slate-400 mt-1">—</span>'}
-                </div>
-                <!-- Dinner -->
-                <div class="p-2 rounded-xl bg-white/95 border border-indigo-100 flex flex-col justify-between shadow-2xs">
-                  <div class="text-[10px] text-indigo-800 font-bold mb-0.5">🌙 රාත්‍රී ආහාරය:</div>
-                  <div class="font-black text-slate-900 text-sm truncate">${mealInfo.dinner.host}</div>
-                  ${mealInfo.dinner.phone ? `
-                    <a href="tel:${mealInfo.dinner.phone}" class="mt-1 inline-flex items-center gap-1 text-[11px] text-emerald-700 font-bold hover:underline">
-                      <i data-lucide="phone-call" class="w-3 h-3"></i>
-                      <span>${mealInfo.dinner.phone}</span>
-                    </a>
-                  ` : `<span class="text-[10px] text-slate-400 mt-1">${mealInfo.dinner.note || '—'}</span>`}
-                </div>
-              </div>
-            </div>
-          `;
-        }
 
         let territoriesHtml = '';
         if (session.territories && session.territories.length > 0) {
@@ -1199,11 +1109,11 @@
             <div class="mt-4 pt-3.5 border-t border-slate-200">
               <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-lg ${isMorning ? 'bg-blue-600' : 'bg-amber-600'} text-white flex items-center justify-center shadow-xs">
+                  <div class="w-6 h-6 rounded-lg ${badgeBg} text-white flex items-center justify-center shadow-xs">
                     <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
                   </div>
                   <span class="text-xs sm:text-sm font-extrabold text-slate-800">
-                    සේවා ප්‍රදේශ (Territories)
+                    Territories (සේවා ප්‍රදේශ)
                   </span>
                   <span class="px-2 py-0.5 rounded-full ${isMorning ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800'} text-xs font-black shadow-2xs">
                     ${session.territories.length}
@@ -1211,7 +1121,7 @@
                 </div>
                 <button onclick="copyTerritories('${session.id}')" title="Copy territory links" class="text-xs text-blue-600 hover:text-blue-800 font-bold flex items-center gap-1 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition">
                   <i data-lucide="copy" class="w-3 h-3"></i>
-                  <span id="copy-t-${session.id}">පිටපත්</span>
+                  <span id="copy-t-${session.id}">Copy Links</span>
                 </button>
               </div>
 
@@ -1227,22 +1137,12 @@
                       </span>
                     </div>
                     <div class="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-${themeColor}-600 group-hover:text-white text-slate-700 transition-colors shrink-0 ml-2 font-bold text-xs shadow-2xs">
-                      <span>සිතියම</span>
+                      <span>Google Map</span>
                       <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                     </div>
                   </a>
                 `).join('')}
               </div>
-            </div>
-          `;
-        } else {
-          territoriesHtml = `
-            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-              <span class="flex items-center gap-1">
-                <i data-lucide="map" class="w-3.5 h-3.5"></i>
-                <span>සේවා ප්‍රදේශ</span>
-              </span>
-              <span class="font-medium text-[11px]">— විස්තර ඉදිරියේදී එක් කෙරේ</span>
             </div>
           `;
         }
@@ -1256,12 +1156,12 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-2.5">
                   <span class="text-xs font-semibold text-white flex items-center gap-1.5 drop-shadow">
                     <i data-lucide="camera" class="w-3.5 h-3.5 text-cyan-300"></i>
-                    <span>පිවිසුම් මාර්ගයේ ඡායාරූපය (බලන්න)</span>
+                    <span>Entrance Photo (පිවිසුම් ඡායාරූපය)</span>
                   </span>
                 </div>
                 <div class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-lg bg-black/60 text-[10px] text-white flex items-center gap-1 backdrop-blur-sm">
                   <i data-lucide="zoom-in" class="w-2.5 h-2.5"></i>
-                  <span>විශාල කරන්න</span>
+                  <span>View</span>
                 </div>
               </div>
               ${session.imageCaption ? `<div class="p-2 text-[10px] text-slate-600 font-medium">${session.imageCaption}</div>` : ''}
@@ -1269,215 +1169,229 @@
           `;
         }
 
-        let cardHtml = `
-          <div>
-            <!-- Session Badge & Header -->
-            <div class="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-100">
-              <div class="flex items-center gap-2">
-                <span class="px-2.5 py-1 rounded-xl ${badgeBg} text-white font-bold text-xs flex items-center gap-1 shadow-xs">
-                  <i data-lucide="${isMorning ? 'sun' : 'sunset'}" class="w-3.5 h-3.5"></i>
-                  <span>${session.sessionTitle}</span>
-                </span>
-                <span class="text-xs font-bold text-slate-700 font-mono">${session.time}</span>
+        sessionsGridHtml += `
+          <div class="p-5 sm:p-6 rounded-2xl border-2 border-slate-200/80 bg-slate-50/50 flex flex-col justify-between hover:border-${themeColor}-400 transition-colors">
+            <div>
+              <!-- Session Badge & Header -->
+              <div class="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-1 rounded-xl ${badgeBg} text-white font-bold text-xs flex items-center gap-1 shadow-xs">
+                    <i data-lucide="${isMorning ? 'sun' : 'sunset'}" class="w-3.5 h-3.5"></i>
+                    <span>${session.sessionTitle}</span>
+                  </span>
+                  <span class="text-xs font-bold text-slate-700 font-mono">${session.time}</span>
+                </div>
+                <button onclick="shareSingleDay('${session.id}')" title="Share via WhatsApp" class="p-2 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition shadow-2xs">
+                  <i data-lucide="share-2" class="w-4 h-4"></i>
+                </button>
               </div>
-              <button onclick="shareSingleDay('${session.id}')" title="WhatsApp යවන්න" class="p-2 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition shadow-2xs">
-                <i data-lucide="share-2" class="w-4 h-4"></i>
-              </button>
+
+              <!-- Host & Meeting Place -->
+              <div class="p-3.5 rounded-2xl ${lightBg}">
+                <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">Meeting Place (රැස්වන ස්ථානය):</div>
+                <div class="font-bold text-slate-900 text-sm flex items-start gap-1.5">
+                  <i data-lucide="home" class="w-4 h-4 text-${themeColor}-600 shrink-0 mt-0.5"></i>
+                  <span>${session.host}</span>
+                </div>
+                <div class="text-xs text-slate-600 ml-5.5 mt-0.5">
+                  Location: ${session.address}
+                  ${session.phone ? `<br><span class="text-${themeColor}-700">Phone: ${session.phone}</span>` : ''}
+                </div>
+
+                <!-- Action button for house -->
+                <div class="mt-3">
+                  <a href="${getGoogleMapsUrl(session)}" target="_blank" class="w-full py-2 px-3.5 rounded-xl bg-${themeColor}-600 hover:bg-${themeColor}-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition">
+                    <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+                    <span>Open in Google Maps (Direct)</span>
+                  </a>
+                </div>
+
+                ${photoHtml}
+              </div>
+
+              ${territoriesHtml}
             </div>
-
-            <!-- Date and Day -->
-            <div class="mb-3">
-              <h4 class="font-extrabold text-slate-900 text-base leading-tight">${session.date}</h4>
-              <span class="text-xs text-slate-500 font-medium">${session.dayName}</span>
-            </div>
-
-            <!-- Host & Meeting Place -->
-            <div class="p-3.5 rounded-2xl ${lightBg}">
-              <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-0.5">රැස්වන ස්ථානය (Meeting Place):</div>
-              <div class="font-bold text-slate-900 text-sm flex items-start gap-1.5">
-                <i data-lucide="home" class="w-4 h-4 text-${themeColor}-600 shrink-0 mt-0.5"></i>
-                <span>${session.host}</span>
-              </div>
-              <div class="text-xs text-slate-600 ml-5.5 mt-0.5">
-                ස්ථානය: ${session.address}
-                ${session.phone ? `<br><span class="text-${themeColor}-700">දුරකථන: ${session.phone}</span>` : ''}
-              </div>
-
-              <!-- Action button for house -->
-              <div class="mt-3">
-                <a href="${getGoogleMapsUrl(session)}" target="_blank" class="w-full py-2 px-3.5 rounded-xl bg-${themeColor}-600 hover:bg-${themeColor}-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition">
-                  <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
-                  <span>රැස්වන ස්ථානයට Google Maps (Direct)</span>
-                </a>
-              </div>
-
-              ${photoHtml}
-            </div>
-
-            ${mealWidgetHtml}
-
-            ${territoriesHtml}
           </div>
         `;
-
-        card.innerHTML = cardHtml;
-        container.appendChild(card);
       });
+
+      sessionsGridHtml += `</div>`;
+
+      daySection.innerHTML = dayHeaderHtml + sessionsGridHtml;
+      container.appendChild(daySection);
 
       lucide.createIcons();
     }
 
     // -------------------------------------------------------------
-    // MEALS GRID RENDERING (DAY BY DAY CARDS)
+    // MEALS GRID RENDERING (DAY BY DAY IN ENGLISH)
     // -------------------------------------------------------------
     function renderMealsGrid() {
       const container = document.getElementById('mealsGrid');
       if (!container) return;
       container.innerHTML = '';
 
-      const filtered = MEALS_SCHEDULE.filter(meal => {
-        return currentMealFilter === 'all' || meal.dayId === currentMealFilter;
-      });
+      const day = MEALS_SCHEDULE.find(m => m.dayId === currentMealFilter);
+      if (!day) return;
 
-      filtered.forEach(day => {
-        const card = document.createElement('div');
-        card.className = "glass-panel rounded-3xl p-5 sm:p-6 shadow-glass card-hover border border-amber-200/90 relative overflow-hidden flex flex-col justify-between";
+      const card = document.createElement('div');
+      card.className = "max-w-2xl mx-auto w-full glass-panel rounded-3xl p-6 sm:p-7 shadow-glass border border-amber-200/90 relative overflow-hidden flex flex-col justify-between";
 
-        const hasDinner = day.dinner.host && day.dinner.host !== "—";
+      const hasDinner = day.dinner.host && day.dinner.host !== "—";
 
-        card.innerHTML = `
-          <div>
-            <!-- Header: Date and Share -->
-            <div class="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-amber-100">
-              <div class="flex items-center gap-2">
-                <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-2xs">
-                  <i data-lucide="calendar" class="w-4 h-4"></i>
-                </span>
-                <div>
-                  <h4 class="font-extrabold text-slate-900 text-base leading-tight">${day.date}</h4>
-                  <span class="text-xs text-amber-800 font-semibold">${day.dayName}</span>
-                </div>
+      card.innerHTML = `
+        <div>
+          <!-- Header: Date and Share -->
+          <div class="flex items-center justify-between gap-2 mb-5 pb-3.5 border-b border-amber-100">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-2xs">
+                <i data-lucide="calendar" class="w-5 h-5"></i>
+              </span>
+              <div>
+                <h4 class="font-black text-slate-900 text-xl leading-tight">${day.dateTitle}</h4>
+                <span class="text-xs text-amber-800 font-semibold">${day.sinhalaDate}</span>
               </div>
-              <button onclick="shareMealDay('${day.dayId}')" title="WhatsApp යවන්න" class="p-2 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition shadow-2xs">
-                <i data-lucide="share-2" class="w-4 h-4"></i>
-              </button>
+            </div>
+            <button onclick="shareMealDay('${day.dayId}')" title="Share via WhatsApp" class="p-2.5 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition shadow-2xs">
+              <i data-lucide="share-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- Lunch Section -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border border-amber-200/90 mb-4 shadow-xs">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="px-3 py-1 rounded-full bg-amber-200/90 text-amber-950 text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs">
+                <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-700"></i>
+                <span>Lunch (දවල් ආහාරය)</span>
+              </span>
+              ${day.lunch.note ? `
+                <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-black border border-rose-200">
+                  🏠 ${day.lunch.note}
+                </span>
+              ` : ''}
             </div>
 
-            <!-- Lunch Section -->
-            <div class="p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 mb-4 shadow-xs">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="px-2.5 py-0.5 rounded-full bg-amber-200/80 text-amber-900 text-[11px] font-black uppercase tracking-wider flex items-center gap-1">
-                  <i data-lucide="sun" class="w-3 h-3 text-amber-700"></i>
-                  <span>දවල් ආහාරය (Lunch)</span>
-                </span>
-                ${day.lunch.note ? `
-                  <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[10px] font-black border border-rose-200">
-                    🏠 ${day.lunch.note}
-                  </span>
-                ` : ''}
+            <!-- Host Name -->
+            <div class="text-xl sm:text-2xl font-black text-slate-900 mt-2.5 mb-1.5 flex items-center gap-2">
+              <i data-lucide="user" class="w-5 h-5 text-amber-700"></i>
+              <span>${day.lunch.host}</span>
+            </div>
+
+            <!-- Google Maps Location Link -->
+            ${day.lunch.mapUrl ? `
+              <div class="mt-2.5 mb-3">
+                <a href="${day.lunch.mapUrl}" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition hover:shadow-md group">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-amber-300 group-hover:scale-110 transition-transform"></i>
+                  <span>ස්ථානයට මග පෙන්වීම (Google Maps)</span>
+                  <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
+                </a>
+              </div>
+            ` : ''}
+
+            <!-- Phone & Actions -->
+            ${day.lunch.phone ? `
+              <div class="mt-3.5 flex items-center gap-2">
+                <a href="tel:${day.lunch.phone}" class="flex-1 py-2 px-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
+                  <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                  <span>Call: ${day.lunch.phone}</span>
+                </a>
+                <a href="https://wa.me/94${day.lunch.phone.startsWith('0') ? day.lunch.phone.substring(1) : day.lunch.phone}" target="_blank" title="WhatsApp Chat" class="p-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 transition">
+                  <i data-lucide="message-circle" class="w-4 h-4"></i>
+                </a>
+                <button onclick="copyPhone('${day.lunch.phone}')" title="Copy Number" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                  <i data-lucide="copy" class="w-4 h-4"></i>
+                </button>
+              </div>
+            ` : `
+              <div class="mt-2 text-xs text-slate-500 italic flex items-center gap-1">
+                <i data-lucide="phone-off" class="w-3.5 h-3.5 text-slate-400"></i>
+                <span>දුරකථන අංකයක් සඳහන් කර නොමැත</span>
+              </div>
+            `}
+          </div>
+
+          <!-- Dinner Section -->
+          <div class="p-4 sm:p-5 rounded-2xl ${hasDinner ? 'bg-indigo-50/90 border border-indigo-200/90' : 'bg-slate-50/80 border border-slate-200/80'} shadow-xs">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="px-3 py-1 rounded-full ${hasDinner ? 'bg-indigo-200/90 text-indigo-950' : 'bg-slate-200 text-slate-600'} text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs">
+                <i data-lucide="moon" class="w-3.5 h-3.5 ${hasDinner ? 'text-indigo-700' : 'text-slate-500'}"></i>
+                <span>Dinner (රාත්‍රී ආහාරය)</span>
+              </span>
+            </div>
+
+            ${hasDinner ? `
+              <!-- Dinner Host Name -->
+              <div class="text-xl sm:text-2xl font-black text-slate-900 mt-2.5 mb-1.5 flex items-center gap-2">
+                <i data-lucide="user" class="w-5 h-5 text-indigo-700"></i>
+                <span>${day.dinner.host}</span>
               </div>
 
-              <!-- Host Name -->
-              <div class="text-lg sm:text-xl font-black text-slate-900 mt-2 mb-1 flex items-center gap-1.5">
-                <i data-lucide="user" class="w-4 h-4 text-amber-700"></i>
-                <span>${day.lunch.host}</span>
-              </div>
-
-              <!-- Phone & Actions -->
-              ${day.lunch.phone ? `
-                <div class="mt-3 flex items-center gap-2">
-                  <a href="tel:${day.lunch.phone}" class="flex-1 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
-                    <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
-                    <span>${day.lunch.phone}</span>
+              <!-- Dinner Google Maps Location Link (if available) -->
+              ${day.dinner.mapUrl ? `
+                <div class="mt-2.5 mb-3">
+                  <a href="${day.dinner.mapUrl}" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-xs transition hover:shadow-md group">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-indigo-200 group-hover:scale-110 transition-transform"></i>
+                    <span>ස්ථානයට මග පෙන්වීම (Google Maps)</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5 opacity-80"></i>
                   </a>
-                  <a href="https://wa.me/94${day.lunch.phone.startsWith('0') ? day.lunch.phone.substring(1) : day.lunch.phone}" target="_blank" title="WhatsApp Chat" class="p-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 transition">
+                </div>
+              ` : ''}
+
+              <!-- Dinner Phone & Actions -->
+              ${day.dinner.phone ? `
+                <div class="mt-3.5 flex items-center gap-2">
+                  <a href="tel:${day.dinner.phone}" class="flex-1 py-2 px-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
+                    <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                    <span>Call: ${day.dinner.phone}</span>
+                  </a>
+                  <a href="https://wa.me/94${day.dinner.phone.startsWith('0') ? day.dinner.phone.substring(1) : day.dinner.phone}" target="_blank" title="WhatsApp Chat" class="p-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 transition">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
                   </a>
-                  <button onclick="copyPhone('${day.lunch.phone}')" title="Copy Number" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+                  <button onclick="copyPhone('${day.dinner.phone}')" title="Copy Number" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
                     <i data-lucide="copy" class="w-4 h-4"></i>
                   </button>
                 </div>
-              ` : `
-                <div class="mt-2 text-xs text-slate-500 italic flex items-center gap-1">
-                  <i data-lucide="phone-off" class="w-3.5 h-3.5 text-slate-400"></i>
-                  <span>දුරකථන අංකයක් සඳහන් කර නොමැත</span>
-                </div>
-              `}
-            </div>
-
-            <!-- Dinner Section -->
-            <div class="p-4 rounded-2xl ${hasDinner ? 'bg-indigo-50/90 border border-indigo-200/90' : 'bg-slate-50/80 border border-slate-200/80'} shadow-xs">
-              <div class="flex items-center justify-between mb-1.5">
-                <span class="px-2.5 py-0.5 rounded-full ${hasDinner ? 'bg-indigo-200/80 text-indigo-900' : 'bg-slate-200 text-slate-600'} text-[11px] font-black uppercase tracking-wider flex items-center gap-1">
-                  <i data-lucide="moon" class="w-3 h-3 ${hasDinner ? 'text-indigo-700' : 'text-slate-500'}"></i>
-                  <span>රාත්‍රී ආහාරය (Dinner)</span>
-                </span>
+              ` : ''}
+            ` : `
+              <!-- No Dinner Notice -->
+              <div class="py-3 text-center text-xs text-slate-500 font-bold flex items-center justify-center gap-1.5">
+                <i data-lucide="coffee" class="w-4 h-4 text-slate-400"></i>
+                <span>රාත්‍රී ආහාර සත්කාරයක් නොමැත (No Dinner Arrangement)</span>
               </div>
-
-              ${hasDinner ? `
-                <!-- Dinner Host Name -->
-                <div class="text-lg sm:text-xl font-black text-slate-900 mt-2 mb-1 flex items-center gap-1.5">
-                  <i data-lucide="user" class="w-4 h-4 text-indigo-700"></i>
-                  <span>${day.dinner.host}</span>
-                </div>
-
-                <!-- Dinner Phone & Actions -->
-                ${day.dinner.phone ? `
-                  <div class="mt-3 flex items-center gap-2">
-                    <a href="tel:${day.dinner.phone}" class="flex-1 py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
-                      <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
-                      <span>${day.dinner.phone}</span>
-                    </a>
-                    <a href="https://wa.me/94${day.dinner.phone.startsWith('0') ? day.dinner.phone.substring(1) : day.dinner.phone}" target="_blank" title="WhatsApp Chat" class="p-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 transition">
-                      <i data-lucide="message-circle" class="w-4 h-4"></i>
-                    </a>
-                    <button onclick="copyPhone('${day.dinner.phone}')" title="Copy Number" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
-                      <i data-lucide="copy" class="w-4 h-4"></i>
-                    </button>
-                  </div>
-                ` : ''}
-              ` : `
-                <!-- No Dinner Notice -->
-                <div class="py-3 text-center text-xs text-slate-500 font-bold flex items-center justify-center gap-1.5">
-                  <i data-lucide="coffee" class="w-4 h-4 text-slate-400"></i>
-                  <span>රාත්‍රී ආහාර සත්කාරයක් නොමැත</span>
-                </div>
-              `}
-            </div>
-
+            `}
           </div>
 
-          <!-- Quick Day Action Bar -->
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-            <button onclick="shareMealDay('${day.dayId}')" class="w-full py-2 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center gap-1.5 transition">
-              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
-              <span>මෙම දිනයේ ආහාර විස්තර WhatsApp යවන්න</span>
-            </button>
-          </div>
-        `;
+        </div>
 
-        container.appendChild(card);
-      });
+        <!-- Quick Day Action Bar -->
+        <div class="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs">
+          <button onclick="shareMealDay('${day.dayId}')" class="w-full py-2.5 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <span>Share ${day.dayName}'s Meals on WhatsApp</span>
+          </button>
+        </div>
+      `;
 
+      container.appendChild(card);
       lucide.createIcons();
     }
 
     // -------------------------------------------------------------
-    // MEALS FILTER CONTROLLER
+    // MEALS FILTER CONTROLLER (ENGLISH DAYS)
     // -------------------------------------------------------------
     function filterMeals(dayId) {
       currentMealFilter = dayId;
       playChime(440, 0.15);
 
       document.querySelectorAll('.meal-tab-btn').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-amber-800', 'shadow-sm');
-        btn.classList.add('text-slate-600');
+        btn.classList.remove('bg-white', 'text-amber-800', 'shadow-md', 'font-black');
+        btn.classList.add('text-slate-600', 'font-medium');
       });
 
       const activeBtn = document.getElementById(`meal-tab-${dayId}`);
       if (activeBtn) {
-        activeBtn.classList.add('bg-white', 'text-amber-800', 'shadow-sm');
-        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('bg-white', 'text-amber-800', 'shadow-md', 'font-black');
+        activeBtn.classList.remove('text-slate-600', 'font-medium');
       }
 
       renderMealsGrid();
@@ -1487,44 +1401,26 @@
     function copyPhone(phone) {
       navigator.clipboard.writeText(phone).then(() => {
         playChime(660, 0.2);
-        showToast(`දුරකථන අංකය පිටපත් විය: ${phone}`);
+        showToast(`Phone number copied: ${phone}`);
       });
     }
 
     // -------------------------------------------------------------
-    // SERVICE FILTER CONTROLLER
+    // SERVICE DAY FILTER CONTROLLER (ENGLISH DAYS)
     // -------------------------------------------------------------
     function filterSchedule(dayId) {
       currentDayFilter = dayId;
       playChime(440, 0.15);
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-jw-blue', 'shadow-sm');
-        btn.classList.add('text-slate-600');
+        btn.classList.remove('bg-white', 'text-jw-blue', 'shadow-md', 'font-black');
+        btn.classList.add('text-slate-600', 'font-semibold');
       });
 
       const activeBtn = document.getElementById(`tab-${dayId}`);
       if (activeBtn) {
-        activeBtn.classList.add('bg-white', 'text-jw-blue', 'shadow-sm');
-        activeBtn.classList.remove('text-slate-600');
-      }
-
-      renderScheduleGrid();
-    }
-
-    function filterSessionType(type) {
-      currentSessionFilter = type;
-      playChime(480, 0.15);
-
-      document.querySelectorAll('.sess-btn').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-slate-800', 'shadow-xs');
-        btn.classList.add('text-slate-600');
-      });
-
-      const activeBtn = document.getElementById(`sess-${type}`);
-      if (activeBtn) {
-        activeBtn.classList.add('bg-white', 'text-slate-800', 'shadow-xs');
-        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('bg-white', 'text-jw-blue', 'shadow-md', 'font-black');
+        activeBtn.classList.remove('text-slate-600', 'font-semibold');
       }
 
       renderScheduleGrid();
@@ -1536,7 +1432,7 @@
     function copyTerritories(sessionId) {
       const session = scheduleData.find(s => s.id === sessionId);
       if (!session || !session.territories || session.territories.length === 0) return;
-      let text = `🗺️ *${session.date} (${session.sessionTitle}) — සේවා ප්‍රදේශ (Territories)*\n🏠 රැස්වන ස්ථානය: ${session.host}\n\n`;
+      let text = `🗺️ *${session.date} (${session.sessionTitle}) — Territories (සේවා ප්‍රදේශ)*\n🏠 Meeting Place: ${session.host}\n\n`;
       session.territories.forEach(t => {
         text += `• ${t.code}: ${t.url}\n`;
       });
@@ -1544,18 +1440,11 @@
         const btnText = document.getElementById(`copy-t-${sessionId}`);
         if (btnText) {
           btnText.innerText = 'Copied! ✓';
-          setTimeout(() => { btnText.innerText = 'ලින්ක් පිටපත්'; }, 2000);
+          setTimeout(() => { btnText.innerText = 'Copy Links'; }, 2000);
         }
         playChime(660, 0.2);
-        showToast("සේවා ප්‍රදේශ ලින්ක් පිටපත් විය!");
+        showToast("Territory links copied!");
       });
-    }
-
-    function navigateToNextMeeting() {
-      const first = scheduleData[0];
-      if (first) {
-        window.open(getGoogleMapsUrl(first), '_blank');
-      }
     }
 
     // -------------------------------------------------------------
@@ -1576,8 +1465,16 @@
       setTimeout(() => modal.classList.add('hidden'), 300);
     }
 
+    function shareDayGroup(dayId) {
+      document.getElementById('shareDaySelect').value = dayId;
+      openShareModal();
+    }
+
     function shareSingleDay(sessionId) {
-      document.getElementById('shareDaySelect').value = sessionId;
+      const session = scheduleData.find(s => s.id === sessionId);
+      if (session) {
+        document.getElementById('shareDaySelect').value = session.dayId;
+      }
       openShareModal();
     }
 
@@ -1593,21 +1490,24 @@
 
     function buildShareMessage(selected) {
       let text = "🌟 *යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව*\n";
-      text += "👤 චාරිකා සේවක: සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා\n";
-      text += "📅 2026 නොවැම්බර් 24 සිට 29 දක්වා\n";
+      text += "👤 Circuit Overseer: Bro. Gabriel & Sis. Ianthi Perera\n";
+      text += "📅 November 24 - 29, 2026\n";
       text += "━━━━━━━━━━━━━━━━━━━━━\n\n";
 
       // 1. All Meals Share
       if (selected === 'all-meals') {
-        text += "🍽️ *චාරිකා සේවක යුවළගේ ආහාර සත්කාර සැලසුම් (සම්පූර්ණ)*\n";
-        text += "📌 *සටහන:* වැඩිමහල්ලන්ට එවූ ලිපියේ ආහාර සම්බන්ධ උපදෙස් බලන්න.\n\n";
+        text += "🍽️ *Circuit Overseer Meals Schedule (Full Week)*\n";
+        text += "📌 *Note:* Please refer to the elders' letter regarding meals.\n\n";
         MEALS_SCHEDULE.forEach(m => {
-          text += `🗓️ *${m.date}*\n`;
-          text += `  ☀️ *දවල් ආහාරය*: ${m.lunch.host} ${m.lunch.phone ? `(📞 ${m.lunch.phone})` : ''} ${m.lunch.note ? `[${m.lunch.note}]` : ''}\n`;
-          text += `  🌙 *රාත්‍රී ආහාරය*: ${m.dinner.host} ${m.dinner.phone ? `(📞 ${m.dinner.phone})` : ''} ${m.dinner.note ? `[${m.dinner.note}]` : ''}\n\n`;
+          text += `🗓️ *${m.dateTitle}*\n`;
+          text += `  ☀️ *Lunch*: ${m.lunch.host} ${m.lunch.phone ? `(📞 ${m.lunch.phone})` : ''} ${m.lunch.note ? `[${m.lunch.note}]` : ''}\n`;
+          if (m.lunch.mapUrl) text += `     📍 Location: ${m.lunch.mapUrl}\n`;
+          text += `  🌙 *Dinner*: ${m.dinner.host} ${m.dinner.phone ? `(📞 ${m.dinner.phone})` : ''} ${m.dinner.note ? `[${m.dinner.note}]` : ''}\n`;
+          if (m.dinner.mapUrl) text += `     📍 Location: ${m.dinner.mapUrl}\n`;
+          text += `\n`;
         });
         text += "━━━━━━━━━━━━━━━━━━━━━\n";
-        text += "✨ *ආදරණීය සත්කාරය වෙනුවෙන් සැමට ස්තූතියි!*";
+        text += "✨ *Thank you for your warm hospitality!*";
         return text;
       }
 
@@ -1616,49 +1516,44 @@
         const mId = selected.replace('meal-', '');
         const m = MEALS_SCHEDULE.find(item => item.dayId === mId);
         if (m) {
-          text += `🍽️ *ආහාර සත්කාර සැලසුම — ${m.date}*\n`;
-          text += `📌 *සටහන:* ලිපියේ සඳහන් ආහාර උපදෙස් බලන්න.\n\n`;
-          text += `☀️ *දවල් ආහාරය (Lunch)*:\n`;
-          text += `  • සත්කාරක: *${m.lunch.host}*\n`;
-          if (m.lunch.phone) text += `  • දුරකථන: ${m.lunch.phone}\n`;
-          if (m.lunch.note) text += `  • විශේෂ සටහන: ${m.lunch.note}\n`;
+          text += `🍽️ *Meals Arrangement — ${m.dateTitle}*\n`;
+          text += `📌 *Note:* Please refer to the elders' letter.\n\n`;
+          text += `☀️ *Lunch (දවල් ආහාරය)*:\n`;
+          text += `  • Host: *${m.lunch.host}*\n`;
+          if (m.lunch.phone) text += `  • Phone: ${m.lunch.phone}\n`;
+          if (m.lunch.note) text += `  • Note: ${m.lunch.note}\n`;
+          if (m.lunch.mapUrl) text += `  • 📍 Location: ${m.lunch.mapUrl}\n`;
           text += `\n`;
 
-          text += `🌙 *රාත්‍රී ආහාරය (Dinner)*:\n`;
+          text += `🌙 *Dinner (රාත්‍රී ආහාරය)*:\n`;
           if (m.dinner.host && m.dinner.host !== '—') {
-            text += `  • සත්කාරක: *${m.dinner.host}*\n`;
-            if (m.dinner.phone) text += `  • දුරකථන: ${m.dinner.phone}\n`;
+            text += `  • Host: *${m.dinner.host}*\n`;
+            if (m.dinner.phone) text += `  • Phone: ${m.dinner.phone}\n`;
+            if (m.dinner.mapUrl) text += `  • 📍 Location: ${m.dinner.mapUrl}\n`;
           } else {
-            text += `  • ${m.dinner.note || 'රාත්‍රී ආහාර සත්කාරයක් නොමැත'}\n`;
+            text += `  • ${m.dinner.note || 'No Dinner Arrangement'}\n`;
           }
           text += "\n━━━━━━━━━━━━━━━━━━━━━\n";
-          text += "✨ *යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව*";
+          text += "✨ *Batagama Congregation*";
           return text;
         }
       }
 
       // 3. Field Service Share
-      text += "📋 *චාරිකා සතියේ සේවා සැලසුම් සහ සේවා ප්‍රදේශ (Territories)*\n\n";
+      text += "📋 *Circuit Week Field Service & Territories*\n\n";
       const sessionsToInclude = scheduleData.filter(s => {
         if (selected === 'all') return true;
-        if (selected === s.dayId) return true;
-        return s.id === selected;
+        return s.dayId === selected;
       });
 
       sessionsToInclude.forEach(session => {
         text += `🗓️ *${session.date} — ${session.sessionTitle} (${session.time})*\n`;
-        text += `  🏠 *රැස්වන ස්ථානය*: ${session.host}\n`;
+        text += `  🏠 *Meeting Place*: ${session.host}\n`;
         text += `  📍 *Google Map*: ${getGoogleMapsUrl(session)}\n`;
-        if (session.phone) text += `  📞 දුරකථන: ${session.phone}\n`;
-
-        // Check if meal info exists
-        const dayMeals = MEALS_SCHEDULE.find(m => m.dayId === session.dayId);
-        if (dayMeals) {
-          text += `  🍽️ *ආහාර*: දවල් - ${dayMeals.lunch.host} ${dayMeals.lunch.phone ? `(${dayMeals.lunch.phone})` : ''} | රෑ - ${dayMeals.dinner.host} ${dayMeals.dinner.phone ? `(${dayMeals.dinner.phone})` : ''}\n`;
-        }
+        if (session.phone) text += `  📞 Phone: ${session.phone}\n`;
 
         if (session.territories && session.territories.length > 0) {
-          text += `  🗺️ *සේවා ප්‍රදේශ (Territories)*:\n`;
+          text += `  🗺️ *Territories (සේවා ප්‍රදේශ)*:\n`;
           session.territories.forEach(t => {
             text += `     • ${t.code}: ${t.url}\n`;
           });
@@ -1667,7 +1562,7 @@
       });
 
       text += "━━━━━━━━━━━━━━━━━━━━━\n";
-      text += "✨ *සියලුදෙනාම ආදරයෙන් සාදරයෙන් පිළිගනිමු!*";
+      text += "✨ *All are warmly welcome! සාදරයෙන් පිළිගනිමු!*";
       return text;
     }
 
@@ -1683,7 +1578,7 @@
         const copyBtn = document.getElementById('copyBtnText');
         copyBtn.innerText = "Copied! ✓";
         playChime(700, 0.2);
-        showToast("පණිවිඩය Clipboard එකට පිටපත් විය!");
+        showToast("Copied to clipboard!");
         setTimeout(() => copyBtn.innerText = "Copy Text", 2000);
       });
     }
@@ -1695,46 +1590,12 @@
     }
 
     // -------------------------------------------------------------
-    // ORIGINAL SCHEDULE IMAGE MODAL
-    // -------------------------------------------------------------
-    function openScheduleModal() {
-      const modal = document.getElementById('scheduleModal');
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-      playChime(500, 0.15);
-      lucide.createIcons();
-    }
-
-    function closeScheduleModal() {
-      const modal = document.getElementById('scheduleModal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => modal.classList.add('hidden'), 300);
-    }
-
-    // -------------------------------------------------------------
-    // ORIGINAL MEALS DOCUMENT MODAL
-    // -------------------------------------------------------------
-    function openMealsDocModal() {
-      const modal = document.getElementById('mealsDocModal');
-      modal.classList.remove('hidden');
-      setTimeout(() => modal.classList.remove('opacity-0'), 10);
-      playChime(500, 0.15);
-      lucide.createIcons();
-    }
-
-    function closeMealsDocModal() {
-      const modal = document.getElementById('mealsDocModal');
-      modal.classList.add('opacity-0');
-      setTimeout(() => modal.classList.add('hidden'), 300);
-    }
-
-    // -------------------------------------------------------------
     // LOCATION PHOTO MODAL
     // -------------------------------------------------------------
     function openPhotoModal(imgSrc, hostName, caption, mapUrl) {
       document.getElementById('photoModalImg').src = imgSrc;
       document.getElementById('photoModalSubtitle').innerText = hostName;
-      document.getElementById('photoModalCaption').innerHTML = `<i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i><span>${caption || 'පිවිසුම් මාර්ගයේ ඡායාරූපය'}</span>`;
+      document.getElementById('photoModalCaption').innerHTML = `<i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i><span>${caption || 'Entrance Photo (පිවිසුම් ඡායාරූපය)'}</span>`;
       const navBtn = document.getElementById('photoModalNavBtn');
       if (mapUrl) {
         navBtn.href = mapUrl;
@@ -1772,7 +1633,7 @@
             </div>
             
             <div class="space-y-1">
-              <label class="font-semibold text-slate-600">රැස්වන සත්කාරක (Host Name):</label>
+              <label class="font-semibold text-slate-600">Host Name (රැස්වන සත්කාරක):</label>
               <input type="text" id="host_${dIdx}" value="${session.host}" class="w-full p-2 rounded-lg border border-slate-300 text-xs">
               <div class="grid grid-cols-2 gap-2 mt-1">
                 <div>
@@ -1790,6 +1651,37 @@
           </div>
         `;
         form.innerHTML += sec;
+      });
+
+      // Meals Section
+      let mealsHeader = `
+        <div class="mt-6 pt-4 border-t-2 border-slate-200">
+          <h4 class="font-black text-slate-800 text-sm flex items-center gap-2 mb-3">
+            <span class="p-1 rounded-lg bg-amber-100 text-amber-800">🍽️</span>
+            <span>ආහාර සත්කාරක ස්ථාන (Meals Locations & Links)</span>
+          </h4>
+        </div>
+      `;
+      form.innerHTML += mealsHeader;
+
+      MEALS_SCHEDULE.forEach((meal, mIdx) => {
+        let mSec = `
+          <div class="p-3.5 rounded-2xl bg-amber-50/60 border border-amber-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <h5 class="font-bold text-amber-900 text-xs">${meal.dateTitle}</h5>
+              <span class="text-[10px] text-amber-700 font-semibold">${meal.sinhalaDate}</span>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-700">
+                <span>Lunch (දවල්): ${meal.lunch.host}</span>
+                <span class="text-slate-500 font-mono">${meal.lunch.phone || ''}</span>
+              </div>
+              <label class="text-[10px] text-slate-500">Google Maps Link (Lunch):</label>
+              <input type="text" id="meal_lunch_url_${mIdx}" value="${meal.lunch.mapUrl || ''}" placeholder="https://maps.app.goo.gl/..." class="w-full p-1.5 rounded-lg border border-slate-300 text-xs">
+            </div>
+          </div>
+        `;
+        form.innerHTML += mSec;
       });
 
       modal.classList.remove('hidden');
@@ -1817,27 +1709,36 @@
       });
 
       localStorage.setItem('jw_batagama_co_schedule_v10', JSON.stringify(scheduleData));
+
+      // Save custom meal locations if edited
+      MEALS_SCHEDULE.forEach((meal, mIdx) => {
+        const lunchUrl = document.getElementById(`meal_lunch_url_${mIdx}`);
+        if (lunchUrl) meal.lunch.mapUrl = lunchUrl.value;
+      });
+      localStorage.setItem('jw_batagama_meals_schedule_v10', JSON.stringify(MEALS_SCHEDULE));
+
       closeCustomizerModal();
       renderScheduleGrid();
+      renderMealsGrid();
       playChime(650, 0.25);
-      showToast("ස්ථාන තොරතුරු සාර්ථකව සුරකින ලදී!");
+      showToast("Settings saved successfully!");
     }
 
     function resetToDefaults() {
-      if (confirm('ඔබට සියලුම තොරතුරු මුල් තත්වයට පත් කිරීමට අවශ්‍යද?')) {
+      if (confirm('Do you want to reset all data to default values?')) {
         localStorage.removeItem('jw_batagama_co_schedule_v10');
+        localStorage.removeItem('jw_batagama_meals_schedule_v10');
         scheduleData = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
         closeCustomizerModal();
         renderScheduleGrid();
-        showToast("මුල් තත්වයට පත් කරන ලදී");
+        renderMealsGrid();
+        showToast("Reset to defaults!");
       }
     }
 
     // Close modals on Escape key
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeScheduleModal();
-        closeMealsDocModal();
         closeShareModal();
         closeCustomizerModal();
         closePhotoModal();
