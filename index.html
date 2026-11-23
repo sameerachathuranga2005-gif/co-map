@@ -1095,7 +1095,7 @@
         renderMealsGrid();
       }
 
-      window.scrollTo({ top: 350, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
 
@@ -1726,6 +1726,11 @@
       openShareModal();
     }
 
+    function sharePioneersMeeting() {
+      document.getElementById('shareDaySelect').value = 'sat-pioneers';
+      openShareModal();
+    }
+
     function buildShareMessage(selected) {
       let text = "🌟 *යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව*\n";
       text += "👤 Circuit Overseer: Bro. Gabriel & Sis. Ianthi Perera\n";
@@ -1747,15 +1752,16 @@
         return text;
       }
 
-      // Special Meeting: Elders and MS Meeting
-      if (selected === 'fri-elders') {
-        text += "👔 *වැඩිමහල්ලන් සහ සහයක සේවකයන්ගේ රැස්වීම*\n";
+      // Special Meeting: Pioneers Meeting
+      if (selected === 'sat-pioneers') {
+        text += "📖 *පුරෝගාමී රැස්වීම (Pioneer Meeting)*\n";
         text += "👤 Circuit Overseer: Bro. Gabriel Perera\n";
         text += "━━━━━━━━━━━━━━━━━━━━━\n\n";
-        text += "📅 *දිනය (Date)*: නොවැම්බර් 27 සිකුරාදා (Friday, November 27)\n";
-        text += "⏰ *වේලාව (Time)*: සවස 6:00 (6:00 PM)\n";
-        text += "🏠 *ස්ථානය (Location)*: සහෝ. දිනේෂ් ගොඩකුඹුරගේ නිවස\n";
-        text += "📞 *දුරකථන (Contact)*: 0712200908\n\n";
+        text += "📅 *දිනය (Date)*: නොවැම්බර් 28 සෙනසුරාදා (Saturday, November 28)\n";
+        text += "⏰ *වේලාව (Time)*: උදේ 10:30 (10:30 AM)\n";
+        text += "🏛️ *ස්ථානය (Location)*: බෝපිටිය නමස්කාර මධ්‍යස්ථානය\n";
+        text += "📍 *Google Map*: https://maps.app.goo.gl/a8zEbqbikqxSucLJ7?g_st=aw\n\n";
+        text += "✨ *තේමාව:* \"මම ඔයාලාගේ වෙහෙස නිවලා ඔයාලට අලුත් පණක් දෙන්නම්\" (මතෙව් 11:28)\n\n";
         text += "━━━━━━━━━━━━━━━━━━━━━\n";
         text += "✨ *යෙහෝවා දෙවිගේ සාක්ෂිකරුවන් — බටගම සභාව*";
         return text;
@@ -1832,8 +1838,9 @@
         text += "👔 *විශේෂ රැස්වීම:* සවස 6:00 ට වැඩිමහල්ලන් සහ සහයක සේවකයන්ගේ රැස්වීම (සහෝ. දිනේෂ් ගොඩකුඹුරගේ නිවස — 📞 0712200908 | 📍 Maps: https://maps.app.goo.gl/rr1GQVecEEMqqK716)\n\n";
       }
 
-      if (selected === 'fri' || selected === 'all') {
-        text += "👔 *විශේෂ රැස්වීම:* සවස 6:00 ට වැඩිමහල්ලන් සහ සහයක සේවකයන්ගේ රැස්වීම (සහෝ. දිනේෂ් ගොඩකුඹුරගේ නිවස — 📞 0712200908 | 📍 Maps: https://maps.app.goo.gl/rr1GQVecEEMqqK716)\n\n";
+      if (selected === 'sat' || selected === 'all') {
+        text += "📖 *පුරෝගාමී රැස්වීම:* උදේ 10:30 ට බෝපිටිය නමස්කාර මධ්‍යස්ථානයේදී (📍 Maps: https://maps.app.goo.gl/a8zEbqbikqxSucLJ7?g_st=aw)\n";
+        text += "   ✨ තේමාව: \"මම ඔයාලාගේ වෙහෙස නිවලා ඔයාලට අලුත් පණක් දෙන්නම්\" (මතෙව් 11:28)\n\n";
       }
 
       text += "━━━━━━━━━━━━━━━━━━━━━\n";

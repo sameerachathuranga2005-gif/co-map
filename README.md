@@ -89,6 +89,12 @@
     2. `WP - 0982` — [Google Maps සිතියම](https://maps.app.goo.gl/gwwBmmSr9AMmvy3L8)
     3. `WP - 0983` — [Google Maps සිතියම](https://maps.app.goo.gl/QAUbJiHxa5toRVvq8)
     4. `WP - 0879` — [Google Maps සිතියම](https://maps.app.goo.gl/94je4ZHofS4SJdnf6)
+* **📖 විශේෂ රැස්වීම: පුරෝගාමී රැස්වීම (Pioneer Meeting) — උදේ 10:30** — **බෝපිටිය නමස්කාර මධ්‍යස්ථානය**
+  - 📅 දිනය: 2026 නොවැම්බර් 28 සෙනසුරාදා
+  - 🕒 වේලාව: උදේ 10:30 (10:30 AM)
+  - 🏛️ ස්ථානය: බෝපිටිය නමස්කාර මධ්‍යස්ථානය
+  - 📍 Google Maps: [බෝපිටිය නමස්කාර මධ්‍යස්ථානයට Google Maps](https://maps.app.goo.gl/a8zEbqbikqxSucLJ7?g_st=aw)
+  - ✨ තේමාව: *"මම ඔයාලාගේ වෙහෙස නිවලා ඔයාලට අලුත් පණක් දෙන්නම්"* (මතෙව් 11:28)
 
 ---
 
