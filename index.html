@@ -368,28 +368,6 @@
           </button>
 
         </div>
-              🗓️ Wednesday (25)
-            </button>
-            <button onclick="filterSchedule('thu')" id="tab-thu" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-              🗓️ Thursday (26)
-            </button>
-            <button onclick="filterSchedule('fri')" id="tab-fri" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-              🗓️ Friday (27)
-            </button>
-            <button onclick="filterSchedule('sat')" id="tab-sat" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-              🗓️ Saturday (28)
-            </button>
-            <button onclick="filterSchedule('sun')" id="tab-sun" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
-              🗓️ Sunday (29)
-            </button>
-          </div>
-
-          <button onclick="openCustomizerModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 shadow-sm text-xs font-bold transition">
-            <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-600"></i>
-            <span>ස්ථාන සංස්කරණය</span>
-          </button>
-
-        </div>
 
         <!-- DAY-BY-DAY SCHEDULE CONTAINER -->
         <div id="scheduleGrid" class="space-y-8">
@@ -427,7 +405,7 @@
         </div>
 
         <!-- MEALS CARDS GRID -->
-        <div id="mealsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="mealsGrid" class="w-full flex justify-center">
           <!-- Rendered dynamically by JavaScript -->
         </div>
 
@@ -1237,10 +1215,10 @@
         }
 
         sessionsGridHtml += `
-          <div class="p-5 sm:p-6 rounded-2xl border-2 border-slate-200/80 bg-slate-50/50 flex flex-col justify-between hover:border-${themeColor}-400 transition-colors">
+          <div class="p-5 sm:p-6 rounded-3xl border-2 border-slate-200/90 bg-white shadow-glass flex flex-col justify-between hover:border-${themeColor}-400 transition-all">
             <div>
               <!-- Session Badge & Header -->
-              <div class="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-200">
+              <div class="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2">
                   <span class="px-2.5 py-1 rounded-xl ${badgeBg} text-white font-bold text-xs flex items-center gap-1 shadow-xs">
                     <i data-lucide="${isMorning ? 'sun' : 'sunset'}" class="w-3.5 h-3.5"></i>
@@ -1267,7 +1245,7 @@
 
                 <!-- Action button for house -->
                 <div class="mt-3">
-                  <a href="${getGoogleMapsUrl(session)}" target="_blank" class="w-full py-2 px-3.5 rounded-xl bg-${themeColor}-600 hover:bg-${themeColor}-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition">
+                  <a href="${getGoogleMapsUrl(session)}" target="_blank" class="w-full py-2.5 px-3.5 rounded-xl bg-${themeColor}-600 hover:bg-${themeColor}-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition">
                     <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
                     <span>Open in Google Maps (Direct)</span>
                   </a>
@@ -1275,9 +1253,9 @@
 
                 ${photoHtml}
               </div>
-
-              ${territoriesHtml}
             </div>
+
+            ${territoriesHtml}
           </div>
         `;
       });
