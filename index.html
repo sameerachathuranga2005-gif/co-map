@@ -922,10 +922,40 @@
       }
     ];
 
-    // Load from LocalStorage if present, else use default v10
-    let scheduleData = JSON.parse(localStorage.getItem('jw_batagama_co_schedule_v10')) || DEFAULT_SCHEDULE;
+    // Automatically purge outdated legacy cache keys so changes appear instantly on all devices
     try {
-      const savedMeals = localStorage.getItem('jw_batagama_meals_schedule_v10');
+      const oldKeys = [
+        'jw_batagama_co_schedule',
+        'jw_batagama_co_schedule_v1', 'jw_batagama_co_schedule_v2',
+        'jw_batagama_co_schedule_v3', 'jw_batagama_co_schedule_v4',
+        'jw_batagama_co_schedule_v5', 'jw_batagama_co_schedule_v6',
+        'jw_batagama_co_schedule_v7', 'jw_batagama_co_schedule_v8',
+        'jw_batagama_co_schedule_v9', 'jw_batagama_co_schedule_v10',
+        'jw_batagama_meals_schedule_v10'
+      ];
+      oldKeys.forEach(k => localStorage.removeItem(k));
+    } catch (e) {}
+
+    // Load from LocalStorage v11 if present, else use default DEFAULT_SCHEDULE
+    let scheduleData;
+    try {
+      const savedSchedule = localStorage.getItem('jw_batagama_co_schedule_v11');
+      scheduleData = savedSchedule ? JSON.parse(savedSchedule) : JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+    } catch (e) {
+      scheduleData = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+    }
+
+    // Force sanitize host names to ensure "මවුබන්දාර" never appears even from custom cache
+    if (Array.isArray(scheduleData)) {
+      scheduleData.forEach(item => {
+        if (item.id === 'fri-morning' && item.host && item.host.includes('මවුබන්දාර')) {
+          item.host = "සහෝ. චමින්දගේ නිවස";
+        }
+      });
+    }
+
+    try {
+      const savedMeals = localStorage.getItem('jw_batagama_meals_schedule_v11');
       if (savedMeals) {
         const parsed = JSON.parse(savedMeals);
         parsed.forEach((pm, idx) => {
@@ -936,6 +966,12 @@
         });
       }
     } catch (e) {}
+
+    // Guarantee Asha's phone number is always populated
+    const sunMeal = MEALS_SCHEDULE.find(m => m.dayId === 'sun');
+    if (sunMeal && sunMeal.lunch) {
+      sunMeal.lunch.phone = "0770082868";
+    }
     let currentMainView = 'service'; // 'service' or 'meals'
     let currentDayFilter = 'wed'; // Default active day: Wednesday!
     let currentMealFilter = 'tue'; // Default active meal day: Tuesday!
@@ -1968,14 +2004,14 @@
         if (url) session.customUrl = url.value;
       });
 
-      localStorage.setItem('jw_batagama_co_schedule_v10', JSON.stringify(scheduleData));
+      localStorage.setItem('jw_batagama_co_schedule_v11', JSON.stringify(scheduleData));
 
       // Save custom meal locations if edited
       MEALS_SCHEDULE.forEach((meal, mIdx) => {
         const lunchUrl = document.getElementById(`meal_lunch_url_${mIdx}`);
         if (lunchUrl) meal.lunch.mapUrl = lunchUrl.value;
       });
-      localStorage.setItem('jw_batagama_meals_schedule_v10', JSON.stringify(MEALS_SCHEDULE));
+      localStorage.setItem('jw_batagama_meals_schedule_v11', JSON.stringify(MEALS_SCHEDULE));
 
       closeCustomizerModal();
       renderScheduleGrid();
@@ -1986,8 +2022,8 @@
 
     function resetToDefaults() {
       if (confirm('Do you want to reset all data to default values?')) {
-        localStorage.removeItem('jw_batagama_co_schedule_v10');
-        localStorage.removeItem('jw_batagama_meals_schedule_v10');
+        localStorage.removeItem('jw_batagama_co_schedule_v11');
+        localStorage.removeItem('jw_batagama_meals_schedule_v11');
         scheduleData = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
         closeCustomizerModal();
         renderScheduleGrid();
