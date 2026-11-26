@@ -17,8 +17,8 @@
 | **නොවැම්බර් 25 බදාදා** | **ප්‍රවීන්** — 📞 `0776589614` <br>📍 [ප්‍රවීන්ගේ ස්ථානයට Google Maps](https://www.google.com/maps/place/7%C2%B003'59.7%22N+79%C2%B053'42.9%22E/@7.0665901,79.8926845,1119m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d7.0665901!4d79.8952594) | **රංජනී** — 📞 `0701188733` |
 | **නොවැම්බර් 26 බ්‍රහස්පතින්දා** | **රෝලන්ඩ්** (*නවාතැන් ගන්නා තැන*) — 📞 `0772749913` <br>📍 [රෝලන්ඩ්ගේ ස්ථානයට Google Maps](https://maps.app.goo.gl/CSCW55fbRCwgqR9bA?g_st=aw) | **රජිත චන්ද්‍රසේකර** — 📞 `0717549900` |
 | **නොවැම්බර් 27 සිකුරාදා** | **ඉශාකා** — 📞 `0783155021` <br>📍 [ඉශාකාගේ ස්ථානයට Google Maps](https://maps.app.goo.gl/95w7hzrA7K3q6v2Q9) | **මොහාන් ඩේවිඩ්** — 📞 `0714899518` |
-| **නොවැම්බර් 28 සෙනසුරාදා** | **සිදත්** — 📞 `0760326161` <br>📍 [සිදත්ගේ ස්ථානයට Google Maps](https://maps.app.goo.gl/cNvvkrVMMWX8m7Ks9) | — *(රාත්‍රී ආහාර සත්කාරයක් නොමැත)* |
-| **නොවැම්බර් 29 ඉරිදා** | **ආශා** — 📞 `0770082868` <br>📍 [ආශාගේ ස්ථානයට Google Maps](https://maps.app.goo.gl/qBGAhBYKchGfLNAk7) | — *(රාත්‍රී ආහාර සත්කාරයක් නොමැත)* |
+| **නොවැම්බර් 28 සෙනසුරාදා** | **සිදත්** — 📞 `0760326161` <br>📍 [සිදත්ගේ ස්ථානයට Google Maps](https://maps.app.goo.gl/cNvvkrVMMWX8m7Ks9) | — *(No Dinner Arrangement)* |
+| **නොවැම්බර් 29 ඉරිදා** | **ආශා** — 📞 `0770082868` <br>📍 [ආශාගේ ස්ථානයට Google Maps](https://maps.app.goo.gl/qBGAhBYKchGfLNAk7) | — *(No Dinner Arrangement)* |
 
 *Web App එක තුළ එක් එක් සත්කාරක සහෝදර/සහෝදරියගේ දුරකථන අංකය ක්ලික් කිරීමෙන් එකවරම Call හෝ WhatsApp පණිවිඩයක් යැවිය හැක. එසේම **Google Maps** බොත්තම මඟින් නිවස වෙතටම Navigation ලබා ගත හැක.*
 
@@ -65,6 +65,7 @@
   - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
     1. `WP - 0973` — [Google Maps සිතියම](https://maps.app.goo.gl/dCRSTmT5kRBBeScX6)
     2. `WP - 0974` — [Google Maps සිතියම](https://maps.app.goo.gl/dCRSTmT5kRBBeScX6)
+    3. `Ma Eliya (North)` — [Google Maps සිතියම](https://maps.app.goo.gl/8eQmVLtMs1BnVstbA)
 * **🌅 සවස් සේවය (සවස 4:00)** — **සහෝ. මොහාන්ගේ නිවස**
   - 🗺️ **සේවා ප්‍රදේශ (Territories)**:
     1. `WP - 0963` — [Google Maps සිතියම](https://maps.app.goo.gl/JCoVcpaFRjN9Lj1n8)

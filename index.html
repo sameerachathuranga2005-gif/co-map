@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="si">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>චාරිකා සතියේ සේවා සැලසුම් & ආහාර සත්කාර | බටගම සභාව</title>
-  
+
   <!-- Favicon & App Icons -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231B365D'/><text x='50%' y='65%' font-family='Arial, sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'>JW</text></svg>">
-  
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231B365D'/><text x='50%' y='65%' font-family='Arial, sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'>JW</text></svg>">
+
   <!-- Google Fonts: Noto Sans Sinhala & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -51,6 +55,11 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Leaflet Interactive Maps & Shared Friday Territory Road Module -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="friday-roads-map.js"></script>
+
   <style>
     body {
       font-family: 'Noto Sans Sinhala', 'Plus Jakarta Sans', sans-serif;
@@ -67,7 +76,7 @@
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.8);
     }
-    
+
     .glass-dark {
       background: rgba(13, 34, 64, 0.94);
       backdrop-filter: blur(16px);
@@ -80,23 +89,38 @@
       width: 6px;
       height: 6px;
     }
+
     ::-webkit-scrollbar-track {
       background: transparent;
     }
+
     ::-webkit-scrollbar-thumb {
       background: #cbd5e1;
       border-radius: 999px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
 
     /* Pulse animation */
     @keyframes pulse-ring {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.1); opacity: 0.4; }
-      100% { transform: scale(0.95); opacity: 0.8; }
+      0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+      }
     }
+
     .pulse-ring {
       animation: pulse-ring 2.5s infinite ease-in-out;
     }
@@ -110,6 +134,7 @@
     .card-hover {
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .card-hover:hover {
       transform: translateY(-4px);
     }
@@ -120,26 +145,30 @@
     }
   </style>
 </head>
+
 <body class="min-h-screen text-slate-800 antialiased selection:bg-blue-200">
 
   <!-- ========================================== -->
   <!-- 1. PRO WELCOME / SPLASH SCREEN (1% - 100%) -->
   <!-- ========================================== -->
-  <div id="welcomeSplash" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center loader-bg text-white px-6 transition-all duration-700">
-    
+  <div id="welcomeSplash"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center loader-bg text-white px-6 transition-all duration-700">
+
     <!-- Decorative Glowing Aura -->
     <div class="absolute w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none pulse-ring"></div>
     <div class="absolute w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none"></div>
 
     <!-- Splash Content -->
     <div class="relative z-10 flex flex-col items-center max-w-md w-full text-center">
-      
+
       <!-- JW Badge / Icon -->
       <div class="relative mb-6">
-        <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-blue-700 to-indigo-500 flex items-center justify-center shadow-2xl shadow-blue-500/40 border border-white/20 transform transition-transform hover:scale-105">
+        <div
+          class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-blue-700 to-indigo-500 flex items-center justify-center shadow-2xl shadow-blue-500/40 border border-white/20 transform transition-transform hover:scale-105">
           <span class="text-3xl font-extrabold tracking-wider font-sans">JW</span>
         </div>
-        <div class="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full bg-emerald-500 text-xs font-semibold uppercase tracking-wider text-white shadow-lg border border-emerald-400">
+        <div
+          class="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full bg-emerald-500 text-xs font-semibold uppercase tracking-wider text-white shadow-lg border border-emerald-400">
           2026
         </div>
       </div>
@@ -156,14 +185,18 @@
       </p>
 
       <!-- Overseer Tag -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-blue-100 mb-8 shadow-inner">
+      <div
+        class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-blue-100 mb-8 shadow-inner">
         <i data-lucide="user-check" class="w-3.5 h-3.5 text-blue-300"></i>
         <span>චාරිකා සේවක: <strong>සහෝ. ගේබ්‍රියල් සහ අයන්ති පෙරේරා</strong></span>
       </div>
 
       <!-- 1% to 100% Loader Progress Bar -->
-      <div class="w-full bg-white/10 rounded-full h-3 p-0.5 mb-3 border border-white/20 backdrop-blur overflow-hidden shadow-inner">
-        <div id="splashProgressBar" class="h-full rounded-full bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-300 transition-all duration-75 shadow-glow" style="width: 1%;"></div>
+      <div
+        class="w-full bg-white/10 rounded-full h-3 p-0.5 mb-3 border border-white/20 backdrop-blur overflow-hidden shadow-inner">
+        <div id="splashProgressBar"
+          class="h-full rounded-full bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-300 transition-all duration-75 shadow-glow"
+          style="width: 1%;"></div>
       </div>
 
       <!-- Progress Percentage Counter & Status -->
@@ -173,7 +206,8 @@
       </div>
 
       <!-- Quick skip button -->
-      <button id="skipSplashBtn" onclick="finishSplash()" class="mt-8 text-xs text-blue-300/80 hover:text-white underline underline-offset-4 transition opacity-0 hover:opacity-100">
+      <button id="skipSplashBtn" onclick="finishSplash()"
+        class="mt-8 text-xs text-blue-300/80 hover:text-white underline underline-offset-4 transition opacity-0 hover:opacity-100">
         කෙලින්ම පිවිසෙන්න (Skip to App)
       </button>
 
@@ -190,14 +224,15 @@
   <!-- 2. MAIN APPLICATION CONTAINER              -->
   <!-- ========================================== -->
   <div id="mainApp" class="opacity-0 transition-opacity duration-500">
-    
+
     <!-- Top Sticky Header Bar -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-        
+
         <!-- Left: Logo & Title -->
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-jw-blue flex items-center justify-center text-white font-bold text-sm shadow-md">
+          <div
+            class="w-10 h-10 rounded-xl bg-jw-blue flex items-center justify-center text-white font-bold text-sm shadow-md">
             JW
           </div>
           <div>
@@ -212,12 +247,14 @@
         <!-- Right: Action Buttons -->
         <div class="flex items-center gap-2">
           <!-- Audio toggle -->
-          <button id="soundToggleBtn" onclick="toggleSound()" title="ශබ්ද සක්‍රීය/අක්‍රීය" class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:text-jw-blue hover:bg-slate-50 transition">
+          <button id="soundToggleBtn" onclick="toggleSound()" title="ශබ්ද සක්‍රීය/අක්‍රීය"
+            class="p-2 rounded-xl border border-slate-200 text-slate-600 hover:text-jw-blue hover:bg-slate-50 transition">
             <i data-lucide="volume-2" id="soundIcon" class="w-4 h-4"></i>
           </button>
 
           <!-- Share / WhatsApp -->
-          <button onclick="openShareModal()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs sm:text-sm shadow-sm transition">
+          <button onclick="openShareModal()"
+            class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs sm:text-sm shadow-sm transition">
             <i data-lucide="share-2" class="w-4 h-4"></i>
             <span class="hidden sm:inline">බෙදාගන්න</span>
           </button>
@@ -229,15 +266,18 @@
 
     <!-- Main Body Container -->
     <main class="max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-24">
-      
+
       <!-- Clean, Professional Header Info Card (Ultra responsive & light, no heavy image) -->
-      <div class="mb-4 sm:mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-jw-navy via-jw-blue to-slate-900 text-white shadow-md border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div
+        class="mb-4 sm:mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-jw-navy via-jw-blue to-slate-900 text-white shadow-md border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div class="space-y-1">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-full bg-blue-400/20 border border-blue-300/30 text-blue-200 text-[11px] font-bold">
+            <span
+              class="px-2.5 py-0.5 rounded-full bg-blue-400/20 border border-blue-300/30 text-blue-200 text-[11px] font-bold">
               🏛️ බටගම සභාව
             </span>
-            <span class="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-300/30 text-amber-200 text-[11px] font-semibold">
+            <span
+              class="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-300/30 text-amber-200 text-[11px] font-semibold">
               📅 2026 නොවැම්බර් 24 - 29
             </span>
           </div>
@@ -255,14 +295,17 @@
       <!-- PRIMARY VIEW NAVIGATION (SEGMENTED TABS)   -->
       <!-- ========================================== -->
       <div class="mb-4 sm:mb-6 flex items-center justify-center">
-        <div class="p-1.5 bg-slate-200/90 rounded-2xl flex items-center gap-1 shadow-inner max-w-lg w-full border border-slate-300/60">
-          <button id="viewBtnService" onclick="switchMainView('service')" class="flex-1 py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 sm:gap-2 transition-all bg-white text-jw-blue shadow-md">
+        <div
+          class="p-1.5 bg-slate-200/90 rounded-2xl flex items-center gap-1 shadow-inner max-w-lg w-full border border-slate-300/60">
+          <button id="viewBtnService" onclick="switchMainView('service')"
+            class="flex-1 py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 sm:gap-2 transition-all bg-white text-jw-blue shadow-md">
             <i data-lucide="map-pin" class="w-4 h-4 text-blue-600 shrink-0"></i>
-            <span>🗺️ සේවා සැලසුම් (Service)</span>
+            <span>🗺️ Field Service</span>
           </button>
-          <button id="viewBtnMeals" onclick="switchMainView('meals')" class="flex-1 py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-slate-600 hover:text-slate-900">
+          <button id="viewBtnMeals" onclick="switchMainView('meals')"
+            class="flex-1 py-3 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-1.5 sm:gap-2 transition-all text-slate-600 hover:text-slate-900">
             <i data-lucide="utensils" class="w-4 h-4 text-amber-600 shrink-0"></i>
-            <span>🍽️ ආහාර සත්කාර (Meals)</span>
+            <span>🍽️ Meals</span>
           </button>
         </div>
       </div>
@@ -274,16 +317,20 @@
 
         <!-- SPECIAL MEETINGS PROMO CARDS (FRIDAY ELDERS & SATURDAY PIONEERS) -->
         <div class="mb-5 grid grid-cols-1 md:grid-cols-2 gap-3">
-          
+
           <!-- Friday: Elders & Ministerial Servants Meeting -->
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-blue-50/90 border border-blue-200 text-slate-800 flex flex-col justify-between gap-3 shadow-2xs">
+          <div
+            class="p-3.5 sm:p-4 rounded-2xl bg-blue-50/90 border border-blue-200 text-slate-800 flex flex-col justify-between gap-3 shadow-2xs">
             <div class="flex items-start gap-3">
-              <div class="w-9 h-9 rounded-xl bg-jw-blue text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <div
+                class="w-9 h-9 rounded-xl bg-jw-blue text-white flex items-center justify-center shrink-0 shadow-2xs">
                 <i data-lucide="shield" class="w-4 h-4"></i>
               </div>
               <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
-                  <span class="px-2 py-0.2 rounded-full bg-blue-100 text-jw-blue text-[10px] font-black uppercase tracking-wider">විශේෂ රැස්වීම</span>
+                  <span
+                    class="px-2 py-0.2 rounded-full bg-blue-100 text-jw-blue text-[10px] font-black uppercase tracking-wider">විශේෂ
+                    රැස්වීම</span>
                   <span class="text-xs font-bold text-slate-500">නොවැ 27 සිකුරාදා • සවස 6:00</span>
                 </div>
                 <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">
@@ -296,11 +343,13 @@
               </div>
             </div>
             <div class="flex items-center gap-2 pt-1 border-t border-blue-100/80">
-              <a href="https://maps.app.goo.gl/rr1GQVecEEMqqK716" target="_blank" class="flex-1 py-1.5 px-3 rounded-xl bg-white hover:bg-blue-100 text-jw-blue border border-blue-200 text-xs font-bold flex items-center justify-center gap-1 shadow-2xs transition">
+              <a href="https://maps.app.goo.gl/rr1GQVecEEMqqK716" target="_blank"
+                class="flex-1 py-1.5 px-3 rounded-xl bg-white hover:bg-blue-100 text-jw-blue border border-blue-200 text-xs font-bold flex items-center justify-center gap-1 shadow-2xs transition">
                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500"></i>
                 <span>Google Maps</span>
               </a>
-              <button onclick="filterSchedule('fri')" class="flex-1 py-1.5 px-3 rounded-xl bg-jw-blue hover:bg-blue-800 text-white text-xs font-black flex items-center justify-center gap-1 shadow-sm transition">
+              <button onclick="filterSchedule('fri')"
+                class="flex-1 py-1.5 px-3 rounded-xl bg-jw-blue hover:bg-blue-800 text-white text-xs font-black flex items-center justify-center gap-1 shadow-sm transition">
                 <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
                 <span>විස්තර බලන්න</span>
               </button>
@@ -308,14 +357,18 @@
           </div>
 
           <!-- Saturday: Pioneers Meeting (පුරෝගාමී රැස්වීම) -->
-          <div class="p-3.5 sm:p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-slate-800 flex flex-col justify-between gap-3 shadow-2xs">
+          <div
+            class="p-3.5 sm:p-4 rounded-2xl bg-amber-50/90 border border-amber-200 text-slate-800 flex flex-col justify-between gap-3 shadow-2xs">
             <div class="flex items-start gap-3">
-              <div class="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <div
+                class="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
                 <i data-lucide="book-open" class="w-4 h-4"></i>
               </div>
               <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-1.5 mb-0.5">
-                  <span class="px-2 py-0.2 rounded-full bg-amber-100 text-amber-900 text-[10px] font-black uppercase tracking-wider">විශේෂ රැස්වීම</span>
+                  <span
+                    class="px-2 py-0.2 rounded-full bg-amber-100 text-amber-900 text-[10px] font-black uppercase tracking-wider">විශේෂ
+                    රැස්වීම</span>
                   <span class="text-xs font-bold text-slate-500">නොවැ 28 සෙනසුරාදා • උදේ 10:30</span>
                 </div>
                 <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">
@@ -328,11 +381,13 @@
               </div>
             </div>
             <div class="flex items-center gap-2 pt-1 border-t border-amber-100/80">
-              <a href="https://maps.app.goo.gl/a8zEbqbikqxSucLJ7?g_st=aw" target="_blank" class="flex-1 py-1.5 px-3 rounded-xl bg-white hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold flex items-center justify-center gap-1 shadow-2xs transition">
+              <a href="https://maps.app.goo.gl/a8zEbqbikqxSucLJ7?g_st=aw" target="_blank"
+                class="flex-1 py-1.5 px-3 rounded-xl bg-white hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold flex items-center justify-center gap-1 shadow-2xs transition">
                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500"></i>
                 <span>Google Maps</span>
               </a>
-              <button onclick="filterSchedule('sat')" class="flex-1 py-1.5 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-black flex items-center justify-center gap-1 shadow-sm transition">
+              <button onclick="filterSchedule('sat')"
+                class="flex-1 py-1.5 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-black flex items-center justify-center gap-1 shadow-sm transition">
                 <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
                 <span>විස්තර බලන්න</span>
               </button>
@@ -343,26 +398,33 @@
 
         <!-- CLEAN ENGLISH DAY NAVIGATION TABS (Wednesday to Sunday) -->
         <div class="mb-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          
-          <div class="flex items-center gap-1.5 p-1.5 bg-slate-200/90 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full w-full sm:w-auto">
-            <button onclick="filterSchedule('wed')" id="tab-wed" class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition bg-white text-jw-blue shadow-md whitespace-nowrap">
+
+          <div
+            class="flex items-center gap-1.5 p-1.5 bg-slate-200/90 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full w-full sm:w-auto">
+            <button onclick="filterSchedule('wed')" id="tab-wed"
+              class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition bg-white text-jw-blue shadow-md whitespace-nowrap">
               🗓️ Wednesday (25)
             </button>
-            <button onclick="filterSchedule('thu')" id="tab-thu" class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            <button onclick="filterSchedule('thu')" id="tab-thu"
+              class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
               🗓️ Thursday (26)
             </button>
-            <button onclick="filterSchedule('fri')" id="tab-fri" class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            <button onclick="filterSchedule('fri')" id="tab-fri"
+              class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
               🗓️ Friday (27)
             </button>
-            <button onclick="filterSchedule('sat')" id="tab-sat" class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            <button onclick="filterSchedule('sat')" id="tab-sat"
+              class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
               🗓️ Saturday (28)
             </button>
-            <button onclick="filterSchedule('sun')" id="tab-sun" class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+            <button onclick="filterSchedule('sun')" id="tab-sun"
+              class="tab-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
               🗓️ Sunday (29)
             </button>
           </div>
 
-          <button onclick="openCustomizerModal()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 shadow-2xs text-xs font-bold transition self-end sm:self-auto">
+          <button onclick="openCustomizerModal()"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 shadow-2xs text-xs font-bold transition self-end sm:self-auto">
             <i data-lucide="edit-3" class="w-3.5 h-3.5 text-amber-600"></i>
             <span>ස්ථාන සංස්කරණය</span>
           </button>
@@ -383,23 +445,30 @@
       <div id="mealsViewSection" class="hidden transition-opacity duration-300">
 
         <!-- Meals Day Filter Tabs in English -->
-        <div class="mb-6 flex items-center gap-2 p-1.5 bg-slate-200/80 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full">
-          <button onclick="filterMeals('tue')" id="meal-tab-tue" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black transition bg-white text-amber-800 shadow-md whitespace-nowrap">
+        <div
+          class="mb-6 flex items-center gap-2 p-1.5 bg-slate-200/80 rounded-2xl overflow-x-auto no-scrollbar shadow-inner max-w-full">
+          <button onclick="filterMeals('tue')" id="meal-tab-tue"
+            class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-black transition bg-white text-amber-800 shadow-md whitespace-nowrap">
             🍽️ Tuesday (24)
           </button>
-          <button onclick="filterMeals('wed')" id="meal-tab-wed" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          <button onclick="filterMeals('wed')" id="meal-tab-wed"
+            class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
             🍽️ Wednesday (25)
           </button>
-          <button onclick="filterMeals('thu')" id="meal-tab-thu" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          <button onclick="filterMeals('thu')" id="meal-tab-thu"
+            class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
             🍽️ Thursday (26)
           </button>
-          <button onclick="filterMeals('fri')" id="meal-tab-fri" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          <button onclick="filterMeals('fri')" id="meal-tab-fri"
+            class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
             🍽️ Friday (27)
           </button>
-          <button onclick="filterMeals('sat')" id="meal-tab-sat" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          <button onclick="filterMeals('sat')" id="meal-tab-sat"
+            class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
             🍽️ Saturday (28)
           </button>
-          <button onclick="filterMeals('sun')" id="meal-tab-sun" class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
+          <button onclick="filterMeals('sun')" id="meal-tab-sun"
+            class="meal-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition text-slate-600 hover:text-slate-900 whitespace-nowrap">
             🍽️ Sunday (29)
           </button>
         </div>
@@ -415,16 +484,20 @@
 
     <!-- Floating Quick Actions Bar on Mobile -->
     <div class="fixed bottom-4 left-4 right-4 sm:hidden z-30">
-      <div class="glass-dark text-white rounded-2xl p-2.5 flex items-center justify-around shadow-2xl border border-white/20">
-        <button onclick="switchMainView('service'); filterSchedule('wed'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white font-bold">
+      <div
+        class="glass-dark text-white rounded-2xl p-2.5 flex items-center justify-around shadow-2xl border border-white/20">
+        <button onclick="switchMainView('service');"
+          class="flex flex-col items-center text-[10px] text-blue-200 hover:text-white font-bold">
           <i data-lucide="map-pin" class="w-5 h-5 mb-0.5"></i>
-          <span>සේවා</span>
+          <span>Service</span>
         </button>
-        <button onclick="switchMainView('meals'); filterMeals('tue'); window.scrollTo({top: 0, behavior: 'smooth'});" class="flex flex-col items-center text-[10px] text-amber-300 hover:text-white font-bold">
+        <button onclick="switchMainView('meals');"
+          class="flex flex-col items-center text-[10px] text-amber-300 hover:text-white font-bold">
           <i data-lucide="utensils" class="w-5 h-5 mb-0.5"></i>
-          <span>ආහාර</span>
+          <span>Meals</span>
         </button>
-        <button onclick="openShareModal()" class="flex flex-col items-center text-[10px] text-emerald-300 hover:text-emerald-200 font-bold">
+        <button onclick="openShareModal()"
+          class="flex flex-col items-center text-[10px] text-emerald-300 hover:text-emerald-200 font-bold">
           <i data-lucide="send" class="w-5 h-5 mb-0.5"></i>
           <span>WhatsApp</span>
         </button>
@@ -439,7 +512,8 @@
   <!-- ========================================== -->
 
   <!-- Modal 1: WhatsApp Share Modal -->
-  <div id="shareModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+  <div id="shareModal"
+    class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-white/20">
       <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-emerald-50">
         <div class="flex items-center gap-2.5">
@@ -451,7 +525,8 @@
             <p class="text-xs text-emerald-800">සේවා ස්ථාන, සේවා ප්‍රදේශ & ආහාර සත්කාර විස්තර</p>
           </div>
         </div>
-        <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 flex items-center justify-center text-slate-600 transition shadow-sm">
+        <button onclick="closeShareModal()"
+          class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 flex items-center justify-center text-slate-600 transition shadow-sm">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -459,7 +534,8 @@
       <div class="p-5 space-y-4">
         <div>
           <label class="block text-xs font-semibold text-slate-700 mb-1.5">බෙදාහැරීමට අවශ්‍ය වැඩසටහන තෝරන්න:</label>
-          <select id="shareDaySelect" onchange="updateSharePreview()" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <select id="shareDaySelect" onchange="updateSharePreview()"
+            class="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
             <optgroup label="🌟 සම්පූර්ණ වැඩසටහන්">
               <option value="all">🗺️ All Field Service Schedule (සම්පූර්ණ සේවා සැලසුම්)</option>
               <option value="all-meals">🍽️ All Meals Schedule (සම්පූර්ණ ආහාර සත්කාර)</option>
@@ -488,16 +564,19 @@
 
         <div>
           <label class="block text-xs font-semibold text-slate-700 mb-1.5">පණිවිඩයේ පෙරදසුන (Message Preview):</label>
-          <textarea id="sharePreviewText" rows="7" readonly class="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-700 font-mono leading-relaxed resize-none focus:outline-none"></textarea>
+          <textarea id="sharePreviewText" rows="7" readonly
+            class="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-700 font-mono leading-relaxed resize-none focus:outline-none"></textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-3 pt-2">
-          <button onclick="copyShareText()" class="py-2.5 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+          <button onclick="copyShareText()"
+            class="py-2.5 px-4 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
             <i data-lucide="copy" class="w-4 h-4"></i>
             <span id="copyBtnText">Copy Text</span>
           </button>
-          
-          <button onclick="sendToWhatsApp()" class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-md shadow-emerald-600/30">
+
+          <button onclick="sendToWhatsApp()"
+            class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-md shadow-emerald-600/30">
             <i data-lucide="message-circle" class="w-4 h-4"></i>
             <span>WhatsApp විවෘත කරන්න</span>
           </button>
@@ -508,9 +587,10 @@
 
 
   <!-- Modal 2: Location Customizer & GPS Editor -->
-  <div id="customizerModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+  <div id="customizerModal"
+    class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
     <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-white/20">
-      
+
       <div class="p-5 border-b border-slate-100 flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
@@ -521,7 +601,8 @@
             <p class="text-xs text-slate-500">නිශ්චිත Google Maps ලින්ක් හෝ දුරකථන අංක ඇතුළත් කරන්න</p>
           </div>
         </div>
-        <button onclick="closeCustomizerModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
+        <button onclick="closeCustomizerModal()"
+          class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -535,10 +616,12 @@
           මුල් තත්වයට පත්කරන්න (Reset)
         </button>
         <div class="flex items-center gap-2">
-          <button onclick="closeCustomizerModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-medium">
+          <button onclick="closeCustomizerModal()"
+            class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-medium">
             අවලංගු කරන්න
           </button>
-          <button onclick="saveCustomLocations()" class="px-5 py-2 rounded-xl bg-jw-blue hover:bg-blue-700 text-white font-semibold shadow-md">
+          <button onclick="saveCustomLocations()"
+            class="px-5 py-2 rounded-xl bg-jw-blue hover:bg-blue-700 text-white font-semibold shadow-md">
             සුරකින්න (Save Changes)
           </button>
         </div>
@@ -549,7 +632,8 @@
 
 
   <!-- Modal 3: Location Photo Lightbox Modal -->
-  <div id="photoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+  <div id="photoModal"
+    class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
     <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20 flex flex-col">
       <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
         <div class="flex items-center gap-2.5">
@@ -561,25 +645,30 @@
             <p id="photoModalSubtitle" class="text-xs text-slate-300">සහෝ. බර්නාඩ්ගේ නිවස</p>
           </div>
         </div>
-        <button onclick="closePhotoModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+        <button onclick="closePhotoModal()"
+          class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
       <div class="relative bg-slate-950 flex items-center justify-center max-h-[70vh] overflow-hidden p-1">
-        <img id="photoModalImg" src="" alt="Location photo" class="max-w-full max-h-[68vh] rounded-lg object-contain shadow-2xl">
+        <img id="photoModalImg" src="" alt="Location photo"
+          class="max-w-full max-h-[68vh] rounded-lg object-contain shadow-2xl">
       </div>
 
-      <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div
+        class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
         <p id="photoModalCaption" class="text-slate-600 font-medium text-center sm:text-left flex items-center gap-1.5">
           <i data-lucide="info" class="w-4 h-4 text-blue-600 shrink-0"></i>
           <span>කහ පැහැති තාප්පය අසලින් ඇති මාර්ගය ඔස්සේ No. 154 ගේට්ටුව වෙත යන්න.</span>
         </p>
         <div class="flex items-center gap-2 w-full sm:w-auto">
-          <button onclick="closePhotoModal()" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-medium">
+          <button onclick="closePhotoModal()"
+            class="flex-1 sm:flex-initial px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-medium">
             වසන්න (Close)
           </button>
-          <a id="photoModalNavBtn" href="#" target="_blank" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center justify-center gap-1.5 shadow-sm transition">
+          <a id="photoModalNavBtn" href="#" target="_blank"
+            class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center justify-center gap-1.5 shadow-sm transition">
             <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
             <span>Google Maps</span>
           </a>
@@ -590,8 +679,10 @@
 
 
   <!-- Floating Toast Notification -->
-  <div id="toastNotification" class="fixed top-20 right-4 z-[9999] pointer-events-none transform translate-y-[-20px] opacity-0 transition-all duration-300">
-    <div class="px-4 py-2.5 rounded-2xl bg-slate-900/95 text-white shadow-2xl border border-white/20 flex items-center gap-2 text-xs font-semibold backdrop-blur-md">
+  <div id="toastNotification"
+    class="fixed top-20 right-4 z-[9999] pointer-events-none transform translate-y-[-20px] opacity-0 transition-all duration-300">
+    <div
+      class="px-4 py-2.5 rounded-2xl bg-slate-900/95 text-white shadow-2xl border border-white/20 flex items-center gap-2 text-xs font-semibold backdrop-blur-md">
       <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
       <span id="toastMessage">පිටපත් කරන ලදී!</span>
     </div>
@@ -738,7 +829,8 @@
         imageCaption: "පිවිසුම් මාර්ගයේ ඡායාරූපය (Litro Gas Dealer බෝර්ඩ් එක අසල නිවස)",
         territories: [
           { code: "WP - 0973", url: "https://maps.app.goo.gl/dCRSTmT5kRBBeScX6" },
-          { code: "WP - 0974", url: "https://maps.app.goo.gl/dCRSTmT5kRBBeScX6" }
+          { code: "WP - 0974", url: "https://maps.app.goo.gl/dCRSTmT5kRBBeScX6" },
+          { code: "Ma Eliya (North)", url: "https://maps.app.goo.gl/8eQmVLtMs1BnVstbA" }
         ]
       },
       {
@@ -898,7 +990,7 @@
         dinner: {
           host: "—",
           phone: "",
-          note: "රාත්‍රී ආහාර සත්කාරයක් නොමැත",
+          note: "No Dinner Arrangement",
           mapUrl: ""
         }
       },
@@ -916,7 +1008,7 @@
         dinner: {
           host: "—",
           phone: "",
-          note: "රාත්‍රී ආහාර සත්කාරයක් නොමැත",
+          note: "No Dinner Arrangement",
           mapUrl: ""
         }
       }
@@ -931,31 +1023,37 @@
         'jw_batagama_co_schedule_v5', 'jw_batagama_co_schedule_v6',
         'jw_batagama_co_schedule_v7', 'jw_batagama_co_schedule_v8',
         'jw_batagama_co_schedule_v9', 'jw_batagama_co_schedule_v10',
-        'jw_batagama_meals_schedule_v10'
+        'jw_batagama_co_schedule_v11',
+        'jw_batagama_meals_schedule_v10', 'jw_batagama_meals_schedule_v11'
       ];
       oldKeys.forEach(k => localStorage.removeItem(k));
-    } catch (e) {}
+    } catch (e) { }
 
-    // Load from LocalStorage v11 if present, else use default DEFAULT_SCHEDULE
+    // Load from LocalStorage v12 if present, else use default DEFAULT_SCHEDULE
     let scheduleData;
     try {
-      const savedSchedule = localStorage.getItem('jw_batagama_co_schedule_v11');
+      const savedSchedule = localStorage.getItem('jw_batagama_co_schedule_v12');
       scheduleData = savedSchedule ? JSON.parse(savedSchedule) : JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
     } catch (e) {
       scheduleData = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
     }
 
-    // Force sanitize host names to ensure "මවුබන්දාර" never appears even from custom cache
+    // Force sanitize host names and ensure Friday morning territories include both map links even from custom cache
     if (Array.isArray(scheduleData)) {
       scheduleData.forEach(item => {
-        if (item.id === 'fri-morning' && item.host && item.host.includes('මවුබන්දාර')) {
-          item.host = "සහෝ. චමින්දගේ නිවස";
+        if (item.id === 'fri-morning') {
+          if (item.host && item.host.includes('මවුබන්දාර')) {
+            item.host = "සහෝ. චමින්දගේ නිවස";
+          }
+          if (Array.isArray(item.territories) && !item.territories.some(t => t.url === 'https://maps.app.goo.gl/8eQmVLtMs1BnVstbA')) {
+            item.territories.push({ code: "Ma Eliya (North)", url: "https://maps.app.goo.gl/8eQmVLtMs1BnVstbA" });
+          }
         }
       });
     }
 
     try {
-      const savedMeals = localStorage.getItem('jw_batagama_meals_schedule_v11');
+      const savedMeals = localStorage.getItem('jw_batagama_meals_schedule_v12');
       if (savedMeals) {
         const parsed = JSON.parse(savedMeals);
         parsed.forEach((pm, idx) => {
@@ -965,16 +1063,48 @@
           }
         });
       }
-    } catch (e) {}
+    } catch (e) { }
 
     // Guarantee Asha's phone number is always populated
     const sunMeal = MEALS_SCHEDULE.find(m => m.dayId === 'sun');
     if (sunMeal && sunMeal.lunch) {
       sunMeal.lunch.phone = "0770082868";
     }
+    // -------------------------------------------------------------
+    // AUTO DATE DETECTION (AUTOMATICALLY SELECT TODAY'S SCHEDULE)
+    // -------------------------------------------------------------
+    function getLocalDateString(dateObj = new Date()) {
+      const y = dateObj.getFullYear();
+      const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    const SCHEDULE_DATE_MAP = {
+      '2026-11-24': { serviceDay: 'wed', mealDay: 'tue', isExactService: false, isExactMeal: true },
+      '2026-11-25': { serviceDay: 'wed', mealDay: 'wed', isExactService: true, isExactMeal: true },
+      '2026-11-26': { serviceDay: 'thu', mealDay: 'thu', isExactService: true, isExactMeal: true },
+      '2026-11-27': { serviceDay: 'fri', mealDay: 'fri', isExactService: true, isExactMeal: true },
+      '2026-11-28': { serviceDay: 'sat', mealDay: 'sat', isExactService: true, isExactMeal: true },
+      '2026-11-29': { serviceDay: 'sun', mealDay: 'sun', isExactService: true, isExactMeal: true }
+    };
+
+    function getAutoDayIds(dateObj = new Date()) {
+      const dateStr = getLocalDateString(dateObj);
+      if (SCHEDULE_DATE_MAP[dateStr]) {
+        return { ...SCHEDULE_DATE_MAP[dateStr], dateStr };
+      }
+      if (dateStr < '2026-11-24') {
+        return { serviceDay: 'wed', mealDay: 'tue', isExactService: false, isExactMeal: false, dateStr };
+      }
+      return { serviceDay: 'sun', mealDay: 'sun', isExactService: false, isExactMeal: false, dateStr };
+    }
+
+    const initialAutoDays = getAutoDayIds();
+    let lastAutoDateStr = initialAutoDays.dateStr;
     let currentMainView = 'service'; // 'service' or 'meals'
-    let currentDayFilter = 'wed'; // Default active day: Wednesday!
-    let currentMealFilter = 'tue'; // Default active meal day: Tuesday!
+    let currentDayFilter = initialAutoDays.serviceDay;
+    let currentMealFilter = initialAutoDays.mealDay;
     let soundEnabled = true;
 
     // Web Audio Synthesizer for gentle audio chime
@@ -1063,7 +1193,7 @@
       } else {
         splashBar.style.width = splashPercent + '%';
         splashText.innerText = splashPercent + '%';
-        
+
         for (let phrase of statusPhrases) {
           if (splashPercent >= phrase.at) {
             splashStatus.innerText = phrase.text;
@@ -1078,8 +1208,11 @@
       mainApp.classList.remove('opacity-0');
       setTimeout(() => {
         splashScreen.style.display = 'none';
-        filterSchedule('wed');
-        filterMeals('tue');
+        const autoDays = getAutoDayIds();
+        lastAutoDateStr = autoDays.dateStr;
+        filterSchedule(autoDays.serviceDay, true);
+        filterMeals(autoDays.mealDay, true);
+        updateTodayTabBadges();
       }, 500);
     }
 
@@ -1101,12 +1234,16 @@
         btnService.className = "flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all bg-white text-jw-blue shadow-md";
         btnMeals.className = "flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all text-slate-600 hover:text-slate-900";
         renderScheduleGrid();
+        const activeTab = document.getElementById(`tab-${currentDayFilter}`);
+        if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else {
         serviceSec.classList.add('hidden');
         mealsSec.classList.remove('hidden');
         btnMeals.className = "flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all bg-white text-amber-800 shadow-md";
         btnService.className = "flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-all text-slate-600 hover:text-slate-900";
         renderMealsGrid();
+        const activeMealTab = document.getElementById(`meal-tab-${currentMealFilter}`);
+        if (activeMealTab) activeMealTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1144,6 +1281,9 @@
       const daySection = document.createElement('div');
       daySection.className = "p-5 sm:p-7 rounded-3xl bg-white shadow-glass border border-slate-200/90";
 
+      const autoInfo = getAutoDayIds();
+      const isTodayService = autoInfo.isExactService && day.id === autoInfo.serviceDay;
+
       // Day Header with English Title
       let dayHeaderHtml = `
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-4 mb-6 border-b-2 border-slate-100">
@@ -1157,6 +1297,7 @@
                 <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
                   ${day.dateTitle}
                 </h3>
+                ${isTodayService ? `<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-black">● අද (Today)</span>` : ''}
                 <span class="text-xs text-slate-400 font-medium">(${day.sinhalaTitle})</span>
                 <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-jw-blue text-xs font-bold shadow-2xs">
                   ${day.badgeText}
@@ -1208,20 +1349,27 @@
 
               <div class="space-y-2">
                 ${session.territories.map(t => `
-                  <a href="${t.url}" target="_blank" class="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-${themeColor}-500 text-slate-900 hover:text-${themeColor}-700 transition-all duration-150 group shadow-xs hover:shadow-sm">
-                    <div class="flex items-center gap-2.5 min-w-0">
+                  <div class="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-${themeColor}-500 text-slate-900 transition-all duration-150 group shadow-xs hover:shadow-sm">
+                    <a href="${t.url}" target="_blank" class="flex items-center gap-2.5 min-w-0 flex-1">
                       <span class="w-7 h-7 rounded-xl ${isMorning ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-amber-50 text-amber-700 border border-amber-200'} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform font-bold text-xs">
                         <i data-lucide="map" class="w-3.5 h-3.5"></i>
                       </span>
                       <span class="text-sm sm:text-[15px] font-black text-slate-900 group-hover:text-${themeColor}-600 tracking-wider whitespace-nowrap font-mono">
                         ${t.code}
                       </span>
+                    </a>
+                    <div class="flex items-center gap-1.5 shrink-0 ml-2">
+                      ${session.id === 'fri-morning' ? `
+                        <button type="button" onclick="window.FridayTerritoryMaps && window.FridayTerritoryMaps.scrollToCard('${t.code}')" class="px-2.5 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs shadow-2xs transition whitespace-nowrap">
+                          Roads ↓
+                        </button>
+                      ` : ''}
+                      <a href="${t.url}" target="_blank" class="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-${themeColor}-600 hover:text-white text-slate-700 transition-colors font-bold text-xs shadow-2xs">
+                        <span>Google Map</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                      </a>
                     </div>
-                    <div class="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-${themeColor}-600 group-hover:text-white text-slate-700 transition-colors shrink-0 ml-2 font-bold text-xs shadow-2xs">
-                      <span>Google Map</span>
-                      <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                    </div>
-                  </a>
+                  </div>
                 `).join('')}
               </div>
             </div>
@@ -1300,6 +1448,9 @@
 
       if (day.id === 'fri') {
         sessionsGridHtml += `
+          <!-- DETAILED INTERACTIVE ROAD MAPS FOR FRIDAY MORNING (WP-0973 & WP-0974) -->
+          <div id="friMorningRoadMapsHost" class="mt-8 pt-6 border-t-2 border-slate-100"></div>
+
           <!-- SPECIAL MEETING: ELDERS & MINISTERIAL SERVANTS (NEW SECTION) -->
           <div class="mt-8 pt-6 border-t-2 border-slate-100">
             <div class="p-5 sm:p-7 rounded-3xl bg-white border-2 border-blue-200 shadow-glass border-l-8 border-l-jw-blue relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -1475,6 +1626,10 @@
       daySection.innerHTML = dayHeaderHtml + sessionsGridHtml;
       container.appendChild(daySection);
 
+      if (day.id === 'fri' && window.FridayTerritoryMaps) {
+        window.FridayTerritoryMaps.renderInto('friMorningRoadMapsHost');
+      }
+
       lucide.createIcons();
     }
 
@@ -1493,6 +1648,8 @@
       card.className = "max-w-2xl mx-auto w-full glass-panel rounded-3xl p-6 sm:p-7 shadow-glass border border-amber-200/90 relative overflow-hidden flex flex-col justify-between";
 
       const hasDinner = day.dinner.host && day.dinner.host !== "—";
+      const autoInfo = getAutoDayIds();
+      const isTodayMeal = autoInfo.isExactMeal && day.dayId === autoInfo.mealDay;
 
       card.innerHTML = `
         <div>
@@ -1503,7 +1660,10 @@
                 <i data-lucide="calendar" class="w-5 h-5"></i>
               </span>
               <div>
-                <h4 class="font-black text-slate-900 text-xl leading-tight">${day.dateTitle}</h4>
+                <div class="flex flex-wrap items-center gap-2">
+                  <h4 class="font-black text-slate-900 text-xl leading-tight">${day.dateTitle}</h4>
+                  ${isTodayMeal ? `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-black">● අද (Today)</span>` : ''}
+                </div>
                 <span class="text-xs text-amber-800 font-semibold">${day.sinhalaDate}</span>
               </div>
             </div>
@@ -1517,7 +1677,7 @@
             <div class="flex items-center justify-between mb-1.5">
               <span class="px-3 py-1 rounded-full bg-amber-200/90 text-amber-950 text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs">
                 <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-700"></i>
-                <span>Lunch (දවල් ආහාරය)</span>
+                <span>Lunch</span>
               </span>
               ${day.lunch.note ? `
                 <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-black border border-rose-200">
@@ -1570,7 +1730,7 @@
             <div class="flex items-center justify-between mb-1.5">
               <span class="px-3 py-1 rounded-full ${hasDinner ? 'bg-indigo-200/90 text-indigo-950' : 'bg-slate-200 text-slate-600'} text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs">
                 <i data-lucide="moon" class="w-3.5 h-3.5 ${hasDinner ? 'text-indigo-700' : 'text-slate-500'}"></i>
-                <span>Dinner (රාත්‍රී ආහාරය)</span>
+                <span>Dinner</span>
               </span>
             </div>
 
@@ -1611,7 +1771,7 @@
               <!-- No Dinner Notice -->
               <div class="py-3 text-center text-xs text-slate-500 font-bold flex items-center justify-center gap-1.5">
                 <i data-lucide="coffee" class="w-4 h-4 text-slate-400"></i>
-                <span>රාත්‍රී ආහාර සත්කාරයක් නොමැත (No Dinner Arrangement)</span>
+                <span>No Dinner Arrangement</span>
               </div>
             `}
           </div>
@@ -1626,9 +1786,9 @@
     // -------------------------------------------------------------
     // MEALS FILTER CONTROLLER (ENGLISH DAYS)
     // -------------------------------------------------------------
-    function filterMeals(dayId) {
+    function filterMeals(dayId, silent = false) {
       currentMealFilter = dayId;
-      playChime(440, 0.15);
+      if (!silent) playChime(440, 0.15);
 
       document.querySelectorAll('.meal-tab-btn').forEach(btn => {
         btn.classList.remove('bg-white', 'text-amber-800', 'shadow-md', 'font-black');
@@ -1639,6 +1799,7 @@
       if (activeBtn) {
         activeBtn.classList.add('bg-white', 'text-amber-800', 'shadow-md', 'font-black');
         activeBtn.classList.remove('text-slate-600', 'font-medium');
+        activeBtn.scrollIntoView({ behavior: silent ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
       }
 
       renderMealsGrid();
@@ -1655,9 +1816,9 @@
     // -------------------------------------------------------------
     // SERVICE DAY FILTER CONTROLLER (ENGLISH DAYS)
     // -------------------------------------------------------------
-    function filterSchedule(dayId) {
+    function filterSchedule(dayId, silent = false) {
       currentDayFilter = dayId;
-      playChime(440, 0.15);
+      if (!silent) playChime(440, 0.15);
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-white', 'text-jw-blue', 'shadow-md', 'font-black');
@@ -1668,9 +1829,36 @@
       if (activeBtn) {
         activeBtn.classList.add('bg-white', 'text-jw-blue', 'shadow-md', 'font-black');
         activeBtn.classList.remove('text-slate-600', 'font-semibold');
+        activeBtn.scrollIntoView({ behavior: silent ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
       }
 
       renderScheduleGrid();
+    }
+
+    // Add subtle green dot indicator on today's tab buttons
+    function updateTodayTabBadges() {
+      document.querySelectorAll('.today-tab-dot').forEach(el => el.remove());
+      const autoInfo = getAutoDayIds();
+
+      if (autoInfo.isExactService) {
+        const sBtn = document.getElementById(`tab-${autoInfo.serviceDay}`);
+        if (sBtn) {
+          const dot = document.createElement('span');
+          dot.className = 'today-tab-dot inline-block w-2 h-2 rounded-full bg-emerald-500 ml-1 align-middle';
+          dot.title = 'Today';
+          sBtn.appendChild(dot);
+        }
+      }
+
+      if (autoInfo.isExactMeal) {
+        const mBtn = document.getElementById(`meal-tab-${autoInfo.mealDay}`);
+        if (mBtn) {
+          const dot = document.createElement('span');
+          dot.className = 'today-tab-dot inline-block w-2 h-2 rounded-full bg-emerald-500 ml-1 align-middle';
+          dot.title = 'Today';
+          mBtn.appendChild(dot);
+        }
+      }
     }
 
     // -------------------------------------------------------------
@@ -1805,14 +1993,14 @@
         if (m) {
           text += `🍽️ *Meals Arrangement — ${m.dateTitle}*\n`;
           text += `📌 *Note:* Please refer to the elders' letter.\n\n`;
-          text += `☀️ *Lunch (දවල් ආහාරය)*:\n`;
+          text += `☀️ *Lunch*:\n`;
           text += `  • Host: *${m.lunch.host}*\n`;
           if (m.lunch.phone) text += `  • Phone: ${m.lunch.phone}\n`;
           if (m.lunch.note) text += `  • Note: ${m.lunch.note}\n`;
           if (m.lunch.mapUrl) text += `  • 📍 Location: ${m.lunch.mapUrl}\n`;
           text += `\n`;
 
-          text += `🌙 *Dinner (රාත්‍රී ආහාරය)*:\n`;
+          text += `🌙 *Dinner*:\n`;
           if (m.dinner.host && m.dinner.host !== '—') {
             text += `  • Host: *${m.dinner.host}*\n`;
             if (m.dinner.phone) text += `  • Phone: ${m.dinner.phone}\n`;
@@ -2004,14 +2192,14 @@
         if (url) session.customUrl = url.value;
       });
 
-      localStorage.setItem('jw_batagama_co_schedule_v11', JSON.stringify(scheduleData));
+      localStorage.setItem('jw_batagama_co_schedule_v12', JSON.stringify(scheduleData));
 
       // Save custom meal locations if edited
       MEALS_SCHEDULE.forEach((meal, mIdx) => {
         const lunchUrl = document.getElementById(`meal_lunch_url_${mIdx}`);
         if (lunchUrl) meal.lunch.mapUrl = lunchUrl.value;
       });
-      localStorage.setItem('jw_batagama_meals_schedule_v11', JSON.stringify(MEALS_SCHEDULE));
+      localStorage.setItem('jw_batagama_meals_schedule_v12', JSON.stringify(MEALS_SCHEDULE));
 
       closeCustomizerModal();
       renderScheduleGrid();
@@ -2022,8 +2210,8 @@
 
     function resetToDefaults() {
       if (confirm('Do you want to reset all data to default values?')) {
-        localStorage.removeItem('jw_batagama_co_schedule_v11');
-        localStorage.removeItem('jw_batagama_meals_schedule_v11');
+        localStorage.removeItem('jw_batagama_co_schedule_v12');
+        localStorage.removeItem('jw_batagama_meals_schedule_v12');
         scheduleData = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
         closeCustomizerModal();
         renderScheduleGrid();
@@ -2031,6 +2219,29 @@
         showToast("Reset to defaults!");
       }
     }
+
+    // Automatically sync to the new date if left open overnight / across days
+    function syncIfDateChanged() {
+      const currentDateStr = getLocalDateString();
+      if (currentDateStr !== lastAutoDateStr) {
+        lastAutoDateStr = currentDateStr;
+        const nextAuto = getAutoDayIds();
+        filterSchedule(nextAuto.serviceDay, true);
+        filterMeals(nextAuto.mealDay, true);
+        updateTodayTabBadges();
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') syncIfDateChanged();
+    });
+    window.addEventListener('focus', syncIfDateChanged);
+    setInterval(syncIfDateChanged, 60000);
+
+    // Pre-initialize active day to today immediately on load
+    filterSchedule(initialAutoDays.serviceDay, true);
+    filterMeals(initialAutoDays.mealDay, true);
+    updateTodayTabBadges();
 
     // Close modals on Escape key
     window.addEventListener('keydown', (e) => {
@@ -2042,4 +2253,5 @@
     });
   </script>
 </body>
+
 </html>
