@@ -59,6 +59,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="friday-roads-map.js"></script>
+  <script src="saturday-roads-map.js"></script>
 
   <style>
     body {
@@ -1538,6 +1539,9 @@
 
       if (day.id === 'sat') {
         sessionsGridHtml += `
+          <!-- DETAILED INTERACTIVE ROAD MAP FOR SATURDAY MORNING (ONE MAP) -->
+          <div id="satMorningRoadMapsHost" class="mt-8 pt-6 border-t-2 border-slate-100"></div>
+
           <!-- SPECIAL MEETING: PIONEERS MEETING (පුරෝගාමී රැස්වීම) -->
           <div class="mt-8 pt-6 border-t-2 border-slate-100">
             <div class="p-5 sm:p-7 rounded-3xl bg-white border-2 border-amber-200/90 shadow-glass border-l-8 border-l-amber-500 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -1628,6 +1632,9 @@
 
       if (day.id === 'fri' && window.FridayTerritoryMaps) {
         window.FridayTerritoryMaps.renderInto('friMorningRoadMapsHost');
+      }
+      if (day.id === 'sat' && window.SaturdayTerritoryMaps) {
+        window.SaturdayTerritoryMaps.renderInto('satMorningRoadMapsHost');
       }
 
       lucide.createIcons();

@@ -990,7 +990,7 @@
     }
 
     const L = global.L;
-    const map = L.map(mapEl, { zoomControl: true, scrollWheelZoom: false });
+    const map = L.map(mapEl, { zoomControl: true, scrollWheelZoom: true });
 
     const streetLayer = L.tileLayer("https://mt{s}.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}", {
       subdomains: ["0", "1", "2", "3"],
