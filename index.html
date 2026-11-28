@@ -60,6 +60,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="friday-roads-map.js"></script>
   <script src="saturday-roads-map.js"></script>
+  <script src="sunday-roads-map.js"></script>
 
   <style>
     body {
@@ -1627,6 +1628,13 @@
         `;
       }
 
+      if (day.id === 'sun') {
+        sessionsGridHtml += `
+          <!-- DETAILED INTERACTIVE ROAD & JUNCTION MAP FOR SUNDAY MORNING (ONE MAP) -->
+          <div id="sunMorningRoadMapsHost" class="mt-8 pt-6 border-t-2 border-slate-100"></div>
+        `;
+      }
+
       daySection.innerHTML = dayHeaderHtml + sessionsGridHtml;
       container.appendChild(daySection);
 
@@ -1635,6 +1643,9 @@
       }
       if (day.id === 'sat' && window.SaturdayTerritoryMaps) {
         window.SaturdayTerritoryMaps.renderInto('satMorningRoadMapsHost');
+      }
+      if (day.id === 'sun' && window.SundayTerritoryMaps) {
+        window.SundayTerritoryMaps.renderInto('sunMorningRoadMapsHost');
       }
 
       lucide.createIcons();
