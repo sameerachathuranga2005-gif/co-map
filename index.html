@@ -145,6 +145,58 @@
     #toastNotification {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-6px) scale(1.06); }
+    }
+    .float-soft {
+      animation: floatSoft 3.2s ease-in-out infinite;
+    }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-slow {
+      animation: spinSlow 10s linear infinite;
+    }
+
+    @keyframes btnShine {
+      0% { transform: translateX(-120%) skewX(-20deg); }
+      60%, 100% { transform: translateX(220%) skewX(-20deg); }
+    }
+    .btn-shine::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 45%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.42), transparent);
+      animation: btnShine 2.8s infinite;
+    }
+
+    @keyframes petalFall {
+      0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0; }
+      15% { opacity: 0.95; }
+      85% { opacity: 0.85; }
+      100% { transform: translateY(105vh) rotate(360deg) scale(1.1); opacity: 0; }
+    }
+    .co-petal {
+      position: fixed;
+      top: -5vh;
+      pointer-events: none;
+      z-index: 9999;
+      animation: petalFall linear forwards;
+    }
+
+    @keyframes revealUp {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .co-reveal-1 { animation: revealUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both; }
+    .co-reveal-2 { animation: revealUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both; }
+    .co-reveal-3 { animation: revealUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both; }
+    .co-reveal-4 { animation: revealUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.50s both; }
   </style>
 </head>
 
@@ -1632,6 +1684,63 @@
         sessionsGridHtml += `
           <!-- DETAILED INTERACTIVE ROAD & JUNCTION MAP FOR SUNDAY MORNING (ONE MAP) -->
           <div id="sunMorningRoadMapsHost" class="mt-8 pt-6 border-t-2 border-slate-100"></div>
+
+          <!-- CO WEEK CLOSING APPRECIATION / THANK YOU CARD -->
+          <div class="mt-8 pt-6 border-t-2 border-slate-100">
+            <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 text-white shadow-2xl border border-indigo-400/30 relative overflow-hidden">
+              <div class="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-amber-400/15 blur-3xl pointer-events-none"></div>
+              <div class="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-blue-400/15 blur-3xl pointer-events-none"></div>
+
+              <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="space-y-3 max-w-2xl">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-300/40 text-amber-200 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+                      <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-400"></i>
+                      <span>හදපිරි ස්තූතිය • WITH HEARTFELT THANKS</span>
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-white/10 text-blue-100 text-[11px] font-bold">
+                      📅 නොවැම්බර් 24 – 29, 2026
+                    </span>
+                  </div>
+
+                  <h4 class="text-xl sm:text-2xl font-black text-white leading-snug">
+                    හදවතින්ම බොහොම ස්තූතියි ගේබ්‍රියෙල් අයියේ, අයන්ති අක්කේ! 🙏❤️
+                  </h4>
+
+                  <p class="text-xs sm:text-sm text-blue-100/95 leading-relaxed font-medium">
+                    මේ සතිය පුරාම අපේ බටගම සභාව එක්ක එකතු වෙලා ඔයාලා දෙන්නා අපිට දීපු ආදරයට, දිරිගැන්වීම්වලට වගේම වටිනා බයිබල් උපදෙස්වලට ගොඩක් ස්තූතියි! ඔයාලා දෙන්නා සේවයේ පෙන්නපු ඒ උද්යෝගය අපි හැමෝටම ලොකු හයියක් වුණා.
+                  </p>
+                  <p class="text-xs sm:text-sm text-indigo-100/95 leading-relaxed font-medium">
+                    යෙහෝවා දෙවියන් ඔයාලා දෙන්නාගේ මේ වටිනා සේවයට හැමදාමත් ආශීර්වාද කරන්න කියලා අපි හදවතින්ම ඉල්ලනවා! 💐
+                  </p>
+
+                  <div class="p-3.5 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xs">
+                    <p class="text-xs font-bold text-amber-200 leading-relaxed">
+                      ✨ "සහෝදරයෙනි, ඔයාලා අතරේ මහන්සි වෙලා වැඩ කරන, ඔයාලා අතරේ පෙරමුණ අරන් ස්වාමීන් වෙනුවෙන් වැඩ කරන, ඔයාලට උපදෙස් සහ අවවාද ලබා දෙන අයට ගෞරව කරන්න කියලා අපි ඔයාලාගෙන් ඉල්ලනවා. ඒ අය කරන සේවය නිසා ඒ අයට උපරිම ආදරයත් ගෞරවයත් දක්වන්න." — <span class="text-white font-black">1 තෙසලෝනික 5:12, 13</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 shrink-0">
+                  <button type="button" onclick="openCoThanksModal()"
+                    class="px-5 py-3 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition">
+                    <i data-lucide="gift" class="w-4 h-4"></i>
+                    <span>🎁 විශේෂ කාඩ්පත විවෘත කරන්න</span>
+                  </button>
+                  <button type="button" onclick="shareCoThanks()"
+                    class="px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>WhatsApp මගින් යවන්න</span>
+                  </button>
+                  <button type="button" onclick="copyCoThanks()"
+                    class="px-5 py-3 rounded-2xl bg-white/15 hover:bg-white/25 text-white border border-white/20 font-bold text-xs flex items-center justify-center gap-2 transition">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    <span>📋 Copy කරන්න</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         `;
       }
 
@@ -1649,6 +1758,31 @@
       }
 
       lucide.createIcons();
+    }
+
+    function getCoThanksMessage() {
+      return [
+        "හදවතින්ම බොහොම ස්තූතියි ගේබ්‍රියෙල් අයියේ, අයන්ති අක්කේ! 🙏❤️",
+        "",
+        "මේ සතිය පුරාම අපේ බටගම සභාව එක්ක එකතු වෙලා ඔයාලා දෙන්නා අපිට දීපු ආදරයට, දිරිගැන්වීම්වලට වගේම වටිනා බයිබල් උපදෙස්වලට ගොඩක් ස්තූතියි! ඔයාලා දෙන්නා සේවයේ පෙන්නපු ඒ උද්යෝගය අපි හැමෝටම ලොකු හයියක් වුණා.",
+        "",
+        "යෙහෝවා දෙවියන් ඔයාලා දෙන්නාගේ මේ වටිනා සේවයට හැමදාමත් ආශීර්වාද කරන්න කියලා අපි හදවතින්ම ඉල්ලනවා!",
+        "",
+        "✨ \"සහෝදරයෙනි, ඔයාලා අතරේ මහන්සි වෙලා වැඩ කරන, ඔයාලා අතරේ පෙරමුණ අරන් ස්වාමීන් වෙනුවෙන් වැඩ කරන, ඔයාලට උපදෙස් සහ අවවාද ලබා දෙන අයට ගෞරව කරන්න කියලා අපි ඔයාලාගෙන් ඉල්ලනවා. ඒ අය කරන සේවය නිසා ඒ අයට උපරිම ආදරයත් ගෞරවයත් දක්වන්න.\" — *1 තෙසලෝනික 5:12, 13*",
+        "",
+        "💐 *බටගම සභාවේ ආදරණීය සහෝදර සහෝදරියන්*"
+      ].join("\n");
+    }
+
+    function shareCoThanks() {
+      const url = `https://wa.me/?text=${encodeURIComponent(getCoThanksMessage())}`;
+      window.open(url, '_blank');
+    }
+
+    function copyCoThanks() {
+      navigator.clipboard.writeText(getCoThanksMessage()).then(() => {
+        showToast("ස්තූති පණිවිඩය Copy කළා! 🙏");
+      });
     }
 
     // -------------------------------------------------------------
@@ -2267,9 +2401,224 @@
         closeShareModal();
         closeCustomizerModal();
         closePhotoModal();
+        closeCoThanksModal();
       }
     });
+
+    function spawnCoCelebrationParticles() {
+      const icons = ['✨', '❤️', '💐', '🌸', '💛', '⭐'];
+      for (let i = 0; i < 26; i++) {
+        const el = document.createElement('span');
+        el.className = 'co-petal';
+        el.textContent = icons[i % icons.length];
+        el.style.left = `${Math.random() * 96 + 2}vw`;
+        el.style.fontSize = `${14 + Math.random() * 14}px`;
+        el.style.animationDuration = `${3.2 + Math.random() * 2.6}s`;
+        el.style.animationDelay = `${Math.random() * 0.9}s`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6500);
+      }
+    }
+
+    function openCoThanksModal() {
+      dismissCoThanksNotif();
+      const loader = document.getElementById('coThanksLoaderOverlay');
+      const bar = document.getElementById('coThanksLoaderBar');
+      const ring = document.getElementById('coThanksRingCircle');
+      const pctEl = document.getElementById('coThanksLoaderPct');
+      const statusEl = document.getElementById('coThanksLoaderStatus');
+      const modal = document.getElementById('coThanksModal');
+      if (!loader || !modal) return;
+
+      const circumference = 326.7;
+      if (bar) bar.style.width = '1%';
+      if (ring) ring.style.strokeDashoffset = String(circumference * 0.99);
+      if (pctEl) pctEl.textContent = '1%';
+      if (statusEl) statusEl.textContent = 'ආදරණීය පණිවිඩය සකසමින් පවතී...';
+
+      loader.classList.remove('hidden');
+      setTimeout(() => loader.classList.remove('opacity-0'), 10);
+
+      let pct = 1;
+      const timer = setInterval(() => {
+        pct = Math.min(100, pct + 2);
+        if (bar) bar.style.width = `${pct}%`;
+        if (ring) ring.style.strokeDashoffset = String(circumference * (1 - pct / 100));
+        if (pctEl) pctEl.textContent = `${pct}%`;
+        if (pct >= 35 && pct < 75 && statusEl) {
+          statusEl.textContent = 'බටගම සභාවේ හදපිරි ස්තූතිය... 💐';
+        } else if (pct >= 75 && statusEl) {
+          statusEl.textContent = 'ගේබ්‍රියෙල් අයියා & අයන්ති අක්කා වෙනුවෙන්! ❤️';
+        }
+        if (pct >= 100) {
+          clearInterval(timer);
+          if (typeof playChime === 'function') playChime(780, 0.28);
+          setTimeout(() => {
+            loader.classList.add('opacity-0');
+            setTimeout(() => loader.classList.add('hidden'), 260);
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 20);
+            spawnCoCelebrationParticles();
+            if (window.lucide) lucide.createIcons();
+          }, 240);
+        }
+      }, 28);
+    }
+
+    function closeCoThanksModal() {
+      const modal = document.getElementById('coThanksModal');
+      if (!modal) return;
+      modal.classList.add('opacity-0');
+      setTimeout(() => modal.classList.add('hidden'), 300);
+    }
+
+    function dismissCoThanksNotif() {
+      const notif = document.getElementById('coThanksNotifBanner');
+      if (!notif) return;
+      notif.classList.add('opacity-0', '-translate-y-6', 'pointer-events-none');
+      setTimeout(() => notif.classList.add('hidden'), 350);
+    }
+
+    // Show cute floating notification at the top after splash screen finishes
+    setTimeout(() => {
+      const notif = document.getElementById('coThanksNotifBanner');
+      if (notif) {
+        notif.classList.remove('hidden');
+        setTimeout(() => {
+          notif.classList.remove('opacity-0', '-translate-y-6', 'pointer-events-none');
+        }, 30);
+        if (window.lucide) lucide.createIcons();
+      }
+    }, 2700);
   </script>
+
+  <!-- Floating Pro Notification Banner at Top (Responsive for all phones & desktops) -->
+  <div id="coThanksNotifBanner"
+    class="hidden opacity-0 -translate-y-6 pointer-events-none fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 w-[calc(100%-1.25rem)] max-w-[460px] z-[9990] transition-all duration-500 ease-out">
+    <div class="relative overflow-hidden p-3 sm:p-3.5 rounded-3xl bg-gradient-to-r from-indigo-950/95 via-slate-900/95 to-rose-950/95 text-white shadow-2xl shadow-rose-950/50 border border-rose-300/45 backdrop-blur-xl">
+      <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-300 via-rose-400 to-indigo-400"></div>
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-rose-500 via-pink-500 to-amber-400 flex items-center justify-center shrink-0 shadow-lg shadow-rose-500/30 float-soft text-lg sm:text-xl">
+          💌
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-rose-400 animate-ping shrink-0"></span>
+            <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-amber-300 truncate">විශේෂ පණිවිඩයක් • Special Note</span>
+          </div>
+          <div class="text-xs sm:text-sm font-black text-white leading-snug mt-0.5">
+            ගේබ්‍රියෙල් අයියා &amp; අයන්ති අක්කා වෙනුවෙන් 🙏❤️
+          </div>
+        </div>
+        <button type="button" onclick="dismissCoThanksNotif()" title="Close"
+          class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white text-xs font-black flex items-center justify-center shrink-0 transition sm:order-last">
+          ✕
+        </button>
+      </div>
+      <div class="mt-2.5 sm:mt-2 flex justify-end">
+        <button type="button" onclick="openCoThanksModal()"
+          class="w-full sm:w-auto relative overflow-hidden btn-shine px-4 py-2 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white text-xs font-black shadow-lg transition text-center">
+          🎁 විශේෂ කාඩ්පත විවෘත කරන්න ✨
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1% to 100% Cute Animated Pre-Reveal Overlay -->
+  <div id="coThanksLoaderOverlay"
+    class="hidden opacity-0 fixed inset-0 z-[9997] bg-gradient-to-br from-indigo-950 via-slate-900 to-rose-950 text-white flex flex-col items-center justify-center p-6 transition-opacity duration-300 overflow-hidden">
+    <div class="absolute w-96 h-96 rounded-full bg-rose-500/20 blur-3xl pointer-events-none pulse-ring"></div>
+    <div class="relative flex flex-col items-center max-w-sm w-full text-center">
+      <!-- Circular SVG Progress Ring + Rotating Halo -->
+      <div class="relative w-32 h-32 flex items-center justify-center mb-4">
+        <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-300/40 spin-slow"></div>
+        <svg class="w-28 h-28 -rotate-90" viewBox="0 0 120 120">
+          <defs>
+            <linearGradient id="coRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fb7185" />
+              <stop offset="50%" stop-color="#f472b6" />
+              <stop offset="100%" stop-color="#fcd34d" />
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="7" />
+          <circle id="coThanksRingCircle" cx="60" cy="60" r="52" fill="none" stroke="url(#coRingGrad)" stroke-width="7"
+            stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="323.4" />
+        </svg>
+        <div class="absolute inset-0 flex items-center justify-center float-soft text-4xl">
+          💌
+        </div>
+      </div>
+
+      <div class="text-xs font-black uppercase tracking-widest text-amber-300 mb-1">
+        SPECIAL SURPRISE • බටගම සභාව
+      </div>
+      <div id="coThanksLoaderPct" class="text-4xl font-black text-white font-mono tracking-tight mb-3 drop-shadow">
+        1%
+      </div>
+      <div class="w-full h-3 rounded-full bg-white/10 p-0.5 border border-white/20 overflow-hidden shadow-inner mb-3">
+        <div id="coThanksLoaderBar"
+          class="h-full rounded-full bg-gradient-to-r from-rose-400 via-pink-300 to-amber-300 transition-all duration-75"
+          style="width: 1%;"></div>
+      </div>
+      <p id="coThanksLoaderStatus" class="text-xs sm:text-sm font-bold text-rose-100/95">
+        ආදරණීය පණිවිඩය සකසමින් පවතී...
+      </p>
+    </div>
+  </div>
+
+  <!-- Cute & Classy Pro Celebration Modal (Responsive on all devices) -->
+  <div id="coThanksModal" onclick="closeCoThanksModal()"
+    class="hidden opacity-0 fixed inset-0 z-[9998] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 transition-opacity duration-300">
+    <div onclick="event.stopPropagation()"
+      class="relative max-w-xl w-full max-h-[90dvh] overflow-y-auto rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-rose-950 text-white shadow-2xl border border-rose-300/35">
+      <!-- Top Shimmer Accent Ribbon -->
+      <div class="h-1.5 w-full bg-gradient-to-r from-amber-300 via-rose-500 to-indigo-400"></div>
+      <!-- Soft Glowing Auras -->
+      <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-rose-500/20 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-amber-400/15 blur-3xl pointer-events-none"></div>
+
+      <!-- Top Header -->
+      <div class="relative z-10 p-5 sm:p-7 pb-4 text-center border-b border-white/10">
+        <button type="button" onclick="closeCoThanksModal()"
+          class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white font-black flex items-center justify-center transition">
+          ✕
+        </button>
+
+        <div class="relative inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-3xl bg-gradient-to-tr from-rose-500 via-pink-500 to-amber-400 shadow-xl shadow-rose-500/30 mb-3 float-soft text-2xl sm:text-3xl">
+          🙏❤️
+        </div>
+        <div class="text-[10px] sm:text-[11px] font-black uppercase tracking-widest text-amber-300 mb-1">
+          බටගම සභාව • චාරිකා සතිය (නොවැම්බර් 24 – 29)
+        </div>
+        <h3 class="text-lg sm:text-2xl font-black text-white leading-snug">
+          හදවතින්ම බොහොම ස්තූතියි<br class="sm:hidden"> ගේබ්‍රියෙල් අයියේ, අයන්ති අක්කේ!
+        </h3>
+      </div>
+
+      <!-- Body -->
+      <div class="relative z-10 p-5 sm:p-7 space-y-3.5 sm:space-y-4 text-left">
+        <p class="co-reveal-1 text-sm text-blue-50/95 leading-relaxed font-medium">
+          මේ සතිය පුරාම අපේ බටගම සභාව එක්ක එකතු වෙලා ඔයාලා දෙන්නා අපිට දීපු ආදරයට, දිරිගැන්වීම්වලට වගේම වටිනා බයිබල් උපදෙස්වලට ගොඩක් ස්තූතියි! ඔයාලා දෙන්නා සේවයේ පෙන්නපු ඒ උද්යෝගය අපි හැමෝටම ලොකු හයියක් වුණා.
+        </p>
+        <p class="co-reveal-2 text-sm text-amber-100/95 leading-relaxed font-semibold">
+          යෙහෝවා දෙවියන් ඔයාලා දෙන්නාගේ මේ වටිනා සේවයට හැමදාමත් ආශීර්වාද කරන්න කියලා අපි හදවතින්ම ඉල්ලනවා! 💐
+        </p>
+
+        <div class="co-reveal-3 p-4 rounded-2xl bg-white/10 border border-amber-300/25 backdrop-blur-xs shadow-inner">
+          <p class="text-xs sm:text-sm font-bold text-amber-200 leading-relaxed">
+            ✨ "සහෝදරයෙනි, ඔයාලා අතරේ මහන්සි වෙලා වැඩ කරන, ඔයාලා අතරේ පෙරමුණ අරන් ස්වාමීන් වෙනුවෙන් වැඩ කරන, ඔයාලට උපදෙස් සහ අවවාද ලබා දෙන අයට ගෞරව කරන්න කියලා අපි ඔයාලාගෙන් ඉල්ලනවා. ඒ අය කරන සේවය නිසා ඒ අයට උපරිම ආදරයත් ගෞරවයත් දක්වන්න."
+          </p>
+          <div class="text-right text-xs font-black text-white mt-2">
+            — 1 තෙසලෝනික 5:12, 13
+          </div>
+        </div>
+
+        <div class="co-reveal-4 text-center text-xs font-bold text-rose-200 pt-2 pb-1">
+          ❤️ බටගම සභාවේ ආදරණීය සහෝදර සහෝදරියන් ❤️
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
